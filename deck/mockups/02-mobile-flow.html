@@ -1,0 +1,72 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Mobile registration - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:1000px;font-family:Arial,"Liberation Sans",sans-serif;background:#e9ecef;display:flex;align-items:center;justify-content:center;gap:70px;color:#1d2733}
+.phone{width:400px;height:840px;background:#111;border-radius:56px;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.28);position:relative}
+.screen{width:100%;height:100%;background:#fff;border-radius:44px;overflow:hidden;display:flex;flex-direction:column}
+.status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 30px;font-size:14px;font-weight:700}
+.bar{height:56px;display:flex;align-items:center;padding:0 22px;gap:12px;border-bottom:1px solid #eceff2;font-size:17px;font-weight:700}
+.step{font-size:12px;color:#5b6670;font-weight:400;margin-left:auto}
+.body{flex:1;padding:20px 22px;display:flex;flex-direction:column;gap:14px}
+.img{height:150px;border-radius:14px;background:linear-gradient(135deg,#3b2a6b,#7b5cc4)}
+h2{font-size:22px}
+.muted{font-size:14px;color:#5b6670;line-height:1.45}
+.row{display:flex;justify-content:space-between;font-size:15px;padding:10px 0;border-bottom:1px solid #eef1f4}
+.label{font-size:13px;color:#5b6670;margin-bottom:6px;font-weight:700}
+.field{height:44px;border:1px solid #cfd5db;border-radius:10px;display:flex;align-items:center;padding:0 14px;font-size:15px;color:#2b3640}
+.seg{display:flex;border:1px solid #cfd5db;border-radius:10px;overflow:hidden}
+.seg div{flex:1;text-align:center;padding:11px 0;font-size:14px}
+.seg .on{background:#3b2a6b;color:#fff;font-weight:700}
+.cta{margin-top:auto;height:52px;border-radius:12px;background:#3b2a6b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px}
+.pay{border:1px solid #cfd5db;border-radius:12px;padding:14px}
+.lock{font-size:12px;color:#1d6b3a;font-weight:700;margin-top:8px}
+.ok{width:64px;height:64px;border-radius:50%;background:#e3f6ea;color:#1d6b3a;font-size:36px;display:flex;align-items:center;justify-content:center;font-weight:700;align-self:center}
+.qr{width:150px;height:150px;align-self:center;background:
+ conic-gradient(#111 0 25%,#fff 0 50%,#111 0 75%,#fff 0) 0 0/30px 30px;border:10px solid #fff;outline:2px solid #111}
+.center{text-align:center}
+.app{background:#f3f0fa;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.app b{font-size:15px;color:#3b2a6b}
+.stores{display:flex;gap:8px}
+.stores div{flex:1;height:36px;border-radius:8px;background:#111;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.cap{position:absolute;bottom:-46px;left:0;right:0;text-align:center;font-size:18px;font-weight:700;color:#2b3640}
+.note{position:absolute;right:40px;top:24px;font-size:13px;color:#8a949e}
+</style></head><body>
+<div class="phone"><div class="screen">
+ <div class="status"><span>9:41</span><span>5G</span></div>
+ <div class="bar">Class details<span class="step">Step 1 of 3</span></div>
+ <div class="body">
+  <div class="img"></div>
+  <h2>CPR &amp; First Aid</h2>
+  <div class="muted">Hands-on training for adults, children and infants. Certificate included.</div>
+  <div class="row"><span>Sat, Nov 8</span><b>9:00 AM</b></div>
+  <div class="row"><span>Katy Hospital, Room 2B</span><b>$45</b></div>
+  <div><div class="label">Who are you registering?</div><div class="seg"><div class="on">Myself</div><div>Someone I care for</div></div></div>
+  <div class="cta">Register</div>
+ </div></div><div class="cap">1. Choose a class</div></div>
+
+<div class="phone"><div class="screen">
+ <div class="status"><span>9:41</span><span>5G</span></div>
+ <div class="bar">Your details<span class="step">Step 2 of 3</span></div>
+ <div class="body">
+  <div><div class="label">Full name</div><div class="field">Jordan Rivera</div></div>
+  <div><div class="label">Email</div><div class="field">jordan@example.com</div></div>
+  <div><div class="label">Mobile (for reminders)</div><div class="field">(713) 555-0142</div></div>
+  <div class="pay"><div class="label">Payment</div><div class="field">Card ending 4242</div><div class="lock">Secure hosted checkout. Card details never stored in Salesforce.</div></div>
+  <div class="muted">Send me updates about related classes and services</div>
+  <div class="cta">Pay $45 and confirm</div>
+ </div></div><div class="cap">2. Register and pay</div></div>
+
+<div class="phone"><div class="screen">
+ <div class="status"><span>9:41</span><span>5G</span></div>
+ <div class="bar">Confirmed<span class="step">Step 3 of 3</span></div>
+ <div class="body">
+  <div class="ok">&#10003;</div>
+  <h2 class="center">You're registered!</h2>
+  <div class="muted center">Show this code at check-in. A reminder is on its way.</div>
+  <div class="qr"></div>
+  <div class="field" style="justify-content:center;font-weight:700;color:#3b2a6b">Add to calendar</div>
+  <div class="app"><b>Get the My Memorial Hermann app</b><div class="muted" style="font-size:13px">Manage your classes, find a doctor and book visits.</div><div class="stores"><div>App Store</div><div>Google Play</div></div></div>
+ </div></div><div class="cap">3. Confirm, check in, get the app</div></div>
+<div class="note">Concept mockup, sample data</div>
+</body></html>

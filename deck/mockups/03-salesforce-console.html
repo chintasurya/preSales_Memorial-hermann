@@ -1,0 +1,74 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Salesforce event console - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:720px;font-family:Arial,"Liberation Sans",sans-serif;background:#b0c4df;color:#181818}
+.app{position:absolute;inset:0;background:#f3f3f3}
+.g{height:50px;background:#fff;display:flex;align-items:center;padding:0 18px;gap:16px;border-bottom:1px solid #dddbda}
+.waffle{width:22px;height:22px;background:radial-gradient(#706e6b 2px,transparent 2.5px) 0 0/7px 7px}
+.appname{font-size:18px;font-weight:700}
+.tabs{display:flex;gap:2px;margin-left:16px;height:50px}
+.tab{padding:0 16px;display:flex;align-items:center;font-size:14px;color:#3e3e3c}
+.tab.on{border-bottom:3px solid #0176d3;font-weight:700;color:#181818}
+.gsearch{margin-left:auto;width:360px;height:32px;border:1px solid #c9c9c9;border-radius:4px;font-size:13px;color:#706e6b;display:flex;align-items:center;padding:0 12px}
+.hdr{margin:14px 18px 0;background:#fff;border-radius:6px;border:1px solid #dddbda;padding:16px 20px}
+.hrow{display:flex;align-items:center;gap:14px}
+.icon{width:42px;height:42px;border-radius:6px;background:#06a59a;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:18px}
+.title small{display:block;font-size:12px;color:#706e6b}
+.title b{font-size:22px}
+.btns{margin-left:auto;display:flex;gap:8px}
+.btn{border:1px solid #c9c9c9;border-radius:4px;padding:8px 14px;font-size:13px;color:#0176d3;background:#fff}
+.btn.pri{background:#0176d3;color:#fff;border-color:#0176d3}
+.fields{display:flex;gap:46px;margin-top:14px;font-size:13px}
+.fields span{display:block;color:#706e6b;margin-bottom:3px}
+.path{display:flex;margin:14px 18px 0;gap:4px}
+.ps{flex:1;height:36px;background:#ecebea;color:#3e3e3c;font-size:13px;display:flex;align-items:center;justify-content:center;clip-path:polygon(0 0,95% 0,100% 50%,95% 100%,0 100%,5% 50%)}
+.ps.done{background:#2e844a;color:#fff}
+.ps.cur{background:#014486;color:#fff;font-weight:700}
+.grid{display:flex;gap:14px;margin:14px 18px}
+.card{background:#fff;border:1px solid #dddbda;border-radius:6px}
+.ch{padding:12px 16px;border-bottom:1px solid #dddbda;font-size:15px;font-weight:700;display:flex;justify-content:space-between}
+.ch span{font-weight:400;font-size:13px;color:#0176d3}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;background:#fafaf9;color:#444;padding:9px 14px;border-bottom:1px solid #dddbda;font-weight:700}
+td{padding:10px 14px;border-bottom:1px solid #f0f0f0}
+.meter{width:120px;height:8px;background:#ecebea;border-radius:4px;display:inline-block;vertical-align:middle;margin-right:8px}
+.meter i{display:block;height:8px;border-radius:4px;background:#0176d3}
+.pill{font-size:11px;padding:3px 8px;border-radius:10px;font-weight:700}
+.p1{background:#e3f6ea;color:#2e844a}.p2{background:#fef1e6;color:#a96404}.p3{background:#e5f1fb;color:#014486}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px}
+.kpi{border:1px solid #ecebea;border-radius:6px;padding:12px}
+.kpi span{font-size:12px;color:#706e6b}
+.kpi b{display:block;font-size:26px;margin-top:4px}
+.note{position:absolute;right:24px;bottom:14px;font-size:13px;color:#706e6b}
+</style></head><body><div class="app">
+<div class="g"><div class="waffle"></div><div class="appname">Event Manager</div>
+ <div class="tabs"><div class="tab">Home</div><div class="tab on">Events</div><div class="tab">Sessions</div><div class="tab">Registrations</div><div class="tab">Speakers</div><div class="tab">Check-in</div><div class="tab">Reports</div></div>
+ <div class="gsearch">Search events, registrants...</div></div>
+<div class="hdr"><div class="hrow"><div class="icon">EV</div><div class="title"><small>Event Series</small><b>Labor &amp; Delivery Preparation</b></div>
+ <div class="btns"><div class="btn">Clone</div><div class="btn">Email Attendees</div><div class="btn pri">Add Session</div></div></div>
+ <div class="fields"><div><span>Type</span>Class (series)</div><div><span>Service line</span>Women's Services</div><div><span>Format</span>In person</div><div><span>Price</span>$80 per couple</div><div><span>Payment gateway</span>Chase</div><div><span>Marketing journey</span>Maternity Nurture</div></div></div>
+<div class="path"><div class="ps done">Draft</div><div class="ps done">Published</div><div class="ps cur">Registration Open</div><div class="ps">In Progress</div><div class="ps">Completed</div></div>
+<div class="grid">
+ <div class="card" style="flex:1.7">
+  <div class="ch">Sessions (4)<span>View all</span></div>
+  <table><tr><th>Session</th><th>Date</th><th>Location</th><th>Registered</th><th>Waitlist</th><th>Status</th></tr>
+  <tr><td>Week 1: Stages of labor</td><td>Nov 11, 6:30 PM</td><td>Memorial City, Rm 4</td><td><span class="meter"><i style="width:90%"></i></span>27 / 30</td><td>0</td><td><span class="pill p1">Open</span></td></tr>
+  <tr><td>Week 2: Comfort and pain relief</td><td>Nov 18, 6:30 PM</td><td>Memorial City, Rm 4</td><td><span class="meter"><i style="width:100%"></i></span>30 / 30</td><td>5</td><td><span class="pill p2">Full</span></td></tr>
+  <tr><td>Week 3: Birth and recovery</td><td>Nov 25, 6:30 PM</td><td>Memorial City, Rm 4</td><td><span class="meter"><i style="width:80%"></i></span>24 / 30</td><td>0</td><td><span class="pill p1">Open</span></td></tr>
+  <tr><td>Week 4: Newborn care</td><td>Dec 2, 6:30 PM</td><td>Online (Zoom)</td><td><span class="meter"><i style="width:60%"></i></span>18 / 30</td><td>0</td><td><span class="pill p3">Virtual</span></td></tr></table>
+  <div class="ch" style="border-top:1px solid #dddbda">Recent Registrations<span>View all</span></div>
+  <table><tr><th>Registrant</th><th>Type</th><th>Ticket</th><th>Payment</th><th>Matched record</th></tr>
+  <tr><td>Jordan Rivera</td><td>Consumer</td><td>Couple</td><td><span class="pill p1">Paid</span></td><td>Existing person account</td></tr>
+  <tr><td>Alex Chen</td><td>Caregiver</td><td>Couple</td><td><span class="pill p1">Paid</span></td><td>New contact created</td></tr>
+  <tr><td>Sam Patel</td><td>Consumer</td><td>Couple</td><td><span class="pill p2">Waitlist</span></td><td>Existing person account</td></tr></table>
+ </div>
+ <div class="card" style="flex:1">
+  <div class="ch">Series Snapshot</div>
+  <div class="kpis"><div class="kpi"><span>Registrations</span><b>99</b></div><div class="kpi"><span>Waitlist</span><b>5</b></div><div class="kpi"><span>Revenue</span><b>$3,960</b></div><div class="kpi"><span>Attendance rate</span><b>92%</b></div></div>
+  <div class="ch" style="border-top:1px solid #dddbda">Follow-up journey</div>
+  <table><tr><td>Confirmation + calendar invite</td><td><span class="pill p1">Sent</span></td></tr><tr><td>Reminder (24 hours before)</td><td><span class="pill p3">Scheduled</span></td></tr><tr><td>Thank-you + survey</td><td><span class="pill p3">After class</span></td></tr><tr><td>App download + find an OB</td><td><span class="pill p3">After class</span></td></tr></table>
+ </div>
+</div>
+<div class="note">Concept mockup, sample data</div>
+</div></body></html>

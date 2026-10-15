@@ -1,0 +1,52 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Post-event journey - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:640px;font-family:Arial,"Liberation Sans",sans-serif;background:#e9ecef;color:#181818}
+.app{position:absolute;inset:20px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.16)}
+.top{height:56px;border-bottom:1px solid #dddbda;display:flex;align-items:center;padding:0 22px;gap:14px}
+.top b{font-size:17px}
+.top .st{font-size:12px;background:#e3f6ea;color:#2e844a;padding:4px 10px;border-radius:10px;font-weight:700}
+.top .sp{flex:1}
+.top .btn{font-size:13px;border:1px solid #c9c9c9;border-radius:4px;padding:7px 14px;color:#0176d3}
+.canvas{position:absolute;top:56px;left:0;right:0;bottom:0;background:#f7f9fb radial-gradient(#d6dde4 1px,transparent 1.2px) 0 0/22px 22px}
+.n{position:absolute;width:190px;background:#fff;border:1px solid #cfd8e0;border-radius:10px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.n .k{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.n b{display:block;font-size:14px;line-height:1.3}
+.n span{display:block;font-size:12px;color:#5b6670;margin-top:5px;line-height:1.35}
+.entry .k{color:#06a59a}.email .k{color:#0176d3}.sms .k{color:#7a3fb0}.wait .k{color:#706e6b}.dec .k{color:#a96404}.pei{border:2px solid #d214aa}.pei .k{color:#d214aa}
+.l{position:absolute;height:2px;background:#9fb0c0}
+.v{position:absolute;width:2px;background:#9fb0c0}
+.lab{position:absolute;font-size:12px;font-weight:700;color:#5b6670;background:#f7f9fb;padding:0 4px}
+.legend{position:absolute;right:22px;bottom:18px;display:flex;gap:16px;font-size:12px;color:#5b6670;align-items:center}
+.sw{display:inline-block;width:12px;height:12px;border:2px solid #d214aa;border-radius:3px;vertical-align:middle;margin-right:5px}
+.note{position:absolute;left:22px;bottom:18px;font-size:12px;color:#8a949e}
+</style></head><body><div class="app">
+<div class="top"><b>Journey: Class attendee nurture</b><span class="st">Running</span><span class="sp"></span><span class="btn">Entry source: Event Registration</span><span class="btn">Goal: Book a visit</span></div>
+<div class="canvas">
+ <div class="n entry" style="left:24px;top:50px"><div class="k">Entry</div><b>Registered for a class or event</b><span>From the Salesforce event app</span></div>
+ <div class="l" style="left:214px;top:90px;width:36px"></div>
+ <div class="n email" style="left:250px;top:50px"><div class="k">Email</div><b>Confirmation + calendar invite</b><span>Includes QR code and directions</span></div>
+ <div class="l" style="left:440px;top:90px;width:36px"></div>
+ <div class="n sms" style="left:476px;top:50px"><div class="k">SMS</div><b>Reminder 24 hours before</b><span>Reply C to cancel and free the seat</span></div>
+ <div class="l" style="left:666px;top:90px;width:36px"></div>
+ <div class="n dec" style="left:702px;top:50px"><div class="k">Decision</div><b>Attended?</b><span>From QR check-in</span></div>
+ <div class="l" style="left:892px;top:90px;width:40px"></div>
+ <div class="lab" style="left:896px;top:70px">Yes</div>
+ <div class="n pei" style="left:932px;top:50px"><div class="k">PEI 1 &middot; Email</div><b>Thank you + 2-question survey</b><span>Same day</span></div>
+ <div class="l" style="left:1122px;top:90px;width:36px"></div>
+ <div class="n pei" style="left:1158px;top:50px"><div class="k">PEI 2 &middot; Email</div><b>Your next class</b><span>Recommended by topic, e.g. Breastfeeding after L&amp;D</span></div>
+ <div class="v" style="left:1252px;top:158px;height:82px"></div>
+ <div class="n pei" style="left:1158px;top:240px"><div class="k">PEI 3 &middot; SMS + email</div><b>Get the My Memorial Hermann app</b><span>Download link to manage classes, results, visits</span></div>
+ <div class="l" style="left:1122px;top:280px;width:36px"></div>
+ <div class="n pei" style="left:932px;top:240px"><div class="k">PEI 4 &middot; Email</div><b>Find a doctor near you</b><span>OB, pediatrician or primary care, by service line</span></div>
+ <div class="v" style="left:1026px;top:348px;height:72px"></div>
+ <div class="n wait" style="left:932px;top:420px"><div class="k">Goal check</div><b>Booked a visit or downloaded the app?</b><span>Exit when the goal is met</span></div>
+ <div class="v" style="left:796px;top:140px;height:100px"></div>
+ <div class="lab" style="left:804px;top:178px">No</div>
+ <div class="n email" style="left:702px;top:240px"><div class="k">Email</div><b>Sorry we missed you</b><span>One-click rebook into the next date</span></div>
+ <div class="n wait" style="left:24px;top:240px;width:300px"><div class="k">Data captured</div><b>Registrant profile in Salesforce</b><span>Contact details, class history, attendance, interests, communication preferences</span></div>
+</div>
+<div class="legend"><span><span class="sw"></span>Post-event interaction (PEI)</span></div>
+<div class="note">Concept mockup of a Marketing Cloud journey</div>
+</div></body></html>

@@ -1,0 +1,12 @@
+{
+  "name": "memorial-hermann-deck",
+  "private": true,
+  "description": "Builds the Memorial Hermann event platform deck in the Insight Global template style",
+  "scripts": {
+    "mockups": "node render-mockups.js",
+    "deck": "node build-deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}

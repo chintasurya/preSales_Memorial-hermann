@@ -1,0 +1,87 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Classes and Events - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:1000px;font-family:Arial,"Liberation Sans",sans-serif;background:#e9ecef;color:#1d2733}
+.browser{margin:24px;height:952px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+.chrome{height:46px;background:#f1f3f5;display:flex;align-items:center;gap:10px;padding:0 18px;border-bottom:1px solid #dde1e5}
+.dot{width:12px;height:12px;border-radius:50%}
+.url{margin-left:18px;flex:1;height:28px;background:#fff;border:1px solid #d5dade;border-radius:14px;font-size:14px;color:#5b6670;display:flex;align-items:center;padding:0 14px}
+.top{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid #e5e8eb}
+.brand{font-size:22px;font-weight:700;color:#3b2a6b}
+.brand span{font-weight:400;color:#5b6670;margin-left:10px;font-size:18px}
+.nav{display:flex;gap:28px;font-size:15px;color:#3b4652}
+.hero{padding:28px 40px 18px}
+.hero h1{font-size:34px;color:#1d2733}
+.hero p{font-size:16px;color:#5b6670;margin-top:6px}
+.search{margin-top:16px;display:flex;gap:12px}
+.search .box{flex:1;height:46px;border:1px solid #cfd5db;border-radius:8px;display:flex;align-items:center;padding:0 16px;color:#8a949e;font-size:16px}
+.search .btn{height:46px;padding:0 26px;background:#3b2a6b;color:#fff;border-radius:8px;display:flex;align-items:center;font-weight:700}
+.main{display:flex;gap:28px;padding:10px 40px}
+.filters{width:270px;flex:none}
+.fgroup{margin-bottom:22px}
+.fgroup h4{font-size:14px;text-transform:uppercase;letter-spacing:1px;color:#5b6670;margin-bottom:10px}
+.opt{display:flex;align-items:center;gap:10px;font-size:15px;margin-bottom:9px;color:#2b3640}
+.cb{width:18px;height:18px;border:2px solid #9aa4ad;border-radius:4px}
+.cb.on{background:#3b2a6b;border-color:#3b2a6b}
+.list{flex:1;display:flex;flex-direction:column;gap:14px}
+.card{border:1px solid #e1e5e9;border-radius:12px;padding:18px 22px;display:flex;gap:22px;align-items:center}
+.date{width:84px;height:84px;border-radius:10px;background:#f3f0fa;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+.date b{font-size:30px;color:#3b2a6b}
+.date span{font-size:13px;text-transform:uppercase;color:#5b6670;letter-spacing:1px}
+.info{flex:1}
+.info h3{font-size:20px;margin-bottom:6px}
+.meta{font-size:14px;color:#5b6670;display:flex;gap:18px;flex-wrap:wrap}
+.tags{margin-top:8px;display:flex;gap:8px}
+.tag{font-size:12px;padding:4px 10px;border-radius:12px;background:#eef2f5;color:#3b4652;font-weight:700}
+.tag.paid{background:#fff4e0;color:#8a5a00}
+.tag.free{background:#e3f6ea;color:#1d6b3a}
+.tag.online{background:#e2f3fb;color:#0b5c80}
+.right{text-align:right;width:180px;flex:none}
+.seats{font-size:13px;color:#b54708;margin-bottom:8px;font-weight:700}
+.seats.ok{color:#1d6b3a}
+.reg{display:inline-block;padding:11px 24px;background:#3b2a6b;color:#fff;border-radius:8px;font-weight:700;font-size:15px}
+.reg.wait{background:#fff;color:#3b2a6b;border:2px solid #3b2a6b}
+.note{position:absolute;right:48px;bottom:40px;font-size:13px;color:#8a949e}
+</style></head><body>
+<div class="browser">
+ <div class="chrome"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><div class="url">memorialhermann.org/classes-events</div></div>
+ <div class="top"><div class="brand">Memorial Hermann<span>Classes &amp; Events</span></div><div class="nav"><span>Find a Doctor</span><span>Locations</span><span>Services</span><span>Classes &amp; Events</span><span>My Registrations</span></div></div>
+ <div class="hero"><h1>Find a class or event near you</h1><p>Free and paid classes, tours, support groups and seminars, in person and online.</p>
+  <div class="search"><div class="box">Search classes, e.g. "CPR", "childbirth", "heart health"</div><div class="box" style="flex:0 0 260px">Near: Katy, TX 77494</div><div class="btn">Search</div></div></div>
+ <div class="main">
+  <div class="filters">
+   <div class="fgroup"><h4>Category</h4>
+    <div class="opt"><div class="cb on"></div>Childbirth &amp; Parenting</div>
+    <div class="opt"><div class="cb on"></div>CPR &amp; Safety</div>
+    <div class="opt"><div class="cb"></div>Hospital Tours</div>
+    <div class="opt"><div class="cb"></div>Support Groups</div>
+    <div class="opt"><div class="cb"></div>Health Seminars</div></div>
+   <div class="fgroup"><h4>Format</h4>
+    <div class="opt"><div class="cb on"></div>In person</div>
+    <div class="opt"><div class="cb on"></div>Online</div></div>
+   <div class="fgroup"><h4>Price</h4>
+    <div class="opt"><div class="cb on"></div>Free</div>
+    <div class="opt"><div class="cb on"></div>Paid</div></div>
+   <div class="fgroup"><h4>Date</h4>
+    <div class="opt"><div class="cb"></div>This week</div>
+    <div class="opt"><div class="cb on"></div>Next 30 days</div></div>
+  </div>
+  <div class="list">
+   <div class="card"><div class="date"><span>Sat</span><b>8</b><span>Nov</span></div>
+    <div class="info"><h3>CPR &amp; First Aid (Adult, Child, Infant)</h3><div class="meta"><span>9:00 AM to 1:00 PM</span><span>Katy Hospital, Room 2B</span></div><div class="tags"><span class="tag paid">$45</span><span class="tag">In person</span><span class="tag">Certificate</span></div></div>
+    <div class="right"><div class="seats">4 seats left</div><span class="reg">Register</span></div></div>
+   <div class="card"><div class="date"><span>Tue</span><b>11</b><span>Nov</span></div>
+    <div class="info"><h3>Labor &amp; Delivery Preparation (4-week series)</h3><div class="meta"><span>6:30 PM to 8:30 PM</span><span>Memorial City, Women's Center</span></div><div class="tags"><span class="tag paid">$80 per couple</span><span class="tag">In person</span><span class="tag">Series</span></div></div>
+    <div class="right"><div class="seats ok">12 seats left</div><span class="reg">Register</span></div></div>
+   <div class="card"><div class="date"><span>Thu</span><b>13</b><span>Nov</span></div>
+    <div class="info"><h3>Maternity Hospital Tour</h3><div class="meta"><span>5:30 PM to 6:30 PM</span><span>Sugar Land Hospital</span></div><div class="tags"><span class="tag free">Free</span><span class="tag">In person</span></div></div>
+    <div class="right"><div class="seats">Full</div><span class="reg wait">Join waitlist</span></div></div>
+   <div class="card"><div class="date"><span>Wed</span><b>19</b><span>Nov</span></div>
+    <div class="info"><h3>Breastfeeding Basics</h3><div class="meta"><span>7:00 PM to 8:30 PM</span><span>Live on Zoom</span></div><div class="tags"><span class="tag free">Free</span><span class="tag online">Online</span></div></div>
+    <div class="right"><div class="seats ok">Open</div><span class="reg">Register</span></div></div>
+  </div>
+ </div>
+</div>
+<div class="note">Concept mockup, sample data</div>
+</body></html>
