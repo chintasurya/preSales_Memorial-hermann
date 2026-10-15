@@ -94,6 +94,7 @@ Sprint plan, pod and investment: `deck/build/delivery-slides.js`.
   1 Marketing Cloud developer. Memorial Hermann provides a product owner and an Epic/app contact.
 - 12 two-week sprints (24 weeks), demo and milestone sign-off at every sprint end. Sprints 1-2
   discover and design, 3-7 Phase 1 (live week 14), 8-12 Phase 2 (live week 24, Certain retired).
+- Pricing is for an **offshore delivery model** (labelled on the Investment slide).
 - Standard program value $700,000 (struck through); strategic partner investment $350,000 after a
   50% partnership credit applied upfront. Phase split by sprint weeks: Phase 1 $410,000 to $205,000,
   Phase 2 $290,000 to $145,000. Indicative, billed at sprint milestones, final in the SOW.

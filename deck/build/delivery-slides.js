@@ -132,12 +132,14 @@ function addInvestmentSlide(h, sectionTitle) {
   const { pres, txt, L } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Investment', { placeholder: 'title' });
-  txt(s, 'Fixed-scope delivery by the five-person pod across 12 sprints', { x: L, y: 1.42, w: 9, h: 0.32, fontSize: 14, color: MUTED });
+  txt(s, 'Offshore delivery model: fixed scope, five-person pod, 12 sprints', { x: L, y: 1.42, w: 9, h: 0.32, fontSize: 14, color: MUTED });
 
   // price card
   const cx = L, cy = 1.95, cw = 4.6, chh = 4.45;
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: cx, y: cy, w: cw, h: chh, rectRadius: 0.14, fill: { color: INK }, line: { color: INK }, objectName: 'price-card' });
-  txt(s, 'STANDARD PROGRAM VALUE', { x: cx + 0.35, y: cy + 0.35, w: cw - 0.7, h: 0.24, fontSize: 10, bold: true, color: 'BFBFBF', charSpacing: 2 });
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: cx + cw - 1.55, y: cy + 0.3, w: 1.2, h: 0.32, rectRadius: 0.16, fill: { type: 'none' }, line: { color: '00D6F2', width: 1.25 } });
+  txt(s, 'OFFSHORE', { x: cx + cw - 1.55, y: cy + 0.3, w: 1.2, h: 0.32, fontSize: 9.5, bold: true, color: '00D6F2', align: 'center', valign: 'middle', charSpacing: 2 });
+  txt(s, 'STANDARD PROGRAM VALUE', { x: cx + 0.35, y: cy + 0.35, w: cw - 2.0, h: 0.24, fontSize: 10, bold: true, color: 'BFBFBF', charSpacing: 2 });
   s.addText('$700,000', { isTextBox: true, x: cx + 0.35, y: cy + 0.62, w: cw - 0.7, h: 0.6, fontFace: h.LIGHT_FONT, fontSize: 30, color: '8C8C8C', strike: 'sngStrike', margin: 0, valign: 'top' });
   s.addShape(pres.shapes.LINE, { x: cx + 0.35, y: cy + 1.45, w: cw - 0.7, h: 0, line: { color: '444444', width: 0.75 } });
   txt(s, 'STRATEGIC PARTNER INVESTMENT', { x: cx + 0.35, y: cy + 1.65, w: cw - 0.7, h: 0.24, fontSize: 10, bold: true, color: '00D6F2', charSpacing: 2 });
@@ -174,7 +176,7 @@ function addInvestmentSlide(h, sectionTitle) {
   const iy = 4.05;
   txt(s, 'Included', { x: tx, y: iy, w: 3.5, h: 0.3, fontSize: 14, bold: true, color: INK });
   s.addText([
-    { text: 'Dedicated five-person pod for 24 weeks', options: { bullet: true, breakLine: true } },
+    { text: 'Dedicated five-person offshore pod for 24 weeks', options: { bullet: true, breakLine: true } },
     { text: 'Sprint demos and milestone sign-offs', options: { bullet: true, breakLine: true } },
     { text: 'Testing, load testing, go-live and hypercare', options: { bullet: true, breakLine: true } },
     { text: 'Documentation and handover to your admins', options: { bullet: true } },
@@ -185,8 +187,8 @@ function addInvestmentSlide(h, sectionTitle) {
     { text: 'Payment gateway transaction fees', options: { bullet: true, breakLine: true } },
     { text: 'Waiting room subscription', options: { bullet: true } },
   ], { isTextBox: true, x: tx + 3.85, y: iy + 0.36, w: 3.38, h: 1.6, fontSize: 11, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 4 });
-  txt(s, 'Indicative pricing, billed at sprint milestones. Final commercials confirmed in the statement of work.', { x: tx, y: 6.1, w: totalW, h: 0.3, fontSize: 10.5, italic: true, color: MUTED });
-  s.addNotes('Standard program value is $700,000. As a strategic partner, Memorial Hermann receives a 50% partnership credit applied upfront, for an investment of $350,000. Billing follows sprint milestones. Licenses and third-party fees are outside this price.');
+  txt(s, 'Pricing is for an offshore delivery model. Indicative, billed at sprint milestones; final commercials in the statement of work.', { x: tx, y: 6.1, w: totalW, h: 0.3, fontSize: 10.5, italic: true, color: MUTED });
+  s.addNotes('Pricing is for an offshore delivery model. Standard program value is $700,000. As a strategic partner, Memorial Hermann receives a 50% partnership credit applied upfront, for an investment of $350,000. Billing follows sprint milestones. Licenses and third-party fees are outside this price.');
   return s;
 }
 
