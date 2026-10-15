@@ -6,6 +6,7 @@ const pptxgen = require('pptxgenjs');
 const { applyTheme } = require('./apply_theme.js');
 const { addDemandSlide, addSecuritySlide, addHarnessSlide } = require('./design-slides.js');
 const { addOverallDesignSlide, addSeatFlowSlide, addPaymentSequenceSlide } = require('./sequence-slides.js');
+const { addSprintPlanSlide, addPodSlide, addInvestmentSlide } = require('./delivery-slides.js');
 
 const ROOT = path.join(__dirname, '..');
 const BG = f => path.join(ROOT, 'assets', 'bg', f);
@@ -252,20 +253,9 @@ blocks.forEach(({ x, up, w, h, b }) => {
 });
 s.addNotes('Phase 1 replaces the home-built class registration around week 14. Phase 2 replaces Certain around week 24; time it to land before the Certain renewal. Engagement work can start as soon as Phase 1 is live.');
 
-// 12. Phase scope
-s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Delivery plan' });
-s.addText('What each phase delivers', { placeholder: 'title' });
-ruledTable(s, L, 1.7, [2.2, 5.0, 5.03], [
-  ['', 'Phase 1  ·  Classes and events', 'Phase 2  ·  Conferences and sessions'],
-  ['Scope', 'Event catalog, recurring classes, capacity and waitlists', 'Multi-day agenda, tracks, rooms and session capacity'],
-  ['Registration', 'Consumers and caregivers, family sign-up', 'Providers and guests, ticket types, My Agenda'],
-  ['Payments', 'Chase hosted checkout, refunds, receipts', 'Authorize.net or one consolidated gateway'],
-  ['Engagement', 'Confirmation and reminder journeys, QR check-in', 'Speaker and attendee communications, badges, CME [to confirm]'],
-  ['Data', 'Registrants matched to Health Cloud records', 'Certain history migrated'],
-  ['Built in', 'Waiting room, seat holds, encryption, monitoring', 'Load test before each conference opens'],
-  ['Retires', 'Home-built class registration', 'Certain'],
-], { rowH: 0.6, bodySize: 13 });
-s.addNotes('Same team and same app across both phases, so Phase 2 builds on Phase 1 rather than starting over.');
+// Sprint plan and delivery pod (replace the phase scope table)
+addSprintPlanSlide(h, 'Delivery plan');
+await addPodSlide(h, 'Delivery plan');
 
 // 13. Section 03
 pres.addSection({ title: 'Beyond the event' });
@@ -369,6 +359,9 @@ s.addNotes('Future plan. AI agents use Agentforce and are licensed separately; w
 
 // AI agent harness
 await addHarnessSlide(h, 'Roadmap and next steps');
+
+// Investment
+addInvestmentSlide(h, 'Roadmap and next steps');
 
 // 20. Next steps
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'Roadmap and next steps' });

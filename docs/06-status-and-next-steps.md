@@ -11,7 +11,7 @@
 | 2026-10-15 | Surya agreed the design. Asked for three new slides: demand handling (not titled "high demand"), payments and data security, AI agents in a controlled harness. Previews built (`deck/previews/`, source `deck/build/design-slides.js`). **Waiting for Surya's approval before adding them to the deck.** |
 | 2026-10-15 | Surya approved the three slides and asked for sequence-diagram views of the overall solution. Deck rebuilt to 26 slides: overall solution design (sequence, slide 6), demand handling (10), registration and seat flow detail (11), payments and data security (12), payment sequence detail (13), AI agent harness (24). PEI renamed and in-app registration applied across slides. |
 | 2026-10-15 | Surya: sequence slides (6, 11, 13) moved to the white background for readability. |
-| 2026-10-15 | Surya asked for team and commercials: 5-person pod (2 Salesforce developers, 1 Marketing Cloud developer, 1 Scrum Master or PM, 1 QA), 2-week sprints with a milestone at each sprint end, pyramid team diagram, and pricing shown as $700,000 standard value struck through with a 50% upfront partner credit ($350,000). Previews built (`deck/build/delivery-slides.js`, `deck/previews/preview-*.jpg`). **Waiting for approval before adding to the deck.** |
+| 2026-10-15 | Surya asked for team and commercials: 5-person pod (2 Salesforce developers, 1 Marketing Cloud developer, 1 Scrum Master or PM, 1 QA), 2-week sprints with a milestone at each sprint end, pyramid team diagram, and pricing shown as $700,000 standard value struck through with a 50% upfront partner credit ($350,000). Previews built (`deck/build/delivery-slides.js`, `deck/previews/preview-*.jpg`). **Approved and added: deck now 28 slides (sprint plan 16, pod 17, investment 26).** |
 
 ## Manager direction (Sandeep)
 
@@ -29,7 +29,7 @@
 
 ## Next actions
 
-1. Review the 26-slide deck with Sandeep.
+1. Review the 28-slide deck with Sandeep.
 2. Ask Kevin for a walkthrough of the current solution with Lucky Rai's team.
 3. Return with a scoped plan, team and estimate.
 
