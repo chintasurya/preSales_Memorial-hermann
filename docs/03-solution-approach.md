@@ -12,7 +12,7 @@ phases: Phase 1 replaces the home-built class registration; Phase 2 replaces Cer
 |---|---|---|
 | Register | Public listings, sign-up, checkout, conference "My Agenda" | Sitecore pages calling Salesforce APIs (matches today), or a Salesforce Experience Cloud site (better for the attendee portal; needs licenses) |
 | Manage | Events, series, sessions, speakers, capacity, waitlists, refunds, check-in, reporting | Custom Salesforce Lightning app on the Health Cloud org |
-| Engage | Confirmations, reminders, calendar invites, virtual links, post-event interactions | Marketing Cloud journeys |
+| Engage | Confirmations, reminders, calendar invites, virtual links, patient engagement initiatives | Marketing Cloud journeys |
 | Pay | Hosted checkout; card data never stored in Salesforce | Chase and/or Authorize.net |
 | Connect | Virtual sessions, website, records | Zoom / Teams, Sitecore, Health Cloud person accounts |
 
@@ -73,4 +73,4 @@ home-built tool and Certain. Present AppExchange as the faster alternative.
 2. Mobile flow: choose class, register and pay, confirmation with QR and app link
 3. Salesforce staff console: series, sessions, capacity, registrations, follow-up journey
 4. Conference agenda: tracks, session capacity, CME badges, My Agenda
-5. Marketing Cloud journey with post-event interactions
+5. Marketing Cloud journey with patient engagement initiatives

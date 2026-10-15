@@ -1,0 +1,465 @@
+<title>Event Platform Design Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (~72ch) with a sticky section index on wide screens; diagrams and tables break out to full column width. */
+:root{
+  --bg:#0b0b0d; --surface:#141418; --surface-2:#1c1c22; --line:#2c2c35;
+  --fg:#f2f2f4; --muted:#a8a8b3; --cyan:#00d6f2; --yellow:#fed700; --magenta:#ff2e7e;
+  --ok:#3ddc84; --warn:#fed700; --diagram-bg:#f7f7f9; --diagram-fg:#15151a;
+  --font-display:"Outfit","Segoe UI",Arial,sans-serif; --font-body:"Outfit","Segoe UI",Arial,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#f6f6f8; --surface:#ffffff; --surface-2:#eff0f3; --line:#d9dae0;
+  --fg:#121216; --muted:#55575f; --cyan:#007c8c; --yellow:#7a6100; --magenta:#c8005a;
+  --ok:#1d7a45; --warn:#7a6100; color-scheme:light;}}
+:root[data-theme="light"]{
+  --bg:#f6f6f8; --surface:#ffffff; --surface-2:#eff0f3; --line:#d9dae0;
+  --fg:#121216; --muted:#55575f; --cyan:#007c8c; --yellow:#7a6100; --magenta:#c8005a;
+  --ok:#1d7a45; --warn:#7a6100; color-scheme:light;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.6;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;padding-top:40px;font-size:14px}
+nav.toc b{font-family:var(--font-mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:5px 0;border-left:2px solid transparent;padding-left:10px}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--fg);border-left-color:var(--cyan);outline:none}
+main{min-width:0;padding-top:40px}
+header.hero{padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+h1{font-family:var(--font-display);font-weight:300;font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:.01em;margin:10px 0 14px;text-wrap:balance}
+h2{font-family:var(--font-display);font-weight:600;font-size:28px;line-height:1.2;margin:0 0 6px;text-wrap:balance}
+h3{font-family:var(--font-display);font-weight:600;font-size:19px;margin:22px 0 6px}
+p{margin:0 0 14px;max-width:72ch}
+.lede{font-size:19px;color:var(--muted);max-width:66ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-top:16px}
+section{padding-top:48px;scroll-margin-top:16px}
+.sec-num{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.12em}
+.changes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px}
+.change{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.change b{display:block;font-weight:600;margin-bottom:4px}
+.change span{color:var(--muted);font-size:15px}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:999px;border:1px solid currentColor;vertical-align:2px;white-space:nowrap}
+.tag.confirm{color:var(--yellow)}
+.tag.rec{color:var(--cyan)}
+.tag.future{color:var(--magenta)}
+.diagram{background:var(--diagram-bg);color:var(--diagram-fg);border-radius:12px;padding:18px;margin:18px 0 8px;overflow-x:auto}
+.diagram pre.mermaid{margin:0;background:transparent;min-width:640px}
+.caption{font-size:14px;color:var(--muted);margin-bottom:18px}
+.table-wrap{overflow-x:auto;margin:14px 0 18px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px dotted var(--line)}
+th{font-weight:600;background:var(--surface-2);border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:500}
+.num{font-variant-numeric:tabular-nums}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:72ch}
+li{margin-bottom:6px}
+.callout{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:16px 0}
+.callout h3{margin-top:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat .v{font-family:var(--font-display);font-weight:300;font-size:32px;color:var(--cyan);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:14px;color:var(--muted)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.option{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.option.pick{border-color:var(--cyan)}
+.option h3{margin-top:0}
+.decisions li{margin-bottom:10px}
+code,.mono{font-family:var(--font-mono);font-size:.88em}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+a{color:var(--cyan)}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}nav.toc{display:none}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Sections">
+  <b>Design review</b>
+  <a href="#changes">What changed</a>
+  <a href="#principles">Quality targets</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#app">Existing app channel</a>
+  <a href="#demand">High-demand events</a>
+  <a href="#notify">Notifications</a>
+  <a href="#security">Payments and data security</a>
+  <a href="#reliability">Reliability</a>
+  <a href="#scale">Scalability</a>
+  <a href="#pei">Patient engagement</a>
+  <a href="#agents">AI agent harness</a>
+  <a href="#decisions">Decisions needed</a>
+  <a href="#deck">Deck changes</a>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Memorial Hermann · Salesforce event platform</div>
+  <h1>Detailed design for review</h1>
+  <p class="lede">How the platform registers people from the website and the existing My Memorial Hermann app, survives a surge of 100,000 clicks for 30 seats without losing that demand, keeps card and patient data safe, stays up, scales, and later runs on AI agents inside a controlled harness.</p>
+  <div class="meta"><span>Version 0.1 · draft for approval</span><span>15 Oct 2026</span><span>Insight Global presales</span></div>
+</header>
+
+<section id="changes">
+  <div class="sec-num">01</div>
+  <h2>What changed after your feedback</h2>
+  <div class="changes">
+    <div class="change"><b>PEI = Patient Engagement Initiatives</b><span>Renamed everywhere. PEIs are the engagement programs we run from registration data, not just follow-up emails.</span></div>
+    <div class="change"><b>No new mobile app</b><span>Registration is added to the existing My Memorial Hermann app. The website and app share one registration flow.</span></div>
+    <div class="change"><b>Detailed design, not just screens</b><span>Architecture, high-demand handling, notifications, security, reliability and scalability are now designed explicitly.</span></div>
+    <div class="change"><b>Future state: AI agent harness</b><span>Agents manage events and campaigns inside guardrails, approvals and audit, built on the same platform.</span></div>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="sec-num">02</div>
+  <h2>Quality targets</h2>
+  <p>Every design choice below traces back to these targets. Numbers are proposals to agree with Memorial Hermann IT.</p>
+  <div class="table-wrap"><table>
+    <tr><th style="width:18%">Quality</th><th style="width:44%">What it means here</th><th>Proposed target</th></tr>
+    <tr><td>Correctness</td><td>Never sell more seats than exist. Never charge someone who did not get a seat.</td><td>Zero overbooking (hard rule); every failed payment releases its seat</td></tr>
+    <tr><td>Scalability</td><td>A popular class or conference opening does not slow or break registration for anyone else.</td><td class="num">Absorb 100,000 visitors in 10 minutes for one event <span class="tag confirm">to confirm</span></td></tr>
+    <tr><td>Performance</td><td>Pages and seat answers feel instant even at peak.</td><td class="num">Event pages under 2 s; seat answer under 3 s at peak <span class="tag confirm">to confirm</span></td></tr>
+    <tr><td>Reliability</td><td>Registration keeps working when a dependency (payments, Salesforce, email) is slow or down.</td><td class="num">99.9% availability for the registration path; RPO 15 min, RTO 4 h <span class="tag confirm">to confirm</span></td></tr>
+    <tr><td>Security</td><td>Card data never touches our systems; registrant and patient data is encrypted, access-controlled and audited.</td><td>PCI scope limited to hosted payment pages; HIPAA-aligned controls on Health Cloud</td></tr>
+    <tr><td>Observability</td><td>Problems are seen and fixed before registrants notice.</td><td>Live dashboard, alerts and runbooks for every failure mode in section 08</td></tr>
+  </table></div>
+</section>
+
+<section id="architecture">
+  <div class="sec-num">03</div>
+  <h2>Target architecture</h2>
+  <p>Salesforce stays the system of record. A thin, elastic registration layer sits in front of it only to absorb bursts and hold seats fairly. Marketing Cloud sends every message. Payments happen on the gateway's own hosted page.</p>
+  <div class="diagram"><pre class="mermaid">
+flowchart LR
+  subgraph CH[Channels]
+    WEB[Website<br/>Sitecore]
+    APP[My Memorial Hermann app<br/>existing, Epic MyChart]
+    QR[Email, SMS, posters<br/>QR and deep links]
+  end
+  subgraph EDGE[Edge protection]
+    CDN[CDN cache<br/>event pages]
+    WAF[WAF, bot defense,<br/>rate limits]
+    WR[Virtual waiting room<br/>only for hot events]
+  end
+  subgraph REG[Registration service]
+    API[Registration API]
+    INV[(Seat inventory<br/>atomic holds, 10 min TTL)]
+    Q[[Durable queue<br/>retries, dead letter]]
+  end
+  subgraph SF[Salesforce Health Cloud org]
+    EVT[Event app<br/>events, sessions, registrations]
+    PER[Person accounts<br/>consent, preferences]
+    PE((Platform Events))
+  end
+  PAY[Hosted payment page<br/>Chase or Authorize.net]
+  MC[Marketing Cloud<br/>journeys and PEIs]
+  ZM[Zoom or Teams]
+  AG[AI agent harness<br/>future]:::future
+  WEB --> CDN
+  APP --> CDN
+  QR --> CDN
+  CDN --> WAF --> WR --> API
+  API <--> INV
+  API --> PAY
+  PAY -- signed webhook --> API
+  API --> Q --> EVT
+  EVT --> PER
+  EVT --> PE --> MC
+  EVT --> ZM
+  AG -.-> EVT
+  AG -.-> MC
+  classDef future stroke-dasharray: 5 4
+  </pre></div>
+  <div class="caption">Normal classes flow straight through. The waiting room and seat holds engage automatically only when demand for one event spikes.</div>
+  <h3>Why a registration layer in front of Salesforce</h3>
+  <ul>
+    <li>Thousands of people grabbing the same 30 seats means thousands of writes to the same event record at once. Salesforce locks that record during each write, so a direct surge causes queuing, timeouts and "unable to lock row" errors.</li>
+    <li>Salesforce also caps concurrent and daily API calls. The buffer turns a spike into a steady stream Salesforce handles comfortably.</li>
+    <li>Recommended build: Heroku (Salesforce's own cloud) with Redis for seat counts and a durable queue. MuleSoft or AWS also fit if Memorial Hermann prefers them <span class="tag confirm">to confirm</span>.</li>
+  </ul>
+</section>
+
+<section id="app">
+  <div class="sec-num">04</div>
+  <h2>Registration inside the existing My Memorial Hermann app</h2>
+  <p>We add a <b>Classes and Events</b> entry to the app people already have. We do not build or publish a new app. The app is built on Epic MyChart, so how it is added depends on what Memorial Hermann's Epic team can configure. Lucky Rai's team owns this.</p>
+  <div class="two">
+    <div class="option pick"><h3>Option A: app menu link <span class="tag rec">start here</span></h3>
+      <p>A menu activity opens our mobile-optimized registration page inside the app. Same flow as the website. Lowest Epic effort; can go live with Phase 1.</p>
+      <p class="caption">Sign-in: the registrant confirms name, email and phone on the page. No patient record is read.</p></div>
+    <div class="option"><h3>Option B: SMART on FHIR launch</h3>
+      <p>The app launches registration with the signed-in patient's identity, so name and contact details are pre-filled and the registration links to the right person automatically.</p>
+      <p class="caption">Needs Epic app registration and launch configuration <span class="tag confirm">to confirm</span>.</p></div>
+  </div>
+  <h3>What the app channel adds</h3>
+  <ul>
+    <li>One registration flow and one data model for website and app, so nothing is built twice.</li>
+    <li>Confirmation shows the QR check-in code and an "Add to calendar" action in the app.</li>
+    <li>Reminders go by SMS and email. In-app push or MyChart messages are used only where Epic supports them <span class="tag confirm">to confirm</span>.</li>
+    <li>Emails, texts and posters carry deep links that open the app if installed and the website if not.</li>
+  </ul>
+</section>
+
+<section id="demand">
+  <div class="sec-num">05</div>
+  <h2>High-demand events: 100,000 clicks, 30 seats</h2>
+  <p>The goal is not only to stop the system from breaking. Every person who clicks gets a clear answer within seconds, nobody pays for a seat they did not get, and nobody who showed interest is lost.</p>
+  <div class="stats">
+    <div class="stat"><div class="v num">100,000</div><div class="l">people click Register in the first minutes</div></div>
+    <div class="stat"><div class="v num">30</div><div class="l">confirmed seats, sold in fair arrival order</div></div>
+    <div class="stat"><div class="v num">60</div><div class="l">on an ordered waitlist (cap set per event)</div></div>
+    <div class="stat"><div class="v num">All the rest</div><div class="l">on an interest list for the next date</div></div>
+  </div>
+  <div class="diagram"><pre class="mermaid">
+sequenceDiagram
+  autonumber
+  actor P as Registrant
+  participant E as Edge and waiting room
+  participant R as Registration service
+  participant S as Seat inventory
+  participant G as Payment page
+  participant SF as Salesforce
+  participant M as Marketing Cloud
+  P->>E: Click Register (surge detected)
+  E-->>P: Waiting room shows place in line
+  E->>R: Admit at a safe rate (fair order)
+  R->>S: Hold one seat (atomic)
+  alt Seat available
+    S-->>R: Hold granted for 10 minutes
+    R-->>P: Your seat is held, pay now
+    P->>G: Pay on hosted page
+    G-->>R: Signed payment webhook
+    R->>SF: Create registration (idempotent, via queue)
+    SF->>M: Registration event
+    M-->>P: Confirmation, QR, calendar invite
+  else Sold out
+    S-->>R: No seats
+    R-->>P: Join waitlist or get notified of new dates
+    R->>SF: Waitlist or interest record
+  end
+  Note over S: Unpaid holds expire and return to the pool
+  </pre></div>
+  <div class="caption">Seat holds are atomic, so two people can never get the same seat. Holds that are not paid within 10 minutes go back to the pool.</div>
+
+  <h3>How each step works</h3>
+  <div class="table-wrap"><table>
+    <tr><th style="width:22%">Step</th><th>Design</th></tr>
+    <tr><td>Absorb the click flood</td><td>Event pages are cached at the CDN, so browsing costs Salesforce nothing. WAF rules, bot detection and per-device rate limits stop scripts and repeat clicking.</td></tr>
+    <tr><td>Fair admission</td><td>When visitors for one event pass a threshold, a virtual waiting room switches on automatically and admits people in arrival order at a rate the backend can handle. Candidates: Queue-it or Cloudflare Waiting Room <span class="tag confirm">to confirm</span>.</td></tr>
+    <tr><td>Seat holds</td><td>Each admitted person gets a seat hold from an atomic counter (no race conditions). Holds last 10 minutes. Paid holds become registrations; expired or failed ones return to the pool instantly.</td></tr>
+    <tr><td>Write to Salesforce</td><td>Confirmed registrations go through a durable queue with an idempotency key, so retries never create duplicates and a Salesforce slowdown never loses a registration.</td></tr>
+    <tr><td>Sold out</td><td>One tap to join the waitlist (ordered, with a position) or the interest list ("tell me when there is a new date"). Both capture contact details and consent.</td></tr>
+    <tr><td>Waitlist promotion</td><td>When a seat frees up (cancellation, no payment), the next person gets an SMS and email offer with a 2-hour claim window, then it moves on automatically.</td></tr>
+  </table></div>
+
+  <div class="callout">
+    <h3>Turning overflow into more sessions</h3>
+    <p>For each event we track a <b>demand ratio</b>: (waitlist + interest list) ÷ seats. When it passes a threshold, for example 3×, the system:</p>
+    <ol>
+      <li>Alerts the event owner with the numbers and a recommendation: add a date, a bigger room, or a virtual session.</li>
+      <li>Lets staff clone the session in one click.</li>
+      <li>Offers the new seats to the waitlist first, then announces them to the interest list through Marketing Cloud.</li>
+    </ol>
+    <p class="caption">In the future state, the Demand Agent (section 11) does this analysis and drafts the new session for staff approval.</p>
+  </div>
+</section>
+
+<section id="notify">
+  <div class="sec-num">06</div>
+  <h2>Notifications</h2>
+  <p>Transactional messages (confirmations, seat offers) always send and take priority. Marketing messages respect consent, preferences, frequency caps and quiet hours.</p>
+  <div class="table-wrap"><table>
+    <tr><th style="width:24%">Trigger</th><th style="width:20%">Channels</th><th>Message</th></tr>
+    <tr><td>Registered</td><td>Email, app</td><td>Confirmation, QR check-in code, calendar invite, directions or virtual link</td></tr>
+    <tr><td>24 hours before</td><td>SMS</td><td>Reminder; reply to cancel and release the seat to the waitlist</td></tr>
+    <tr><td>Joined waitlist</td><td>Email</td><td>Your position; what happens next</td></tr>
+    <tr><td>Seat freed</td><td>SMS, email</td><td>Seat offered; claim within 2 hours</td></tr>
+    <tr><td>New date added</td><td>Email, SMS</td><td>Early access for the waitlist, then the interest list</td></tr>
+    <tr><td>Event changed or cancelled</td><td>SMS, email</td><td>New details or refund confirmation</td></tr>
+    <tr><td>After the event</td><td>Email, SMS</td><td>Patient engagement initiatives (section 10)</td></tr>
+  </table></div>
+</section>
+
+<section id="security">
+  <div class="sec-num">07</div>
+  <h2>Payments and data security</h2>
+  <h3>Card data never enters our systems</h3>
+  <div class="diagram"><pre class="mermaid">
+sequenceDiagram
+  actor P as Registrant browser or app
+  participant R as Registration service
+  participant G as Gateway hosted page<br/>Chase or Authorize.net
+  participant SF as Salesforce
+  R->>G: Create payment session (amount, reference)
+  G-->>R: Session token
+  R-->>P: Open hosted payment page
+  P->>G: Card details typed directly into gateway page
+  G-->>P: Approved
+  G->>R: Signed webhook (token, last 4 digits, auth code)
+  R->>R: Verify signature, idempotency check
+  R->>SF: Payment record: token reference, last 4, amount, status
+  Note over SF: No card number, CVV or expiry is ever stored
+  </pre></div>
+  <ul>
+    <li>Card numbers go from the registrant straight to the gateway's hosted page. Salesforce stores only a token reference, last 4 digits, amount and status.</li>
+    <li>This keeps Memorial Hermann's PCI DSS scope to the simplest level (SAQ A for hosted pages) <span class="tag confirm">to confirm with MH finance</span>.</li>
+    <li>Refunds use the stored token through the gateway API. Webhooks are signature-verified and idempotent. A daily job reconciles gateway settlements against Salesforce.</li>
+  </ul>
+
+  <h3>Registrant and patient data</h3>
+  <p>A class topic can reveal a health condition (for example a diabetes support group), so registration data is treated as sensitive even when the person is not known to be a patient.</p>
+  <div class="table-wrap"><table>
+    <tr><th style="width:20%">Data</th><th style="width:30%">Examples</th><th>Protection</th></tr>
+    <tr><td>Public</td><td>Event titles, dates, locations</td><td>Cached at the CDN; no personal data</td></tr>
+    <tr><td>Personal (PII)</td><td>Name, email, phone, address</td><td>Encrypted at rest and in transit; field-level security; least-privilege access</td></tr>
+    <tr><td>Sensitive</td><td>Class topic, caregiver relationship, survey answers, CME records</td><td>Shield Platform Encryption on selected fields; restricted permission sets; access logged</td></tr>
+    <tr><td>Payment</td><td>Token, last 4 digits, amount</td><td>No card data stored; token usable only through the gateway</td></tr>
+    <tr><td>Consent</td><td>Per-channel opt-in, preferences</td><td>Captured at registration; synced to Marketing Cloud; enforced before every marketing send</td></tr>
+  </table></div>
+  <h3>Security controls</h3>
+  <div class="two">
+    <div class="option"><h3>Platform</h3><ul>
+      <li>TLS 1.2+ everywhere; encryption at rest</li>
+      <li>Salesforce Shield: Platform Encryption, Event Monitoring, Field Audit Trail</li>
+      <li>Business Associate Agreement coverage for Health Cloud and Marketing Cloud <span class="tag confirm">to confirm</span></li>
+      <li>Backups with tested restores; masked data in sandboxes (Data Mask)</li></ul></div>
+    <div class="option"><h3>Access and application</h3><ul>
+      <li>SSO with MFA for all staff; least-privilege permission sets</li>
+      <li>No third-party tracking pixels on registration or payment pages</li>
+      <li>Bot defense, rate limits and CAPTCHA on high-demand events</li>
+      <li>Secure code review, dependency scanning, penetration test before go-live</li></ul></div>
+  </div>
+</section>
+
+<section id="reliability">
+  <div class="sec-num">08</div>
+  <h2>Reliability: what happens when something fails</h2>
+  <div class="table-wrap"><table>
+    <tr><th style="width:24%">Failure</th><th style="width:38%">What registrants see</th><th>What the system does</th></tr>
+    <tr><td>Payment gateway slow or down</td><td>Seat stays held; "finish payment" link by email</td><td>Retries with backoff; extends the hold once; alerts the on-call team</td></tr>
+    <tr><td>Salesforce maintenance or slowdown</td><td>Nothing; registration still confirms</td><td>Queue buffers writes and replays them in order; dead-letter queue with alert for anything that cannot be written</td></tr>
+    <tr><td>Marketing Cloud delay</td><td>Confirmation may arrive a few minutes late</td><td>Transactional sends prioritized; confirmation page already shows the QR code</td></tr>
+    <tr><td>Double clicks or repeated submits</td><td>One registration, one charge</td><td>Idempotency keys on every registration and payment</td></tr>
+    <tr><td>Virtual meeting link fails</td><td>Backup link sent automatically</td><td>Health check on links before the event; fallback room</td></tr>
+    <tr><td>Traffic far beyond forecast</td><td>Waiting room with honest wait time</td><td>Admission rate tuned live; core registration protected</td></tr>
+  </table></div>
+  <h3>Running it</h3>
+  <ul>
+    <li>Monitoring: live dashboard for traffic, seat holds, payments, queue depth and message sends; synthetic tests run the registration flow every few minutes.</li>
+    <li>Alerting and runbooks for every failure above; named on-call during big launches.</li>
+    <li>Releases through CI/CD with automated tests and feature flags; load test before every major conference opens.</li>
+  </ul>
+</section>
+
+<section id="scale">
+  <div class="sec-num">09</div>
+  <h2>Scalability</h2>
+  <div class="table-wrap"><table>
+    <tr><th style="width:24%">Growth dimension</th><th>How the design scales</th></tr>
+    <tr><td>Traffic bursts</td><td>CDN and waiting room scale elastically; only admitted traffic reaches the registration service</td></tr>
+    <tr><td>Registrations per minute</td><td>Registration service scales horizontally; writes to Salesforce are queued and batched</td></tr>
+    <tr><td>Number of events and hospitals</td><td>Events, sessions and venues are data, not code; new hospitals and service lines are configuration</td></tr>
+    <tr><td>Data volume over years</td><td>Archive old registrations after a retention period (Big Objects or external archive); reports run on current data</td></tr>
+    <tr><td>Messages</td><td>Marketing Cloud journeys sized for peak sends; transactional and marketing sends separated</td></tr>
+    <tr><td>Future AI workload</td><td>Agents call the same APIs as staff, with their own rate limits and quotas</td></tr>
+  </table></div>
+</section>
+
+<section id="pei">
+  <div class="sec-num">10</div>
+  <h2>Patient engagement initiatives (PEIs)</h2>
+  <p>Registration data shows what each person cares about. PEIs are the programs that use it to keep people engaged and bring them into the Memorial Hermann network, sent only to people who opted in.</p>
+  <div class="table-wrap"><table>
+    <tr><th style="width:26%">Initiative</th><th style="width:40%">Trigger and content</th><th>Goal</th></tr>
+    <tr><td>Thank you and quick survey</td><td>Same day as the class</td><td>Satisfaction score; improve classes</td></tr>
+    <tr><td>Next class</td><td>Recommended by topic (labor and delivery, then breastfeeding)</td><td>Repeat attendance</td></tr>
+    <tr><td>App adoption</td><td>Get the My Memorial Hermann app to manage classes, results and visits</td><td>App downloads and activation</td></tr>
+    <tr><td>Find a doctor</td><td>OB, pediatrician or primary care matched to the class</td><td>Booked visits</td></tr>
+    <tr><td>Demand re-engagement</td><td>New date for people on waitlists and interest lists</td><td>Capture overflow demand</td></tr>
+  </table></div>
+</section>
+
+<section id="agents">
+  <div class="sec-num">11</div>
+  <h2>Future state: AI agents in a controlled harness <span class="tag future">phase 4</span></h2>
+  <p>Agents run events and campaigns day to day, but only through the harness: a registry of allowed actions, policies, approval gates, identity, audit and evaluation. Staff stay in control of anything that reaches registrants or spends money.</p>
+  <div class="diagram"><pre class="mermaid">
+flowchart TB
+  subgraph AGENTS[Agents]
+    A1[Event Ops agent]
+    A2[Demand agent]
+    A3[Campaign agent]
+    A4[Attendee concierge]
+    A5[Insights agent]
+  end
+  subgraph HARNESS[Agent harness]
+    T[Action registry<br/>only approved actions]
+    G[Guardrails and policies<br/>consent, PHI rules, spend limits]
+    H[Human approval gates]
+    I[Identity and permissions<br/>least privilege per agent]
+    O[Audit log and observability]
+    V[Evaluations and testing<br/>before every release]
+    K[Kill switch]
+    TL[Einstein Trust Layer<br/>data masking, zero retention]
+  end
+  subgraph PLATFORM[Platform]
+    EV[Event app]
+    MCJ[Marketing Cloud]
+    DC[Data Cloud profiles]
+  end
+  STAFF[Event and marketing staff]
+  AGENTS --> T
+  T --> G --> H --> PLATFORM
+  STAFF --> H
+  I --- T
+  O --- T
+  V --- AGENTS
+  K --- AGENTS
+  TL --- AGENTS
+  </pre></div>
+  <div class="table-wrap"><table>
+    <tr><th style="width:20%">Agent</th><th style="width:42%">What it does</th><th>Autonomy</th></tr>
+    <tr><td>Event Ops</td><td>Creates sessions from templates, manages capacity, waitlists and reminders, flags no-show risk</td><td>Acts within limits; publishing needs approval</td></tr>
+    <tr><td>Demand</td><td>Watches demand ratios, recommends new dates or rooms, drafts the session and the announcement</td><td>Suggests; staff approve in one click</td></tr>
+    <tr><td>Campaign</td><td>Builds PEI segments, drafts copy, runs A/B tests, schedules journeys</td><td>Drafts; sends only after approval and only to consented people</td></tr>
+    <tr><td>Attendee concierge</td><td>Answers questions on web, app and SMS; registers, reschedules and cancels</td><td>Acts for the registrant within their own bookings</td></tr>
+    <tr><td>Insights</td><td>Summarizes surveys and results; weekly report to event owners</td><td>Read-only</td></tr>
+  </table></div>
+  <p class="caption">Built on Agentforce and Data Cloud, licensed separately <span class="tag confirm">to confirm</span>. Rolled out after the core platform is stable.</p>
+</section>
+
+<section id="decisions">
+  <div class="sec-num">12</div>
+  <h2>Decisions needed from Memorial Hermann</h2>
+  <ol class="decisions">
+    <li>App channel: start with the menu link (Option A) and assess the SMART on FHIR launch (Option B) with Lucky Rai's team.</li>
+    <li>Registration layer hosting: Heroku (recommended), MuleSoft or AWS.</li>
+    <li>Waiting room product: Queue-it, Cloudflare Waiting Room, or built in.</li>
+    <li>Payments: keep Chase and Authorize.net, or consolidate on one gateway.</li>
+    <li>Targets: peak traffic, availability, RPO and RTO in section 02.</li>
+    <li>Shield licensing and BAA coverage for the clouds in scope.</li>
+    <li>Waitlist rules: cap per event, claim window, demand ratio threshold.</li>
+  </ol>
+</section>
+
+<section id="deck">
+  <div class="sec-num">13</div>
+  <h2>What changes in the deck after approval</h2>
+  <ul>
+    <li>Every slide reframed around reliability, security and scalability, with PEI renamed to patient engagement initiatives.</li>
+    <li>New slide: detailed design diagram (architecture from section 03).</li>
+    <li>New slide: high-demand handling (100,000 clicks for 30 seats, waitlist, interest list, new sessions).</li>
+    <li>New slide: data security (card tokenization, data classes, controls).</li>
+    <li>New slide: reliability and scalability (failure modes and growth).</li>
+    <li>Mobile screens reworked as registration inside the existing My Memorial Hermann app.</li>
+    <li>Roadmap phase 4 becomes the AI agent harness, with its own slide.</li>
+  </ul>
+</section>
+
+<footer>Draft for internal review. Items marked "to confirm" are assumptions until Memorial Hermann confirms them. Source of truth: the preSales_Memorial-hermann repository.</footer>
+</main>
+</div>

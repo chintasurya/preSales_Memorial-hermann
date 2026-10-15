@@ -4,8 +4,9 @@ Manager direction (Sandeep): we build the events platform, and we also propose a
 campaign layer that uses the registration data to send PEIs, drive My Memorial Hermann app downloads
 and bring people into the Memorial Hermann network. This is the value proposition.
 
-> **PEI** is used here as "post-event interaction": an automated touchpoint after a class or event.
-> Confirm the exact meaning Sandeep intends before client use.
+> **PEI = patient engagement initiatives** (confirmed by Surya, 2026-10-15): the engagement
+> programs run from registration data (follow-up, next class, app adoption, find a doctor,
+> demand re-engagement).
 
 ## Value statement
 
@@ -13,7 +14,7 @@ Every registration tells Memorial Hermann what a person cares about. Use it to b
 into the network. Consent-based: messages only to people who opt in at registration.
 
 - 1 profile: every registrant, caregiver and provider in one Salesforce record
-- 4 PEIs: automated post-event interactions after every class
+- 4 PEIs: patient engagement initiatives after every class
 - 1 tap: app download link at confirmation, check-in and follow-up
 - Closed loop: from class attended to visit booked, measured end to end
 

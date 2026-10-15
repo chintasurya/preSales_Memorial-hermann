@@ -10,7 +10,7 @@ to replace.
 
 **Our position:** build a Salesforce event app on their existing Health Cloud org in two phases
 (classes, then conferences), then upsell an engagement layer: Marketing Cloud journeys with
-post-event interactions (PEIs) that drive My Memorial Hermann app downloads and booked visits.
+patient engagement initiatives (PEIs) that drive My Memorial Hermann app downloads and booked visits.
 
 ## Contents
 
@@ -23,6 +23,7 @@ docs/
   05-glossary.md                    Terms used with the client
   06-status-and-next-steps.md       Manager direction, open questions, next actions
   07-brand-template.md              Insight Global template rules
+  08-detailed-design.md             Detailed design (draft v0.1, awaiting approval)
 deck/
   Memorial-Hermann-Event-Platform.pptx  Client deck (21 slides, IG template)
   mockups/                          Concept screens (HTML source + PNG renders)

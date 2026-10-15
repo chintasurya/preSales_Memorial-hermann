@@ -13,8 +13,9 @@
 - **Sessions:** individual talks or workshops inside a conference, each with a time, room, speaker
   and capacity. **Tracks** group related sessions (for example Cardiology).
 - **CME:** continuing medical education credits that providers earn by attending sessions.
-- **PEI:** post-event interaction (our working definition; confirm with Sandeep). An automated
-  follow-up after a class or event.
+- **PEI:** patient engagement initiatives. Engagement programs run from registration data after a
+  class or event (thank you and survey, next class, app adoption, find a doctor, re-engaging
+  waitlist and interest-list demand).
 - **Registrant types:** consumers (may or may not be patients), caregivers, providers.
 - **Hosted checkout:** the payment gateway's own payment page, so card data never touches Salesforce.
 - **My Memorial Hermann:** MH's Epic MyChart-based patient app.
