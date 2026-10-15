@@ -10,6 +10,7 @@
 | 2026-10-15 | Surya feedback: PEI = patient engagement initiatives; registration goes into the existing My Memorial Hermann app (no new app); needs a detailed design covering high demand (100,000 clicks for 30 seats), notification of overflow demand, payment and data security, reliability, scalability, and a future AI agent harness. Design review v0.1 drafted (`08-detailed-design.md`). **Deck update waits for Surya's approval of the design.** |
 | 2026-10-15 | Surya agreed the design. Asked for three new slides: demand handling (not titled "high demand"), payments and data security, AI agents in a controlled harness. Previews built (`deck/previews/`, source `deck/build/design-slides.js`). **Waiting for Surya's approval before adding them to the deck.** |
 | 2026-10-15 | Surya approved the three slides and asked for sequence-diagram views of the overall solution. Deck rebuilt to 26 slides: overall solution design (sequence, slide 6), demand handling (10), registration and seat flow detail (11), payments and data security (12), payment sequence detail (13), AI agent harness (24). PEI renamed and in-app registration applied across slides. |
+| 2026-10-15 | Surya: sequence slides (6, 11, 13) moved to the white background for readability. |
 
 ## Manager direction (Sandeep)
 

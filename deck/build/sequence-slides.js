@@ -3,6 +3,12 @@
 
 // Draws a sequence diagram. rows: { from, to, label, dashed, phase } | { type: 'self', at, label }
 // | { type: 'alt' | 'else', label } | { type: 'end' } | { type: 'note', over: [id, id], label }
+// Colors tuned for the white template background.
+const INK = '000000', LINE_SOLID = '1A1A1A', LINE_DASH = '6B7280', LABEL_DASH = '4D4D4D', LIFELINE = 'B0B0B8';
+const BOX_FILL = 'F2F2F2', BOX_LINE = 'B8B8C0', FRAME = '9A9AA2', PHASE = '007C8C';
+// Brand accents darkened slightly so outlines stay visible on white.
+const ACCENT = { cyan: '00A9C0', yellow: 'D9B200', magenta: 'FF0068' };
+
 function sequence(s, h, { x, y, w, bottom, parts, rows, phaseX }) {
   const { pres, txt, HEX } = h;
   const n = parts.length, colW = w / n;
@@ -14,9 +20,9 @@ function sequence(s, h, { x, y, w, bottom, parts, rows, phaseX }) {
   };
   const boxH = 0.52;
   parts.forEach((p, i) => {
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: px[i] - colW / 2 + 0.06, y, w: colW - 0.12, h: boxH, rectRadius: 0.08, line: { color: p.color || '6A6A75', width: 1.25 }, fill: { color: '17171B' }, objectName: `participant-${p.id}` });
-    txt(s, p.label, { x: px[i] - colW / 2 + 0.1, y, w: colW - 0.2, h: boxH, fontSize: 10.5, bold: true, color: 'FFFFFF', align: 'center', valign: 'middle' });
-    s.addShape(pres.shapes.LINE, { x: px[i], y: y + boxH, w: 0, h: bottom - y - boxH, line: { color: '4A4A55', width: 1, dashType: 'dash' } });
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: px[i] - colW / 2 + 0.06, y, w: colW - 0.12, h: boxH, rectRadius: 0.08, line: { color: p.color || BOX_LINE, width: p.color ? 1.75 : 1.25 }, fill: { color: BOX_FILL }, objectName: `participant-${p.id}` });
+    txt(s, p.label, { x: px[i] - colW / 2 + 0.1, y, w: colW - 0.2, h: boxH, fontSize: 10.5, bold: true, color: INK, align: 'center', valign: 'middle' });
+    s.addShape(pres.shapes.LINE, { x: px[i], y: y + boxH, w: 0, h: bottom - y - boxH, line: { color: LIFELINE, width: 1, dashType: 'dash' } });
   });
   const weight = r => ({ msg: 1, self: 1.25, note: 1, alt: 0.75, else: 0.75, end: 0.35 })[r.type || 'msg'];
   const top = y + boxH + 0.1;
@@ -26,48 +32,48 @@ function sequence(s, h, { x, y, w, bottom, parts, rows, phaseX }) {
 
   const tag = (label, ty) => {
     const tw = Math.max(1.4, label.length * 0.075 + 0.3);
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: frameX + 0.06, y: ty, w: tw, h: 0.24, rectRadius: 0.05, line: { color: HEX.yellow, width: 1 }, fill: { color: '2A2508' } });
-    txt(s, label, { x: frameX + 0.06, y: ty, w: tw, h: 0.24, fontSize: 9.5, bold: true, color: HEX.yellow, align: 'center', valign: 'middle' });
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: frameX + 0.06, y: ty, w: tw, h: 0.24, rectRadius: 0.05, line: { color: ACCENT.yellow, width: 1 }, fill: { color: 'FFF6CC' } });
+    txt(s, label, { x: frameX + 0.06, y: ty, w: tw, h: 0.24, fontSize: 9.5, bold: true, color: '6B5600', align: 'center', valign: 'middle' });
   };
 
   for (const r of rows) {
     const t = r.type || 'msg';
     const rh = weight(r) * unit;
     if (r.phase && phaseX != null) {
-      if (!firstPhase) s.addShape(pres.shapes.LINE, { x: phaseX, y: cy, w: frameX + frameW - phaseX, h: 0, line: { color: '33333B', width: 0.75, dashType: 'sysDot' } });
-      txt(s, r.phase.toUpperCase(), { x: phaseX, y: cy + 0.06, w: 0.95, h: 0.25, fontSize: 9.5, bold: true, color: HEX.cyan, charSpacing: 2 });
+      if (!firstPhase) s.addShape(pres.shapes.LINE, { x: phaseX, y: cy, w: frameX + frameW - phaseX, h: 0, line: { color: 'D4D4DA', width: 0.75, dashType: 'sysDot' } });
+      txt(s, r.phase.toUpperCase(), { x: phaseX, y: cy + 0.06, w: 0.95, h: 0.25, fontSize: 9.5, bold: true, color: PHASE, charSpacing: 2 });
       firstPhase = false;
     }
     if (t === 'msg') {
       num++;
       const a = at(r.from), b = at(r.to), ly = cy + rh * 0.66;
-      const line = { color: r.dashed ? '9AA7B4' : 'FFFFFF', width: 1.25 };
+      const line = { color: r.dashed ? LINE_DASH : LINE_SOLID, width: 1.25 };
       if (r.dashed) line.dashType = 'dash';
       if (b > a) line.endArrowType = 'triangle'; else line.beginArrowType = 'triangle';
       s.addShape(pres.shapes.LINE, { x: Math.min(a, b), y: ly, w: Math.abs(b - a), h: 0, line });
-      s.addShape(pres.shapes.OVAL, { x: a - 0.11, y: ly - 0.11, w: 0.22, h: 0.22, fill: { color: HEX.cyan }, line: { color: HEX.cyan } });
+      s.addShape(pres.shapes.OVAL, { x: a - 0.11, y: ly - 0.11, w: 0.22, h: 0.22, fill: { color: ACCENT.cyan }, line: { color: ACCENT.cyan } });
       txt(s, String(num), { x: a - 0.11, y: ly - 0.11, w: 0.22, h: 0.22, fontSize: 8, bold: true, color: '000000', align: 'center', valign: 'middle' });
       // label starts after the number badge and runs toward the arrow head, sized to its text
       const lw = Math.max(Math.abs(b - a) - 0.2, r.label.length * 0.074 + 0.25);
       const lx = b > a ? a + 0.16 : a - 0.16 - lw;
-      txt(s, r.label, { x: lx, y: ly - 0.27, w: lw, h: 0.24, fontSize: 10, color: r.dashed ? 'D0D6DC' : 'FFFFFF', align: 'center', valign: 'bottom' });
+      txt(s, r.label, { x: lx, y: ly - 0.27, w: lw, h: 0.24, fontSize: 10, color: r.dashed ? LABEL_DASH : INK, align: 'center', valign: 'bottom' });
     } else if (t === 'self') {
       num++;
       const a = at(r.at), y1 = cy + rh * 0.35, y2 = cy + rh * 0.8;
-      s.addShape(pres.shapes.LINE, { x: a, y: y1, w: 0.35, h: 0, line: { color: 'FFFFFF', width: 1.25 } });
-      s.addShape(pres.shapes.LINE, { x: a + 0.35, y: y1, w: 0, h: y2 - y1, line: { color: 'FFFFFF', width: 1.25 } });
-      s.addShape(pres.shapes.LINE, { x: a, y: y2, w: 0.35, h: 0, line: { color: 'FFFFFF', width: 1.25, beginArrowType: 'triangle' } });
-      s.addShape(pres.shapes.OVAL, { x: a - 0.11, y: y1 - 0.11, w: 0.22, h: 0.22, fill: { color: HEX.cyan }, line: { color: HEX.cyan } });
+      s.addShape(pres.shapes.LINE, { x: a, y: y1, w: 0.35, h: 0, line: { color: LINE_SOLID, width: 1.25 } });
+      s.addShape(pres.shapes.LINE, { x: a + 0.35, y: y1, w: 0, h: y2 - y1, line: { color: LINE_SOLID, width: 1.25 } });
+      s.addShape(pres.shapes.LINE, { x: a, y: y2, w: 0.35, h: 0, line: { color: LINE_SOLID, width: 1.25, beginArrowType: 'triangle' } });
+      s.addShape(pres.shapes.OVAL, { x: a - 0.11, y: y1 - 0.11, w: 0.22, h: 0.22, fill: { color: ACCENT.cyan }, line: { color: ACCENT.cyan } });
       txt(s, String(num), { x: a - 0.11, y: y1 - 0.11, w: 0.22, h: 0.22, fontSize: 8, bold: true, color: '000000', align: 'center', valign: 'middle' });
-      txt(s, r.label, { x: a + 0.48, y: y1 - 0.02, w: 2.6, h: y2 - y1 + 0.04, fontSize: 10, color: 'FFFFFF', valign: 'middle' });
+      txt(s, r.label, { x: a + 0.48, y: y1 - 0.02, w: 2.6, h: y2 - y1 + 0.04, fontSize: 10, color: INK, valign: 'middle' });
     } else if (t === 'alt') {
       frameTop = cy + 0.04;
       tag(r.label, cy + (rh - 0.24) / 2);
     } else if (t === 'else') {
-      s.addShape(pres.shapes.LINE, { x: frameX, y: cy + 0.04, w: frameW, h: 0, line: { color: '8C8C8C', width: 1, dashType: 'dash' } });
+      s.addShape(pres.shapes.LINE, { x: frameX, y: cy + 0.04, w: frameW, h: 0, line: { color: FRAME, width: 1, dashType: 'dash' } });
       tag(r.label, cy + 0.04 + (rh - 0.28) / 2);
     } else if (t === 'end') {
-      s.addShape(pres.shapes.RECTANGLE, { x: frameX, y: frameTop, w: frameW, h: cy + rh * 0.5 - frameTop, line: { color: '8C8C8C', width: 1, dashType: 'dash' }, fill: { type: 'none' } });
+      s.addShape(pres.shapes.RECTANGLE, { x: frameX, y: frameTop, w: frameW, h: cy + rh * 0.5 - frameTop, line: { color: FRAME, width: 1, dashType: 'dash' }, fill: { type: 'none' } });
     } else if (t === 'note') {
       const x1 = at(r.over[0]) - colW * 0.45, x2 = at(r.over[r.over.length - 1]) + colW * 0.45;
       s.addShape(pres.shapes.RECTANGLE, { x: x1, y: cy + rh * 0.15, w: x2 - x1, h: rh * 0.7, fill: { color: HEX.yellow }, line: { color: HEX.yellow } });
@@ -78,19 +84,19 @@ function sequence(s, h, { x, y, w, bottom, parts, rows, phaseX }) {
 }
 
 function addOverallDesignSlide(h, sectionTitle) {
-  const { pres, txt, L, R, MUTED_DARK, HEX } = h;
-  const s = pres.addSlide({ masterName: 'IG Dark', sectionTitle });
+  const { pres, txt, L, R, MUTED_LIGHT } = h;
+  const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Overall solution design', { placeholder: 'title' });
-  txt(s, 'One flow from sign-up to follow-up for classes and conferences, replacing the home-built class tool and Certain', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_DARK });
+  txt(s, 'One flow from sign-up to follow-up for classes and conferences, replacing the home-built class tool and Certain', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
   sequence(s, h, {
     x: 1.55, y: 1.92, w: R - 1.55, bottom: 6.62, phaseX: L,
     parts: [
       { id: 'p', label: 'Registrant' },
-      { id: 'ch', label: 'Website or My MH app', color: HEX.cyan },
-      { id: 'reg', label: 'Registration service', color: HEX.yellow },
+      { id: 'ch', label: 'Website or My MH app', color: ACCENT.cyan },
+      { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
       { id: 'pay', label: 'Payment gateway' },
-      { id: 'sf', label: 'Salesforce event app', color: HEX.cyan },
-      { id: 'mc', label: 'Marketing Cloud', color: HEX.magenta },
+      { id: 'sf', label: 'Salesforce event app', color: ACCENT.cyan },
+      { id: 'mc', label: 'Marketing Cloud', color: ACCENT.magenta },
       { id: 'st', label: 'Event staff' },
     ],
     rows: [
@@ -109,25 +115,25 @@ function addOverallDesignSlide(h, sectionTitle) {
       { from: 'st', to: 'sf', label: 'Add a session in one click' },
     ],
   });
-  txt(s, 'Conferences follow the same flow, adding sessions, speakers and My Agenda.', { x: L, y: 6.68, w: 9, h: 0.26, fontSize: 10.5, italic: true, color: MUTED_DARK });
+  txt(s, 'Conferences follow the same flow, adding sessions, speakers and My Agenda.', { x: L, y: 6.68, w: 9, h: 0.26, fontSize: 10.5, italic: true, color: MUTED_LIGHT });
   s.addNotes('This is the whole solution on one page, in the order a registrant experiences it. Register: website or the existing My Memorial Hermann app, with a seat held while they pay. Pay: the gateway hosts the card page; we receive only a token. Confirm: Salesforce records the registration and Marketing Cloud sends confirmation and reminders. Attend: QR check-in. Engage: patient engagement initiatives. Grow: staff see demand and add sessions. It replaces both the home-built class tool and Certain.');
   return s;
 }
 
 function addSeatFlowSlide(h, sectionTitle) {
-  const { pres, txt, R, HEX } = h;
-  const s = pres.addSlide({ masterName: 'IG Dark', sectionTitle });
+  const { pres, txt, R } = h;
+  const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Design detail: registration and seat flow', { placeholder: 'title' });
   sequence(s, h, {
     x: 0.55, y: 1.6, w: R - 0.55, bottom: 6.75,
     parts: [
       { id: 'p', label: 'Registrant' },
-      { id: 'edge', label: 'Edge and waiting room', color: HEX.cyan },
-      { id: 'reg', label: 'Registration service', color: HEX.yellow },
-      { id: 'inv', label: 'Seat inventory', color: HEX.yellow },
+      { id: 'edge', label: 'Edge and waiting room', color: ACCENT.cyan },
+      { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
+      { id: 'inv', label: 'Seat inventory', color: ACCENT.yellow },
       { id: 'pay', label: 'Payment page' },
-      { id: 'sf', label: 'Salesforce', color: HEX.cyan },
-      { id: 'mc', label: 'Marketing Cloud', color: HEX.magenta },
+      { id: 'sf', label: 'Salesforce', color: ACCENT.cyan },
+      { id: 'mc', label: 'Marketing Cloud', color: ACCENT.magenta },
     ],
     rows: [
       { from: 'p', to: 'edge', label: 'Click Register' },
@@ -155,16 +161,16 @@ function addSeatFlowSlide(h, sectionTitle) {
 }
 
 function addPaymentSequenceSlide(h, sectionTitle) {
-  const { pres, txt, C, MUTED_DARK, HEX } = h;
-  const s = pres.addSlide({ masterName: 'IG Dark', sectionTitle });
+  const { pres, txt, C, MUTED_LIGHT } = h;
+  const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Design detail: payment sequence', { placeholder: 'title' });
   sequence(s, h, {
     x: 0.55, y: 1.65, w: 8.2, bottom: 6.6,
     parts: [
       { id: 'p', label: 'Registrant (web or app)' },
-      { id: 'reg', label: 'Registration service', color: HEX.yellow },
-      { id: 'gw', label: 'Gateway hosted page', color: HEX.magenta },
-      { id: 'sf', label: 'Salesforce', color: HEX.cyan },
+      { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
+      { id: 'gw', label: 'Gateway hosted page', color: ACCENT.magenta },
+      { id: 'sf', label: 'Salesforce', color: ACCENT.cyan },
     ],
     rows: [
       { from: 'reg', to: 'gw', label: 'Create payment session (amount, reference)' },
@@ -179,20 +185,20 @@ function addPaymentSequenceSlide(h, sectionTitle) {
     ],
   });
   const px = 9.2, pw = 3.58;
-  txt(s, 'Gateway choice', { x: px, y: 1.7, w: pw, h: 0.35, fontSize: 16, bold: true, color: C.background1 });
-  [['OPTION A', 'Keep both', 'Chase for classes, Authorize.net for conferences', HEX.cyan], ['OPTION B', 'Consolidate on one', 'One gateway for every event; simpler reconciliation', HEX.magenta]].forEach(([k, t, d, col], i) => {
+  txt(s, 'Gateway choice', { x: px, y: 1.7, w: pw, h: 0.35, fontSize: 16, bold: true, color: C.text1 });
+  [['OPTION A', 'Keep both', 'Chase for classes, Authorize.net for conferences', '007C8C'], ['OPTION B', 'Consolidate on one', 'One gateway for every event; simpler reconciliation', 'C8005A']].forEach(([k, t, d, col], i) => {
     const y = 2.15 + i * 1.32;
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: px, y, w: pw, h: 1.18, rectRadius: 0.1, line: { color: '3A3A42', width: 1 }, fill: { color: '17171B' } });
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: px, y, w: pw, h: 1.18, rectRadius: 0.1, line: { color: 'D0D0D6', width: 1 }, fill: { color: 'F2F2F2' } });
     txt(s, k, { x: px + 0.2, y: y + 0.12, w: pw - 0.4, h: 0.22, fontSize: 9, bold: true, color: col, charSpacing: 2 });
-    txt(s, t, { x: px + 0.2, y: y + 0.36, w: pw - 0.4, h: 0.3, fontSize: 13, bold: true, color: C.background1 });
-    txt(s, d, { x: px + 0.2, y: y + 0.68, w: pw - 0.4, h: 0.45, fontSize: 11, color: MUTED_DARK });
+    txt(s, t, { x: px + 0.2, y: y + 0.36, w: pw - 0.4, h: 0.3, fontSize: 13, bold: true, color: C.text1 });
+    txt(s, d, { x: px + 0.2, y: y + 0.68, w: pw - 0.4, h: 0.45, fontSize: 11, color: MUTED_LIGHT });
   });
-  txt(s, 'After payment', { x: px, y: 4.95, w: pw, h: 0.35, fontSize: 16, bold: true, color: C.background1 });
+  txt(s, 'After payment', { x: px, y: 4.95, w: pw, h: 0.35, fontSize: 16, bold: true, color: C.text1 });
   s.addText([
     { text: 'Full and partial refunds by token from Salesforce', options: { bullet: true, breakLine: true } },
     { text: 'Automatic receipts', options: { bullet: true, breakLine: true } },
     { text: 'Daily settlement reconciliation', options: { bullet: true } },
-  ], { isTextBox: true, x: px, y: 5.35, w: pw, h: 1.2, fontSize: 12, color: MUTED_DARK, margin: 0, valign: 'top', paraSpaceAfter: 4 });
+  ], { isTextBox: true, x: px, y: 5.35, w: pw, h: 1.2, fontSize: 12, color: MUTED_LIGHT, margin: 0, valign: 'top', paraSpaceAfter: 4 });
   s.addNotes('The card is typed directly into the gateway page; the registration service only creates the session and receives a signed webhook with a token. Salesforce stores the token reference, last 4 digits, amount and status. Gateway choice is Memorial Hermann finance\'s decision; both are supported.');
   return s;
 }
