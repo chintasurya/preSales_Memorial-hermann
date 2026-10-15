@@ -23,9 +23,9 @@ docs/
   05-glossary.md                    Terms used with the client
   06-status-and-next-steps.md       Manager direction, open questions, next actions
   07-brand-template.md              Insight Global template rules
-  08-detailed-design.md             Detailed design (draft v0.1, awaiting approval)
+  08-detailed-design.md             Detailed design (approved 2026-10-15)
 deck/
-  Memorial-Hermann-Event-Platform.pptx  Client deck (21 slides, IG template)
+  Memorial-Hermann-Event-Platform.pptx  Client deck (26 slides, IG template)
   mockups/                          Concept screens (HTML source + PNG renders)
   assets/bg/                        Backgrounds taken from the IG template
   build/                            Scripts that render mockups and build the deck

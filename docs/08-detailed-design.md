@@ -1,7 +1,7 @@
-# Detailed design (draft v0.1, awaiting Surya's approval)
+# Detailed design (approved by Surya, 2026-10-15)
 
 Review page with diagrams: https://claude.ai/artifact/SZmKrbqDdha5A6HHgVT8ku
-(source copy: `docs/08-detailed-design-review.html`). The deck is updated only after approval.
+(source copy: `docs/08-detailed-design-review.html`). Approved and now in the deck (slides 6 and 10 to 13, 24).
 
 ## Changes from feedback (2026-10-15)
 

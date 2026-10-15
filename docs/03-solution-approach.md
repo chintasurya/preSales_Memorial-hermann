@@ -74,3 +74,15 @@ home-built tool and Certain. Present AppExchange as the faster alternative.
 3. Salesforce staff console: series, sessions, capacity, registrations, follow-up journey
 4. Conference agenda: tracks, session capacity, CME badges, My Agenda
 5. Marketing Cloud journey with patient engagement initiatives
+
+## Deck structure (26 slides, 2026-10-15)
+
+1 Title, 2 Agenda, 3 What we heard, 4 Section 01, 5 Event app inside your org, 6 Overall solution
+design (sequence), 7 One registration flow for website and app, 8 Staff console, 9 Conferences,
+10 Every seat filled (demand handling), 11 Design detail: registration and seat flow, 12 Payments and
+data security, 13 Design detail: payment sequence, 14 Section 02, 15 Timeline, 16 Phase scope,
+17 Section 03, 18 Value statement, 19 PEI journey, 20 Campaigns, 21 Website registrants into the app,
+22 KPIs, 23 Roadmap, 24 AI agents in a controlled harness, 25 Next steps, 26 Thank you.
+
+Sequence diagrams are native shapes from `deck/build/sequence-slides.js`; design slides from
+`deck/build/design-slides.js`.

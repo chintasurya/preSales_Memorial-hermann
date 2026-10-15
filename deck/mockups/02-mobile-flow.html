@@ -1,11 +1,13 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><title>Mobile registration - concept</title>
+<html><head><meta charset="utf-8"><title>Registration in My Memorial Hermann - concept</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{width:1600px;height:1000px;font-family:Arial,"Liberation Sans",sans-serif;background:#e9ecef;display:flex;align-items:center;justify-content:center;gap:70px;color:#1d2733}
 .phone{width:400px;height:840px;background:#111;border-radius:56px;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.28);position:relative}
 .screen{width:100%;height:100%;background:#fff;border-radius:44px;overflow:hidden;display:flex;flex-direction:column}
 .status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 30px;font-size:14px;font-weight:700}
+.appbar{height:46px;background:#3b2a6b;color:#fff;display:flex;align-items:center;padding:0 22px;font-size:15px;font-weight:700;gap:10px}
+.appbar small{margin-left:auto;font-weight:400;font-size:12px;opacity:.85}
 .bar{height:56px;display:flex;align-items:center;padding:0 22px;gap:12px;border-bottom:1px solid #eceff2;font-size:17px;font-weight:700}
 .step{font-size:12px;color:#5b6670;font-weight:400;margin-left:auto}
 .body{flex:1;padding:20px 22px;display:flex;flex-direction:column;gap:14px}
@@ -34,6 +36,7 @@ h2{font-size:22px}
 </style></head><body>
 <div class="phone"><div class="screen">
  <div class="status"><span>9:41</span><span>5G</span></div>
+ <div class="appbar">My Memorial Hermann<small>Classes &amp; Events</small></div>
  <div class="bar">Class details<span class="step">Step 1 of 3</span></div>
  <div class="body">
   <div class="img"></div>
@@ -43,12 +46,14 @@ h2{font-size:22px}
   <div class="row"><span>Katy Hospital, Room 2B</span><b>$45</b></div>
   <div><div class="label">Who are you registering?</div><div class="seg"><div class="on">Myself</div><div>Someone I care for</div></div></div>
   <div class="cta">Register</div>
- </div></div><div class="cap">1. Choose a class</div></div>
+ </div></div><div class="cap">1. Open Classes &amp; Events in the app</div></div>
 
 <div class="phone"><div class="screen">
  <div class="status"><span>9:41</span><span>5G</span></div>
+ <div class="appbar">My Memorial Hermann<small>Classes &amp; Events</small></div>
  <div class="bar">Your details<span class="step">Step 2 of 3</span></div>
  <div class="body">
+  <div class="muted" style="font-size:13px">Details pre-filled from your account</div>
   <div><div class="label">Full name</div><div class="field">Jordan Rivera</div></div>
   <div><div class="label">Email</div><div class="field">jordan@example.com</div></div>
   <div><div class="label">Mobile (for reminders)</div><div class="field">(713) 555-0142</div></div>
@@ -59,6 +64,7 @@ h2{font-size:22px}
 
 <div class="phone"><div class="screen">
  <div class="status"><span>9:41</span><span>5G</span></div>
+ <div class="appbar">My Memorial Hermann<small>Classes &amp; Events</small></div>
  <div class="bar">Confirmed<span class="step">Step 3 of 3</span></div>
  <div class="body">
   <div class="ok">&#10003;</div>
@@ -66,7 +72,7 @@ h2{font-size:22px}
   <div class="muted center">Show this code at check-in. A reminder is on its way.</div>
   <div class="qr"></div>
   <div class="field" style="justify-content:center;font-weight:700;color:#3b2a6b">Add to calendar</div>
-  <div class="app"><b>Get the My Memorial Hermann app</b><div class="muted" style="font-size:13px">Manage your classes, find a doctor and book visits.</div><div class="stores"><div>App Store</div><div>Google Play</div></div></div>
- </div></div><div class="cap">3. Confirm, check in, get the app</div></div>
+  <div class="app"><b>Saved to My Classes</b><div class="muted" style="font-size:13px">Find it any time in this app. Want an OB near you? Book a visit in two taps.</div></div>
+ </div></div><div class="cap">3. Confirmed and saved in the app</div></div>
 <div class="note">Concept mockup, sample data</div>
 </body></html>

@@ -4,6 +4,8 @@
 const path = require('path');
 const pptxgen = require('pptxgenjs');
 const { applyTheme } = require('./apply_theme.js');
+const { addDemandSlide, addSecuritySlide, addHarnessSlide } = require('./design-slides.js');
+const { addOverallDesignSlide, addSeatFlowSlide, addPaymentSequenceSlide } = require('./sequence-slides.js');
 
 const ROOT = path.join(__dirname, '..');
 const BG = f => path.join(ROOT, 'assets', 'bg', f);
@@ -114,6 +116,13 @@ function frameImage(slide, file, x, y, w, h) {
   slide.addImage({ path: IMG(file), x, y, w, h, objectName: file, shadow: { type: 'outer', blur: 8, offset: 2, angle: 90, color: '000000', opacity: 0.25 } });
 }
 
+// Shared context for the design and sequence slide modules.
+const h = {
+  pres, C, L, R, CW, W, txt, LIGHT_FONT, MUTED_DARK, MUTED_LIGHT,
+  HEX: { cyan: '00D6F2', yellow: 'FED700', magenta: 'FF0068', magentaDark: 'C8005A' },
+};
+
+(async () => {
 // ---------- Slides ----------
 // 1. Title
 pres.addSection({ title: 'Introduction' });
@@ -127,7 +136,7 @@ s.addNotes('Thank Kevin for the detailed answers. Today: how we solve the event 
 // 2. Agenda
 s = pres.addSlide({ masterName: 'IG Agenda', sectionTitle: 'Introduction' });
 s.addText('Agenda', { placeholder: 'title' });
-const agenda = ['What we heard', 'The solution', 'Payments and integrations', 'Delivery timeline', 'Beyond the event', 'Roadmap and next steps'];
+const agenda = ['What we heard', 'The solution and design', 'Payments and data security', 'Delivery timeline', 'Beyond the event', 'Roadmap and next steps'];
 agenda.forEach((a, i) => {
   const col = i < 3 ? 0 : 1, row = i % 3;
   const x = col === 0 ? 0.6 : 6.9, y = 2.2 + row * 0.95;
@@ -160,9 +169,9 @@ s.addText('One Salesforce event app for classes, events and conferences', { plac
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'The solution' });
 s.addText('An event app inside your Salesforce org', { placeholder: 'title' });
 const cols = [
-  ['Register', 'Website and mobile', ['Class listings and sign-up on Sitecore pages', 'Mobile-friendly checkout', '“My Agenda” portal for conferences']],
+  ['Register', 'Website and My MH app', ['Sign-up on Sitecore pages and inside the existing My Memorial Hermann app', 'Secure hosted checkout', '“My Agenda” portal for conferences']],
   ['Manage', 'Event app in Salesforce', ['Classes, series, sessions, speakers', 'Capacity, waitlists, refunds', 'QR check-in and reporting', 'Registrants matched to Health Cloud']],
-  ['Engage', 'Marketing Cloud journeys', ['Confirmations and reminders', 'Calendar invites and virtual links', 'Post-event interactions (PEIs)']],
+  ['Engage', 'Marketing Cloud journeys', ['Confirmations and reminders', 'Calendar invites and virtual links', 'Patient engagement initiatives (PEIs)']],
 ];
 cols.forEach(([h, sub, items], i) => {
   const x = L + i * 4.2;
@@ -175,18 +184,22 @@ cols.forEach(([h, sub, items], i) => {
 txt(s, 'CONNECTS TO', { x: L, y: 5.62, w: 2, h: 0.3, fontSize: 10, bold: true, color: C.background1, charSpacing: 3 });
 const conns = ['Chase', 'Authorize.net', 'Sitecore', 'Zoom / Teams', 'Health Cloud', 'Marketing Cloud'];
 conns.forEach((c, i) => pill(s, c, L + i * 2.05, 6.0, 1.85, [C.accent1, C.accent2, C.accent3][i % 3], C.background1));
-s.addNotes('One app on the Health Cloud org they already own. Sitecore stays the public front door, Salesforce runs events, Marketing Cloud sends every message. This retires both the home-built class tool and Certain.');
+txt(s, 'Reliable, secure and scalable by design: waiting room and seat holds for busy events, encrypted data, full audit trail.', { x: L, y: 6.55, w: CW, h: 0.3, fontSize: 11, italic: true, color: C.accent1 });
+s.addNotes('One app on the Health Cloud org they already own. Sitecore and the existing My Memorial Hermann app are the front doors, Salesforce runs events, Marketing Cloud sends every message. This retires both the home-built class tool and Certain.');
+
+// Overall solution design (sequence view)
+addOverallDesignSlide(h, 'The solution');
 
 // 6. Registration screens
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'The solution' });
-s.addText('Consumers find, register and pay in minutes', { placeholder: 'title' });
+s.addText('One registration flow for website and app', { placeholder: 'title' });
 frameImage(s, '01-web-registration.png', L, 1.85, 5.95, 3.72);
 frameImage(s, '02-mobile-flow.png', 6.83, 1.85, 5.95, 3.72);
 txt(s, 'Website', { x: L, y: 5.75, w: 5.95, h: 0.3, fontSize: 15, bold: true, color: C.text1 });
 txt(s, 'Search by topic, location, date, format and price. Seats left and waitlists update live.', { x: L, y: 6.07, w: 5.95, h: 0.55, fontSize: 13, color: MUTED_LIGHT });
-txt(s, 'Mobile', { x: 6.83, y: 5.75, w: 5.95, h: 0.3, fontSize: 15, bold: true, color: C.text1 });
-txt(s, 'Register yourself or someone you care for, pay securely, get a QR code and the app link.', { x: 6.83, y: 6.07, w: 5.95, h: 0.55, fontSize: 13, color: MUTED_LIGHT });
-s.addNotes('Concept screens, sample data. The same experience works on desktop and phone, and can sit inside the existing Sitecore site.');
+txt(s, 'Existing My Memorial Hermann app', { x: 6.83, y: 5.75, w: 5.95, h: 0.3, fontSize: 15, bold: true, color: C.text1 });
+txt(s, 'A Classes & Events entry in the app people already use. No new app to download [Epic setup to confirm].', { x: 6.83, y: 6.07, w: 5.95, h: 0.55, fontSize: 13, color: MUTED_LIGHT });
+s.addNotes('Concept screens, sample data. One registration flow serves the Sitecore website and the existing My Memorial Hermann app (Epic MyChart), so nothing is built twice. How it appears in the app (menu link or SMART on FHIR launch) is confirmed with Lucky Rai’s team.');
 
 // 7. Staff console
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'The solution' });
@@ -205,27 +218,11 @@ txt(s, 'Replaces Certain', { x: 8.5, y: 1.85, w: 4.3, h: 0.4, fontSize: 18, bold
 bullets(s, ['Multi-day agenda with tracks and rooms', 'Attendees build their own “My Agenda”', 'Session capacity and waitlists', 'Speaker profiles and assignments', 'Ticket types for providers and guests', 'Badges and CME credit tracking [to confirm]'], { x: 8.5, y: 2.4, w: 4.3, h: 3.6, fontSize: 14, color: MUTED_LIGHT });
 s.addNotes('Conferences use the same app and data as classes, so attendees, payments and reporting stay in one place. CME requirements to be confirmed with Kevin.');
 
-// 9. Payments
-s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'The solution' });
-s.addText('Payments and integrations', { placeholder: 'title' });
-const flow = ['Registrant checks out', 'Hosted payment page', 'Chase or Authorize.net', 'Payment record in Salesforce', 'Receipts, refunds, reconciliation'];
-flow.forEach((f, i) => {
-  const x = L + i * 2.47;
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 1.9, w: 2.1, h: 1.0, rectRadius: 0.12, line: { color: [C.accent1, C.accent2, C.accent3, C.accent2, C.accent1][i], width: 1.5 }, fill: { type: 'none' } });
-  txt(s, f, { x: x + 0.12, y: 1.9, w: 1.86, h: 1.0, fontSize: 14, bold: true, color: C.background1, align: 'center', valign: 'middle' });
-  if (i < 4) s.addShape(pres.shapes.LINE, { x: x + 2.12, y: 2.4, w: 0.33, h: 0, line: { color: C.background1, width: 1.25, endArrowType: 'triangle' } });
-});
-txt(s, 'What’s included', { x: L, y: 3.4, w: 5.6, h: 0.4, fontSize: 18, bold: true, color: C.background1 });
-bullets(s, ['Card details stay on the gateway’s hosted page, never in Salesforce (smaller PCI scope)', 'Free, paid, discount codes and per-couple pricing', 'Full and partial refunds from Salesforce', 'Automatic receipts and a daily reconciliation report'], { x: L, y: 3.9, w: 5.6, h: 2.6, fontSize: 14, color: MUTED_DARK });
-[['Option A', 'Keep both gateways', 'Chase for classes, Authorize.net for conferences. No change for finance.'], ['Option B', 'Consolidate on one', 'One gateway for every event. Simpler reconciliation and support.']].forEach(([k, h, d], i) => {
-  const x = 6.75 + i * 3.05;
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 3.45, w: 2.85, h: 2.45, rectRadius: 0.12, line: { color: '595959', width: 1 }, fill: { color: '1A1A1A' } });
-  txt(s, k.toUpperCase(), { x: x + 0.25, y: 3.65, w: 2.4, h: 0.3, fontSize: 10, bold: true, color: i ? C.accent3 : C.accent1, charSpacing: 3 });
-  txt(s, h, { x: x + 0.25, y: 4.0, w: 2.4, h: 0.4, fontSize: 17, bold: true, color: C.background1 });
-  txt(s, d, { x: x + 0.25, y: 4.5, w: 2.4, h: 1.3, fontSize: 13, color: MUTED_DARK });
-});
-txt(s, 'Decision for Memorial Hermann finance; both options are supported.', { x: 6.75, y: 6.05, w: 6.0, h: 0.35, fontSize: 12, italic: true, color: MUTED_DARK });
-s.addNotes('Today Chase handles Salesforce-based classes and Authorize.net handles Certain events. We support either path. Hosted checkout keeps card data out of Salesforce.');
+// Demand handling, seat-flow detail, payments and data security, payment detail
+await addDemandSlide(h, 'The solution');
+addSeatFlowSlide(h, 'The solution');
+await addSecuritySlide(h, 'The solution');
+addPaymentSequenceSlide(h, 'The solution');
 
 // 10. Section 02
 pres.addSection({ title: 'Delivery plan' });
@@ -244,7 +241,7 @@ const blocks = [
   { x: 1.15, up: false, w: 3.3, h: 'Weeks 1-3  ·  Discover and design', b: 'Walkthrough of the current build, requirements, data model, payment decision' },
   { x: 3.85, up: true, w: 3.3, h: 'Weeks 4-14  ·  Phase 1 live', b: 'Classes and events: registration, payments, journeys, check-in. Home-built tool retired' },
   { x: 6.95, up: false, w: 3.3, h: 'Weeks 15-24  ·  Phase 2 live', b: 'Conferences: sessions, speakers, My Agenda, badges. Certain retired' },
-  { x: 9.7, up: true, w: 2.9, h: 'Week 25+  ·  Grow', b: 'Engagement journeys, app downloads, AI assistant and recommendations' },
+  { x: 9.7, up: true, w: 2.9, h: 'Week 25+  ·  Grow', b: 'Patient engagement initiatives, app adoption, AI agents in a controlled harness' },
 ];
 blocks.forEach(({ x, up, w, h, b }) => {
   const y = up ? 2.45 : lineY + 0.25;
@@ -265,8 +262,9 @@ ruledTable(s, L, 1.7, [2.2, 5.0, 5.03], [
   ['Payments', 'Chase hosted checkout, refunds, receipts', 'Authorize.net or one consolidated gateway'],
   ['Engagement', 'Confirmation and reminder journeys, QR check-in', 'Speaker and attendee communications, badges, CME [to confirm]'],
   ['Data', 'Registrants matched to Health Cloud records', 'Certain history migrated'],
+  ['Built in', 'Waiting room, seat holds, encryption, monitoring', 'Load test before each conference opens'],
   ['Retires', 'Home-built class registration', 'Certain'],
-], { rowH: 0.66, bodySize: 13 });
+], { rowH: 0.6, bodySize: 13 });
 s.addNotes('Same team and same app across both phases, so Phase 2 builds on Phase 1 rather than starting over.');
 
 // 13. Section 03
@@ -280,7 +278,7 @@ s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'Beyond the event' });
 txt(s, 'Every registration tells you what a person cares about. Use it to bring them back and into the network.', { x: L, y: 1.1, w: 5.6, h: 2.6, fontFace: LIGHT_FONT, fontSize: 30, color: C.background1 });
 const stats = [
   ['1 profile', 'Every registrant, caregiver and provider in one Salesforce record'],
-  ['4 PEIs', 'Automated post-event interactions after every class'],
+  ['4 PEIs', 'Patient engagement initiatives after every class'],
   ['1 tap', 'App download link at confirmation, check-in and follow-up'],
   ['Closed loop', 'From class attended to visit booked, measured end to end'],
 ];
@@ -290,13 +288,13 @@ stats.forEach(([n, d], i) => {
   txt(s, d, { x, y: y + 0.95, w: 2.75, h: 1.0, fontSize: 14, color: C.background1 });
 });
 txt(s, 'Consent-based: messages go only to people who opt in at registration.', { x: L, y: 6.2, w: 5.6, h: 0.35, fontSize: 12, italic: true, color: MUTED_DARK });
-s.addNotes('This is the upsell. The event platform captures first-party data about what each person is interested in. Marketing Cloud journeys turn that into post-event interactions that lead to app downloads and booked visits.');
+s.addNotes('This is the upsell. The event platform captures first-party data about what each person is interested in. Marketing Cloud journeys turn that into patient engagement initiatives that lead to app adoption and booked visits.');
 
 // 15. Journey
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Beyond the event' });
-s.addText('After the class: post-event interactions (PEIs)', { placeholder: 'title' });
+s.addText('After the class: patient engagement initiatives (PEIs)', { placeholder: 'title' });
 frameImage(s, '05-marketing-journey.png', L, 1.75, 12.23, 4.89);
-s.addNotes('Every class feeds one Marketing Cloud journey: confirmation, reminder, then four PEIs (thank you and survey, next class, app download, find a doctor). The journey exits when the person books a visit or downloads the app.');
+s.addNotes('Every class feeds one Marketing Cloud journey: confirmation, reminder, then four patient engagement initiatives (thank you and survey, next class, app adoption, find a doctor). The journey exits when the person books a visit or downloads the app.');
 
 // 16. Campaign examples
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Beyond the event' });
@@ -313,8 +311,8 @@ s.addNotes('Examples to show the idea. We would pick two or three service lines 
 
 // 17. App downloads
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'Beyond the event' });
-s.addText('Drive My Memorial Hermann app downloads', { placeholder: 'title' });
-s.addImage({ path: IMG('02b-app-phone.png'), x: L + 0.2, y: 1.7, w: 2.44, h: 5.0, objectName: 'app phone' });
+s.addText('Bring website registrants into the app', { placeholder: 'title' });
+s.addImage({ path: IMG('06-confirmation-email.png'), x: L + 0.2, y: 1.7, w: 2.6, h: 5.0, objectName: 'confirmation email' });
 const touch = [
   ['Confirmation email', 'App link beside the calendar invite and QR code'],
   ['Check-in', 'QR at the door and on room signage: scan to download'],
@@ -328,7 +326,7 @@ touch.forEach(([h, d], i) => {
   txt(s, d, { x: 4.7, y: y + 0.35, w: 7.5, h: 0.4, fontSize: 14, color: MUTED_DARK });
 });
 txt(s, 'Tracked links show which classes and service lines drive downloads and booked visits.', { x: 4.0, y: 6.25, w: 8.6, h: 0.35, fontSize: 13, italic: true, color: C.accent1 });
-s.addNotes('My Memorial Hermann is their Epic-based patient app (scheduling, results, messaging). Every touchpoint in the event journey carries a tracked download link.');
+s.addNotes('My Memorial Hermann is their existing Epic-based patient app (scheduling, results, messaging). App users register in the app; people who register on the website get a tracked download link at every touchpoint. No new app is built.');
 
 // 18. KPIs
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'Beyond the event' });
@@ -357,7 +355,7 @@ const road = [
   ['Classes and events', 'Weeks 1-14', ['Registration and payments', 'Marketing Cloud reminders', 'QR check-in and reporting']],
   ['Conferences', 'Weeks 15-24', ['Sessions and speakers', 'My Agenda and badges', 'Certain retired']],
   ['Engagement', 'From Phase 1 go-live', ['PEI journeys by service line', 'App download campaigns', 'Find-a-doctor nurture']],
-  ['Intelligence', 'Week 25+', ['AI registration assistant (Agentforce)', 'Session and class recommendations', 'Class-to-visit attribution']],
+  ['AI agents', 'Week 25+', ['Agents in a controlled harness', 'Demand and campaign agents', 'Concierge on web, app and SMS']],
 ];
 road.forEach(([h, t, items], i) => {
   const x = L + i * 3.1;
@@ -367,13 +365,17 @@ road.forEach(([h, t, items], i) => {
   bullets(s, items, { x, y: 3.45, w: 2.8, h: 2.4, fontSize: 14, color: MUTED_LIGHT });
 });
 txt(s, 'Phases 1 and 2 solve today’s problem. Phases 3 and 4 grow engagement and the network on the same platform.', { x: L, y: 5.75, w: CW, h: 0.4, fontSize: 14, bold: true, color: C.text1 });
-s.addNotes('Future plan. AI features use Agentforce and are licensed separately; we would scope them after the core platform is live.');
+s.addNotes('Future plan. AI agents use Agentforce and are licensed separately; we would scope them after the core platform is live.');
+
+// AI agent harness
+await addHarnessSlide(h, 'Roadmap and next steps');
 
 // 20. Next steps
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'Roadmap and next steps' });
 s.addText('Next steps', { placeholder: 'title' });
 const steps = [
   'Walk through the current class solution with Lucky Rai’s team',
+  'Confirm how registration opens inside the My Memorial Hermann app',
   'Confirm yearly volumes: classes, conferences, registrants',
   'Confirm conference must-haves: sessions, badges, sponsors, CME',
   'Agree the payment approach: keep both gateways or consolidate',
@@ -381,19 +383,18 @@ const steps = [
   'Pick 2 to 3 service lines for the first engagement journeys',
 ];
 steps.forEach((t, i) => {
-  const y = 1.8 + i * 0.75;
+  const y = 1.75 + i * 0.64;
   numCircle(s, i + 1, 0.6, y, C.background1);
   txt(s, t, { x: 1.3, y, w: 11, h: 0.46, fontFace: LIGHT_FONT, fontSize: 20, color: C.background1, valign: 'middle' });
 });
 txt(s, 'Then we return with a scoped plan, team and estimate.', { x: 1.3, y: 6.35, w: 11, h: 0.35, fontSize: 14, bold: true, color: C.accent1 });
-s.addNotes('Ask Kevin to set up the walkthrough with Lucky Rai’s team. Items 2 to 6 let us firm up the timeline and estimate.');
+s.addNotes('Ask Kevin to set up the walkthrough with Lucky Rai’s team. Items 2 to 7 let us firm up the timeline and estimate.');
 
 // 21. Closing
 s = pres.addSlide({ masterName: 'IG Closing', sectionTitle: 'Roadmap and next steps' });
 s.addNotes('Thank you. Open for questions.');
 
-(async () => {
-  await pres.writeFile({ fileName: OUT });
-  await applyTheme(OUT, THEME);
-  console.log('wrote', OUT);
+await pres.writeFile({ fileName: OUT });
+await applyTheme(OUT, THEME);
+console.log('wrote', OUT);
 })();
