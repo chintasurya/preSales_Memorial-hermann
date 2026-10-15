@@ -8,6 +8,7 @@
 | 2026-10-14 | Request received for patient registration and event management. Kevin Kelly identified as contact. Top 5 questions sent. |
 | 2026-10-15 | Kevin answered (see `02-discovery-and-client-answers.md`). First solution deck drafted. Manager (Sandeep) feedback: open with the solution, screens and timeline, add payments, then upsell the registration data (PEIs, campaigns, app downloads). Deck rebuilt in the Insight Global template. |
 | 2026-10-15 | Surya feedback: PEI = patient engagement initiatives; registration goes into the existing My Memorial Hermann app (no new app); needs a detailed design covering high demand (100,000 clicks for 30 seats), notification of overflow demand, payment and data security, reliability, scalability, and a future AI agent harness. Design review v0.1 drafted (`08-detailed-design.md`). **Deck update waits for Surya's approval of the design.** |
+| 2026-10-15 | Surya agreed the design. Asked for three new slides: demand handling (not titled "high demand"), payments and data security, AI agents in a controlled harness. Previews built (`deck/previews/`, source `deck/build/design-slides.js`). **Waiting for Surya's approval before adding them to the deck.** |
 
 ## Manager direction (Sandeep)
 
