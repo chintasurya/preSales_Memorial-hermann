@@ -199,7 +199,6 @@ async function addHarnessSlide(h, sectionTitle) {
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 6.45, w: 1.38, h: 0.34, rectRadius: 0.17, line: { color: [HEX.cyan, HEX.yellow, HEX.magenta][i], width: 1.25 }, fill: { type: 'none' } });
     txt(s, t, { x, y: 6.45, w: 1.38, h: 0.34, fontSize: 10, bold: true, color: C.background1, align: 'center', valign: 'middle' });
   });
-  s.addNotes('Future state. Five agents run day-to-day event and campaign work, but only through the harness: approved actions, guardrails on consent and patient data, staff approval for anything that reaches patients or spends money, per-agent identity, a full audit trail, evaluation before release, the Einstein Trust Layer and a kill switch. Autonomy grows as trust is earned.');
   return s;
 }
 

@@ -130,6 +130,13 @@ pres.addSection({ title: 'Introduction' });
 let s = pres.addSlide({ masterName: 'IG Title', sectionTitle: 'Introduction' });
 s.addText('ONE EVENT PLATFORM ON SALESFORCE', { placeholder: 'title' });
 s.addText('Memorial Hermann Health System  ×  Insight Global', { placeholder: 'body' });
+// Client logo: drop the file at deck/assets/client/memorial-hermann-logo.png (white or reversed version for the dark title).
+const LOGO = path.join(ROOT, 'assets', 'client', 'memorial-hermann-logo.png');
+if (require('fs').existsSync(LOGO)) {
+  const meta = await require('sharp')(LOGO).metadata();
+  const lh = 0.6, lw = lh * meta.width / meta.height;
+  s.addImage({ path: LOGO, x: (W - lw) / 2, y: 5.6, w: lw, h: lh, objectName: 'Memorial Hermann logo' });
+}
 txt(s, 'CLASSES  ·  EVENTS  ·  CONFERENCES  ·  ENGAGEMENT', { x: 1.0, y: 5.15, w: W - 2, h: 0.3, fontSize: 11, color: C.background1, align: 'center', charSpacing: 4 });
 txt(s, 'OCTOBER 2026', { x: 1.0, y: 6.75, w: W - 2, h: 0.3, fontSize: 11, bold: true, color: C.background1, align: 'center', charSpacing: 5 });
 s.addNotes('Thank Kevin for the detailed answers. Today: how we solve the event registration problem on the Salesforce platform they already own, how we deliver it, and how the registration data can grow engagement and the network.');
@@ -137,18 +144,17 @@ s.addNotes('Thank Kevin for the detailed answers. Today: how we solve the event 
 // 2. Agenda
 s = pres.addSlide({ masterName: 'IG Agenda', sectionTitle: 'Introduction' });
 s.addText('Agenda', { placeholder: 'title' });
-const agenda = ['What we heard', 'The solution and design', 'Payments and data security', 'Delivery timeline', 'Beyond the event', 'Roadmap and next steps'];
+const agenda = ['Business opportunity', 'The solution and design', 'Payments and data security', 'Delivery timeline', 'Beyond the event', 'Roadmap and next steps'];
 agenda.forEach((a, i) => {
   const col = i < 3 ? 0 : 1, row = i % 3;
   const x = col === 0 ? 0.6 : 6.9, y = 2.2 + row * 0.95;
   numCircle(s, i + 1, x, y, C.background1);
   txt(s, a, { x: x + 0.7, y, w: 5.2, h: 0.46, fontFace: LIGHT_FONT, fontSize: 22, color: C.background1, valign: 'middle' });
 });
-s.addNotes('Sections 1 to 4 solve the problem Kevin described. Section 5 is the value we add on top: using registration data to keep people engaged and bring them into the Memorial Hermann network.');
 
 // 3. What we heard
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Introduction' });
-s.addText('Business problem', { placeholder: 'title' });
+s.addText('Business opportunity', { placeholder: 'title' });
 // Primary ask, highlighted first
 s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: L, y: 1.6, w: CW, h: 1.22, rectRadius: 0.12, fill: { color: '000000' }, line: { color: 'FF0068', width: 2 }, objectName: 'primary-ask' });
 txt(s, 'PRIMARY ASK', { x: L + 0.3, y: 1.74, w: 4, h: 0.24, fontSize: 10, bold: true, color: 'FF0068', charSpacing: 3 });
@@ -162,7 +168,6 @@ ruledTable(s, L, 3.5, [2.45, 5.2, 4.58], [
   ['Mobile app', 'People can already register for events in the app', 'Keep it, connected to the same event model'],
   ['Platform', 'Health Cloud and Marketing Cloud; Epic not needed', 'Built on what Memorial Hermann already owns'],
 ], { rowH: 0.62, bodySize: 12.5, headSize: 14 });
-s.addNotes('Lead with the primary ask: Certain is the one tool Kevin said they want to replace, for conferences with session management. Then the secondary goal: classes on the same platform, building on the Experience Cloud registration and app they already have.');
 
 // Keep, improve, replace
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Introduction' });
@@ -209,7 +214,6 @@ txt(s, 'CONNECTS TO', { x: L, y: 5.62, w: 2, h: 0.3, fontSize: 10, bold: true, c
 const conns = ['Chase', 'Authorize.net', 'Sitecore', 'Zoom / Teams', 'Health Cloud', 'Marketing Cloud'];
 conns.forEach((c, i) => pill(s, c, L + i * 2.05, 6.0, 1.85, [C.accent1, C.accent2, C.accent3][i % 3], C.background1));
 txt(s, 'Reliable, secure and scalable by design: waiting room and seat holds for busy events, encrypted data, full audit trail.', { x: L, y: 6.55, w: CW, h: 0.3, fontSize: 11, italic: true, color: C.accent1 });
-s.addNotes('One event platform on the Health Cloud org they already own. Today’s Sitecore listings, Experience Cloud site and mobile app stay the front doors. Salesforce runs classes and conferences on one model, and Marketing Cloud sends every message. Only Certain is retired.');
 
 // Overall solution design (sequence view)
 addOverallDesignSlide(h, 'The solution');
@@ -276,7 +280,22 @@ blocks.forEach(({ x, up, w, h, b }) => {
 });
 s.addNotes('Phase 1 replaces Certain around week 12; time it to land before the Certain renewal. Phase 2 brings classes onto the same platform and improves them by week 20, without rebuilding the registration site. Engagement work can start once classes are on the shared model.');
 
-// Sprint plan and delivery pod (replace the phase scope table)
+// What each phase delivers (restored by Surya in draft 2)
+s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Delivery plan' });
+s.addText('What each phase delivers', { placeholder: 'title' });
+ruledTable(s, L, 1.7, [2.2, 5.0, 5.03], [
+  ['', 'Phase 1  ·  Conferences (replaces Certain)', 'Phase 2  ·  Classes on the shared platform'],
+  ['Scope', 'Multi-day agenda, tracks, rooms and session capacity', 'Today’s classes moved onto the shared event model'],
+  ['Registration', 'Providers and guests, ticket types, My Agenda on Experience Cloud', 'Existing Experience Cloud site and app, now with instant confirmation'],
+  ['Payments', 'Authorize.net checkout, or one consolidated gateway', 'Chase checkout with safe payment retries and refunds'],
+  ['Engagement', 'Speaker and attendee communications, badges, CME [to confirm]', 'Reminder journeys, waitlists, QR check-in'],
+  ['Data', 'Certain history migrated', 'Class history kept; registrants matched to Health Cloud'],
+  ['Built in', 'Load test before each conference opens', 'Live seats, waitlists, encryption, monitoring'],
+  ['Retires', 'Certain', 'Nothing retired; today’s registration is improved'],
+], { rowH: 0.6, bodySize: 13 });
+s.addNotes('Same team and same platform across both phases, so Phase 2 builds on Phase 1 rather than starting over.');
+
+// Sprint plan and delivery pod
 addSprintPlanSlide(h, 'Delivery plan');
 await addPodSlide(h, 'Delivery plan');
 
@@ -288,7 +307,7 @@ s.addText('Turn every registration into a lasting relationship', { placeholder: 
 
 // 14. Value proposition (template stat style)
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'Beyond the event' });
-txt(s, 'Every registration tells you what a person cares about. Use it to bring them back and into the network.', { x: L, y: 1.1, w: 5.6, h: 2.6, fontFace: LIGHT_FONT, fontSize: 30, color: C.background1 });
+txt(s, 'Every registration tells you what a person cares about. Use it to bring them back and into the network.', { x: L, y: 2.5, w: 5.6, h: 2.6, fontFace: LIGHT_FONT, fontSize: 30, color: C.background1 });
 const stats = [
   ['1 profile', 'Every registrant, caregiver and provider in one Salesforce record'],
   ['4 PEIs', 'Patient engagement initiatives after every class'],

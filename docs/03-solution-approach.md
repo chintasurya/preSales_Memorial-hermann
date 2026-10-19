@@ -75,28 +75,31 @@ home-built tool and Certain. Present AppExchange as the faster alternative.
 4. Conference agenda: tracks, session capacity, CME badges, My Agenda
 5. Marketing Cloud journey with patient engagement initiatives
 
-## Deck structure (28 slides, 2026-10-15)
+## Deck structure (30 slides, 2026-10-19, reworked)
 
-1 Title, 2 Agenda, 3 What we heard, 4 Section 01, 5 Event app inside your org, 6 Overall solution
-design (sequence), 7 One registration flow for website and app, 8 Staff console, 9 Conferences,
-10 Every seat filled (demand handling), 11 Design detail: registration and seat flow, 12 Payments and
-data security, 13 Design detail: payment sequence, 14 Section 02, 15 Timeline, 16 Delivery plan:
-12 two-week sprints, 17 Five-person delivery pod, 18 Section 03, 19 Value statement, 20 PEI journey,
-21 Campaigns, 22 Website registrants into the app, 23 KPIs, 24 Roadmap, 25 AI agents in a controlled
-harness, 26 Investment, 27 Next steps, 28 Thank you.
+1 Title, 2 Agenda, 3 Business opportunity (primary ask: replace Certain), 4 Build on what already
+works (keep / improve / replace / add later), 5 Section 01, 6 One event platform inside your org,
+7 Overall solution design (sequence), 8 Phase 1: conferences, 9 Phase 2: today's class registration
+improved, 10 Staff console, 11 Every seat filled, 12 Registration and seat flow detail, 13 Payments
+and data security, 14 Payment sequence detail, 15 Section 02, 16 Timeline, 17 What each phase
+delivers, 18 Sprint plan (10 sprints), 19 Delivery pod, 20 Section 03, 21 Value statement, 22 PEI
+journey, 23 Campaigns, 24 Website registrants into the app, 25 KPIs, 26 Roadmap, 27 AI agents in a
+controlled harness, 28 Investment, 29 Next steps, 30 Thank you.
 
-Sequence diagrams: `deck/build/sequence-slides.js`. Design slides: `deck/build/design-slides.js`.
-Sprint plan, pod and investment: `deck/build/delivery-slides.js`.
+Surya's draft 2 edits carried forward: "Business opportunity" heading and agenda item, restored
+"What each phase delivers" slide, value statement moved lower, "Salesforce licenses" wording,
+speaker notes removed on agenda, slide 3, slide 6 and the AI harness slide. Source copy:
+`reference/Memorial_Hermann_Event_Platform_draft_2_Surya_edits.pptx`.
 
 ## Team and commercials (approved by Surya, 2026-10-15)
 
 - Pod of 5: 1 Scrum Master or Project Manager, 1 QA engineer, 2 Salesforce developers,
   1 Marketing Cloud developer. Memorial Hermann provides a product owner and an Epic/app contact.
-- 12 two-week sprints (24 weeks), demo and milestone sign-off at every sprint end. Sprints 1-2
-  discover and design, 3-7 Phase 1 (live week 14), 8-12 Phase 2 (live week 24, Certain retired).
+- 10 two-week sprints (20 weeks), demo and milestone sign-off at every sprint end. Sprint 1 assess,
+  2-6 Phase 1 conferences (live week 12, Certain retired), 7-10 Phase 2 classes improved (live week 20).
 - Pricing is for an **offshore delivery model** (labelled on the Investment slide).
-- Standard program value $700,000 (struck through); strategic partner investment $350,000 after a
-  50% partnership credit applied upfront. Phase split by sprint weeks: Phase 1 $410,000 to $205,000,
-  Phase 2 $290,000 to $145,000. Indicative, billed at sprint milestones, final in the SOW.
+- Standard program value $580,000 (struck through, placeholder scaled from the $700,000 example);
+  strategic partner investment $290,000 after a 50% partnership credit applied upfront. Phase 1
+  $350,000 to $175,000, Phase 2 $230,000 to $115,000. Indicative, billed at sprint milestones, final in the SOW.
 - Not included: Salesforce licenses (Shield, Agentforce, Data Cloud), gateway fees, waiting room
   subscription.

@@ -182,7 +182,7 @@ function addInvestmentSlide(h, sectionTitle) {
   ], { isTextBox: true, x: tx, y: iy + 0.36, w: 3.6, h: 1.6, fontSize: 11, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 4 });
   txt(s, 'Not included', { x: tx + 3.85, y: iy, w: 3.4, h: 0.3, fontSize: 14, bold: true, color: INK });
   s.addText([
-    { text: 'Salesforce licenses (Shield, Agentforce, Data Cloud)', options: { bullet: true, breakLine: true } },
+    { text: 'Salesforce licenses', options: { bullet: true, breakLine: true } },
     { text: 'Payment gateway transaction fees', options: { bullet: true, breakLine: true } },
     { text: 'Waiting room subscription', options: { bullet: true } },
   ], { isTextBox: true, x: tx + 3.85, y: iy + 0.36, w: 3.38, h: 1.6, fontSize: 11, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 4 });
