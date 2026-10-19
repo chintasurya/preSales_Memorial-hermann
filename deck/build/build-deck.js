@@ -148,17 +148,21 @@ s.addNotes('Sections 1 to 4 solve the problem Kevin described. Section 5 is the 
 
 // 3. What we heard
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Introduction' });
-s.addText('What we heard', { placeholder: 'title' });
-ruledTable(s, L, 1.7, [2.45, 5.2, 4.58], [
+s.addText('Business problem', { placeholder: 'title' });
+// Primary ask, highlighted first
+s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: L, y: 1.6, w: CW, h: 1.22, rectRadius: 0.12, fill: { color: '000000' }, line: { color: 'FF0068', width: 2 }, objectName: 'primary-ask' });
+txt(s, 'PRIMARY ASK', { x: L + 0.3, y: 1.74, w: 4, h: 0.24, fontSize: 10, bold: true, color: 'FF0068', charSpacing: 3 });
+txt(s, 'Replace Certain with conference and session management on Salesforce', { x: L + 0.3, y: 2.0, w: 8.2, h: 0.7, fontSize: 21, bold: true, color: 'FFFFFF', valign: 'middle' });
+txt(s, '1 to 2 multi-day conferences a year, with session management, for providers, caregivers and consumers. Authorize.net today.', { x: 9.1, y: 1.78, w: 3.45, h: 0.95, fontSize: 11.5, color: 'D9D9D9', valign: 'middle' });
+txt(s, 'Also: run classes on the same platform, building on today\u2019s registration instead of rebuilding it.', { x: L, y: 3.08, w: CW, h: 0.32, fontSize: 14, bold: true, color: C.text1 });
+ruledTable(s, L, 3.5, [2.45, 5.2, 4.58], [
   ['Area', 'Today', 'Where we take it'],
+  ['Conferences', 'Certain for multi-day events; Authorize.net payments', 'Replace with Salesforce conference and session management'],
   ['Classes and events', 'Sitecore listings open a home-built Experience Cloud site; Chase payments; confirmation up to 24 hours', 'Keep the site and improve it on one shared event model'],
   ['Mobile app', 'People can already register for events in the app', 'Keep it, connected to the same event model'],
-  ['Conferences', 'Certain for 1 to 2 multi-day events a year; Authorize.net', 'Replace with Salesforce conference and session management'],
-  ['Who registers', 'Consumers, caregivers and providers', 'One profile per person, matched to Health Cloud'],
   ['Platform', 'Health Cloud and Marketing Cloud; Epic not needed', 'Built on what Memorial Hermann already owns'],
-], { rowH: 0.7 });
-txt(s, 'The ask: replace Certain and run classes and conferences on one Salesforce platform, without rebuilding what already works.', { x: L, y: 6.2, w: CW, h: 0.45, fontSize: 15, bold: true, color: C.text1 });
-s.addNotes('Play back Kevin’s answers and what we saw on the site. Class registration already runs on a home-built Experience Cloud site and in the app. The tool they want to replace is Certain. The goal is one platform for both, building on what works.');
+], { rowH: 0.62, bodySize: 12.5, headSize: 14 });
+s.addNotes('Lead with the primary ask: Certain is the one tool Kevin said they want to replace, for conferences with session management. Then the secondary goal: classes on the same platform, building on the Experience Cloud registration and app they already have.');
 
 // Keep, improve, replace
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Introduction' });
