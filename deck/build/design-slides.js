@@ -21,7 +21,7 @@ async function addDemandSlide(h, sectionTitle) {
   const { pres, txt, C, L, R, LIGHT_FONT, MUTED_DARK, HEX } = h;
   const s = pres.addSlide({ masterName: 'IG Dark', sectionTitle });
   s.addText('Every seat filled, no interested person lost', { placeholder: 'title' });
-  txt(s, 'Example: 100,000 people click Register for a class with 30 seats', { x: L, y: 1.45, w: 9, h: 0.35, fontSize: 14, color: MUTED_DARK });
+  txt(s, 'When interest outruns seats: a popular class or a conference opening', { x: L, y: 1.45, w: 9, h: 0.35, fontSize: 14, color: MUTED_DARK });
 
   const steps = [
     ['FaGlobe', 'Edge protection', 'Cached pages, bot defense, rate limits'],
@@ -82,7 +82,7 @@ async function addSecuritySlide(h, sectionTitle) {
   // Left: payment flow
   txt(s, 'Card data never enters our systems', { x: L, y: 1.6, w: 5.8, h: 0.4, fontSize: 17, bold: true, color: C.text1 });
   const flow = [
-    ['FaUser', 'Registrant', 'Website or My Memorial Hermann app'],
+    ['FaUser', 'Registrant', 'Website, Experience Cloud or app'],
     ['FaCreditCard', 'Gateway hosted page', 'Card typed here (Chase or Authorize.net)'],
     ['FaKey', 'Signed webhook', 'Token, last 4 digits, approval code'],
     ['FaDatabase', 'Salesforce payment record', 'Token reference, last 4, amount, status'],

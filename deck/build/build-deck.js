@@ -11,7 +11,7 @@ const { addSprintPlanSlide, addPodSlide, addInvestmentSlide } = require('./deliv
 const ROOT = path.join(__dirname, '..');
 const BG = f => path.join(ROOT, 'assets', 'bg', f);
 const IMG = f => path.join(ROOT, 'mockups', 'png', f);
-const OUT = path.join(ROOT, 'Memorial-Hermann-Event-Platform.pptx');
+const OUT = process.env.DECK_OUT || path.join(ROOT, 'Memorial-Hermann-Event-Platform.pptx');
 
 // Insight Global palette, sampled from the template's color page.
 const THEME = {
@@ -149,28 +149,47 @@ s.addNotes('Sections 1 to 4 solve the problem Kevin described. Section 5 is the 
 // 3. What we heard
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Introduction' });
 s.addText('What we heard', { placeholder: 'title' });
-ruledTable(s, L, 1.75, [2.6, 4.9, 4.73], [
-  ['Area', 'Today', 'With one platform'],
-  ['Classes and events', 'Home-built on Salesforce + Sitecore; payments through Chase', 'One Salesforce event app for every class, tour and seminar'],
-  ['Conferences', 'Certain for 1 to 2 multi-day events a year; Authorize.net', 'Same app with sessions, tracks and speakers; Certain retired'],
+ruledTable(s, L, 1.7, [2.45, 5.2, 4.58], [
+  ['Area', 'Today', 'Where we take it'],
+  ['Classes and events', 'Sitecore listings open a home-built Experience Cloud site; Chase payments; confirmation up to 24 hours', 'Keep the site and improve it on one shared event model'],
+  ['Mobile app', 'People can already register for events in the app', 'Keep it, connected to the same event model'],
+  ['Conferences', 'Certain for 1 to 2 multi-day events a year; Authorize.net', 'Replace with Salesforce conference and session management'],
   ['Who registers', 'Consumers, caregivers and providers', 'One profile per person, matched to Health Cloud'],
-  ['Platform', 'Health Cloud and Marketing Cloud', 'Built on what Memorial Hermann already owns'],
-  ['Epic', 'Not needed for this use case', 'Lucky Rai’s team if an integration is ever required'],
-], { rowH: 0.72 });
-txt(s, 'Goal: one platform for simple classes (free or paid, in person or online) and multi-day conferences with session management.', { x: L, y: 6.25, w: CW, h: 0.4, fontSize: 15, bold: true, color: C.text1 });
-s.addNotes('Play back Kevin’s answers so he can correct anything. Two systems and two payment gateways today; the goal is one platform.');
+  ['Platform', 'Health Cloud and Marketing Cloud; Epic not needed', 'Built on what Memorial Hermann already owns'],
+], { rowH: 0.7 });
+txt(s, 'The ask: replace Certain and run classes and conferences on one Salesforce platform, without rebuilding what already works.', { x: L, y: 6.2, w: CW, h: 0.45, fontSize: 15, bold: true, color: C.text1 });
+s.addNotes('Play back Kevin’s answers and what we saw on the site. Class registration already runs on a home-built Experience Cloud site and in the app. The tool they want to replace is Certain. The goal is one platform for both, building on what works.');
+
+// Keep, improve, replace
+s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Introduction' });
+s.addText('Build on what already works', { placeholder: 'title' });
+txt(s, 'No rebuild of today’s class registration. Replace only Certain, then bring every event onto one platform.', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
+const kir = [
+  ['KEEP', '00A9C0', '007C8C', ['Sitecore class listings', 'Experience Cloud registration site', 'Mobile app registration', 'Health Cloud and Marketing Cloud']],
+  ['IMPROVE', 'D9B200', '7A6100', ['Instant confirmation (today up to 24 hours)', 'Safe payment retries', 'Live seats and waitlists', 'Check-in and reporting', 'One shared event model']],
+  ['REPLACE', 'FF0068', 'C8005A', ['Certain, with Salesforce conference and session management', 'My Agenda portal on Experience Cloud', 'Authorize.net checkout inside the platform', 'Certain data migrated']],
+  ['ADD LATER', '8C8C96', '4D4D4D', ['Patient engagement initiatives (PEIs)', 'App adoption campaigns', 'AI agents in a controlled harness']],
+];
+kir.forEach(([k, line, ink, items], i) => {
+  const cw4 = (CW - 3 * 0.2) / 4, x = L + i * (cw4 + 0.2), y = 1.95;
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w: cw4, h: 4.15, rectRadius: 0.12, fill: { color: i === 2 ? '000000' : 'F2F2F2' }, line: { color: line, width: 1.75 }, objectName: `kir-${k}` });
+  txt(s, k, { x: x + 0.22, y: y + 0.22, w: cw4 - 0.44, h: 0.32, fontSize: 15, bold: true, color: i === 2 ? line : ink, charSpacing: 3 });
+  bullets(s, items, { x: x + 0.22, y: y + 0.75, w: cw4 - 0.4, h: 3.3, fontSize: 13, color: i === 2 ? 'FFFFFF' : C.text1 });
+});
+txt(s, 'Lowest-risk path: what works stays, the one tool you want gone goes, and every event ends up on the same data, payments and reporting.', { x: L, y: 6.3, w: CW, h: 0.4, fontSize: 13, italic: true, color: MUTED_LIGHT });
+s.addNotes('This is the core of our position. We keep the Sitecore listings, the Experience Cloud registration site and the app. We improve classes where today’s experience is weak, such as confirmations that can take up to 24 hours. We replace only Certain. Engagement and AI come later.');
 
 // 4. Section 01
 pres.addSection({ title: 'The solution' });
 s = pres.addSlide({ masterName: 'IG Section Blue', sectionTitle: 'The solution' });
 s.addText('01  THE SOLUTION', { placeholder: 'title' });
-s.addText('One Salesforce event app for classes, events and conferences', { placeholder: 'body' });
+s.addText('Conferences first, then classes on the same Salesforce platform', { placeholder: 'body' });
 
 // 5. Solution overview
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'The solution' });
-s.addText('An event app inside your Salesforce org', { placeholder: 'title' });
+s.addText('One event platform inside your Salesforce org', { placeholder: 'title' });
 const cols = [
-  ['Register', 'Website and My MH app', ['Sign-up on Sitecore pages and inside the existing My Memorial Hermann app', 'Secure hosted checkout', '“My Agenda” portal for conferences']],
+  ['Register', 'Your existing front doors', ['Sitecore listings and today’s Experience Cloud site', 'Existing mobile app', '“My Agenda” portal for conferences']],
   ['Manage', 'Event app in Salesforce', ['Classes, series, sessions, speakers', 'Capacity, waitlists, refunds', 'QR check-in and reporting', 'Registrants matched to Health Cloud']],
   ['Engage', 'Marketing Cloud journeys', ['Confirmations and reminders', 'Calendar invites and virtual links', 'Patient engagement initiatives (PEIs)']],
 ];
@@ -186,38 +205,38 @@ txt(s, 'CONNECTS TO', { x: L, y: 5.62, w: 2, h: 0.3, fontSize: 10, bold: true, c
 const conns = ['Chase', 'Authorize.net', 'Sitecore', 'Zoom / Teams', 'Health Cloud', 'Marketing Cloud'];
 conns.forEach((c, i) => pill(s, c, L + i * 2.05, 6.0, 1.85, [C.accent1, C.accent2, C.accent3][i % 3], C.background1));
 txt(s, 'Reliable, secure and scalable by design: waiting room and seat holds for busy events, encrypted data, full audit trail.', { x: L, y: 6.55, w: CW, h: 0.3, fontSize: 11, italic: true, color: C.accent1 });
-s.addNotes('One app on the Health Cloud org they already own. Sitecore and the existing My Memorial Hermann app are the front doors, Salesforce runs events, Marketing Cloud sends every message. This retires both the home-built class tool and Certain.');
+s.addNotes('One event platform on the Health Cloud org they already own. Today’s Sitecore listings, Experience Cloud site and mobile app stay the front doors. Salesforce runs classes and conferences on one model, and Marketing Cloud sends every message. Only Certain is retired.');
 
 // Overall solution design (sequence view)
 addOverallDesignSlide(h, 'The solution');
 
+// 8. Conference screens
+s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'The solution' });
+s.addText('Phase 1: conferences with full session management', { placeholder: 'title' });
+frameImage(s, '04-conference-agenda.png', L, 1.85, 7.5, 4.69);
+txt(s, 'Replaces Certain', { x: 8.5, y: 1.85, w: 4.3, h: 0.4, fontSize: 18, bold: true, color: C.text1 });
+bullets(s, ['Multi-day agenda with tracks and rooms', 'Attendees build their own “My Agenda”', 'Session capacity and waitlists', 'Speaker profiles and assignments', 'Ticket types for providers and guests', 'Badges and CME credit tracking [to confirm]'], { x: 8.5, y: 2.4, w: 4.3, h: 3.6, fontSize: 14, color: MUTED_LIGHT });
+s.addNotes('This is the main ask: replace Certain. Conferences run on the same Salesforce platform as classes, with the attendee portal on their existing Experience Cloud site. CME requirements to be confirmed with Kevin.');
+
 // 6. Registration screens
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'The solution' });
-s.addText('One registration flow for website and app', { placeholder: 'title' });
+s.addText('Phase 2: today’s class registration, improved', { placeholder: 'title' });
 frameImage(s, '01-web-registration.png', L, 1.85, 5.95, 3.72);
 frameImage(s, '02-mobile-flow.png', 6.83, 1.85, 5.95, 3.72);
-txt(s, 'Website', { x: L, y: 5.75, w: 5.95, h: 0.3, fontSize: 15, bold: true, color: C.text1 });
-txt(s, 'Search by topic, location, date, format and price. Seats left and waitlists update live.', { x: L, y: 6.07, w: 5.95, h: 0.55, fontSize: 13, color: MUTED_LIGHT });
-txt(s, 'Existing My Memorial Hermann app', { x: 6.83, y: 5.75, w: 5.95, h: 0.3, fontSize: 15, bold: true, color: C.text1 });
-txt(s, 'A Classes & Events entry in the app people already use. No new app to download [Epic setup to confirm].', { x: 6.83, y: 6.07, w: 5.95, h: 0.55, fontSize: 13, color: MUTED_LIGHT });
-s.addNotes('Concept screens, sample data. One registration flow serves the Sitecore website and the existing My Memorial Hermann app (Epic MyChart), so nothing is built twice. How it appears in the app (menu link or SMART on FHIR launch) is confirmed with Lucky Rai’s team.');
+txt(s, 'Website and Experience Cloud site', { x: L, y: 5.75, w: 5.95, h: 0.3, fontSize: 15, bold: true, color: C.text1 });
+txt(s, 'Same listings and registration site, now with live seats, waitlists and instant confirmation.', { x: L, y: 6.07, w: 5.95, h: 0.55, fontSize: 13, color: MUTED_LIGHT });
+txt(s, 'Existing mobile app', { x: 6.83, y: 5.75, w: 5.95, h: 0.3, fontSize: 15, bold: true, color: C.text1 });
+txt(s, 'The app people already register in, connected to the same event model. No new app.', { x: 6.83, y: 6.07, w: 5.95, h: 0.55, fontSize: 13, color: MUTED_LIGHT });
+s.addNotes('Concept screens, sample data. We keep today’s registration site and app and improve them: instant confirmation instead of up to 24 hours, safe payment retries, live seats and waitlists. How the app connects is confirmed with Lucky Rai’s team.');
 
 // 7. Staff console
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'The solution' });
-s.addText('Staff run every class from one Salesforce console', { placeholder: 'title' });
+s.addText('Staff run classes and conferences from one console', { placeholder: 'title' });
 frameImage(s, '03-salesforce-console.png', L, 1.95, 8.6, 3.87);
 txt(s, 'What staff can do', { x: 9.55, y: 1.95, w: 3.25, h: 0.4, fontSize: 18, bold: true, color: C.text1 });
 bullets(s, ['Set up a class once and repeat it as a series', 'Watch capacity and waitlists fill in real time', 'Match registrants to existing Health Cloud records', 'Check people in with a QR scan', 'Email attendees and track revenue'], { x: 9.55, y: 2.5, w: 3.25, h: 3.4, fontSize: 14, color: MUTED_LIGHT });
 txt(s, 'Concept mockup, sample data', { x: L, y: 6.0, w: 5, h: 0.3, fontSize: 11, italic: true, color: MUTED_LIGHT });
 s.addNotes('This is a standard Salesforce Lightning app, so their in-house Salesforce admins can own it after launch.');
-
-// 8. Conference screens
-s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'The solution' });
-s.addText('Conferences with full session management', { placeholder: 'title' });
-frameImage(s, '04-conference-agenda.png', L, 1.85, 7.5, 4.69);
-txt(s, 'Replaces Certain', { x: 8.5, y: 1.85, w: 4.3, h: 0.4, fontSize: 18, bold: true, color: C.text1 });
-bullets(s, ['Multi-day agenda with tracks and rooms', 'Attendees build their own “My Agenda”', 'Session capacity and waitlists', 'Speaker profiles and assignments', 'Ticket types for providers and guests', 'Badges and CME credit tracking [to confirm]'], { x: 8.5, y: 2.4, w: 4.3, h: 3.6, fontSize: 14, color: MUTED_LIGHT });
-s.addNotes('Conferences use the same app and data as classes, so attendees, payments and reporting stay in one place. CME requirements to be confirmed with Kevin.');
 
 // Demand handling, seat-flow detail, payments and data security, payment detail
 await addDemandSlide(h, 'The solution');
@@ -229,7 +248,7 @@ addPaymentSequenceSlide(h, 'The solution');
 pres.addSection({ title: 'Delivery plan' });
 s = pres.addSlide({ masterName: 'IG Section Gold', sectionTitle: 'Delivery plan' });
 s.addText('02  DELIVERY PLAN', { placeholder: 'title' });
-s.addText('Two phases, about 24 weeks to both platforms live', { placeholder: 'body' });
+s.addText('Ten sprints: conferences live at week 12, classes improved by week 20', { placeholder: 'body' });
 
 // 11. Timeline (template timeline style)
 s = pres.addSlide({ masterName: 'IG Spectrum', sectionTitle: 'Delivery plan' });
@@ -239,10 +258,10 @@ const lineY = 3.95;
 s.addShape(pres.shapes.LINE, { x: 0.68, y: lineY, w: W - 1.36, h: 0, line: { color: C.background1, width: 3 } });
 [0.55, W - 0.81].forEach(x => s.addShape(pres.shapes.OVAL, { x, y: lineY - 0.13, w: 0.26, h: 0.26, fill: { color: C.background1 }, line: { color: C.background1 } }));
 const blocks = [
-  { x: 1.15, up: false, w: 3.3, h: 'Weeks 1-3  ·  Discover and design', b: 'Walkthrough of the current build, requirements, data model, payment decision' },
-  { x: 3.85, up: true, w: 3.3, h: 'Weeks 4-14  ·  Phase 1 live', b: 'Classes and events: registration, payments, journeys, check-in. Home-built tool retired' },
-  { x: 6.95, up: false, w: 3.3, h: 'Weeks 15-24  ·  Phase 2 live', b: 'Conferences: sessions, speakers, My Agenda, badges. Certain retired' },
-  { x: 9.7, up: true, w: 2.9, h: 'Week 25+  ·  Grow', b: 'Patient engagement initiatives, app adoption, AI agents in a controlled harness' },
+  { x: 1.15, up: false, w: 3.3, h: 'Weeks 1-2  ·  Assess and design', b: 'Review today’s Experience Cloud site, the app and Certain; shared event model; payment decision' },
+  { x: 3.85, up: true, w: 3.3, h: 'Weeks 3-12  ·  Phase 1 live', b: 'Conferences: sessions, speakers, My Agenda, badges. Certain retired' },
+  { x: 6.95, up: false, w: 3.3, h: 'Weeks 13-20  ·  Phase 2 live', b: 'Classes on the shared model: instant confirmation, waitlists, check-in, reporting' },
+  { x: 9.7, up: true, w: 2.9, h: 'Week 21+  ·  Grow', b: 'Patient engagement initiatives, app adoption, AI agents in a controlled harness' },
 ];
 blocks.forEach(({ x, up, w, h, b }) => {
   const y = up ? 2.45 : lineY + 0.25;
@@ -251,7 +270,7 @@ blocks.forEach(({ x, up, w, h, b }) => {
   txt(s, b, { x: x + 0.2, y: y + 0.4, w, h: 0.85, fontSize: 12, color: C.background1 });
   s.addShape(pres.shapes.OVAL, { x: x - 0.09, y: lineY - 0.09, w: 0.18, h: 0.18, fill: { color: C.accent2 }, line: { color: C.accent2 } });
 });
-s.addNotes('Phase 1 replaces the home-built class registration around week 14. Phase 2 replaces Certain around week 24; time it to land before the Certain renewal. Engagement work can start as soon as Phase 1 is live.');
+s.addNotes('Phase 1 replaces Certain around week 12; time it to land before the Certain renewal. Phase 2 brings classes onto the same platform and improves them by week 20, without rebuilding the registration site. Engagement work can start once classes are on the shared model.');
 
 // Sprint plan and delivery pod (replace the phase scope table)
 addSprintPlanSlide(h, 'Delivery plan');
@@ -342,10 +361,10 @@ pres.addSection({ title: 'Roadmap and next steps' });
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Roadmap and next steps' });
 s.addText('Roadmap: from registration to relationship', { placeholder: 'title' });
 const road = [
-  ['Classes and events', 'Weeks 1-14', ['Registration and payments', 'Marketing Cloud reminders', 'QR check-in and reporting']],
-  ['Conferences', 'Weeks 15-24', ['Sessions and speakers', 'My Agenda and badges', 'Certain retired']],
-  ['Engagement', 'From Phase 1 go-live', ['PEI journeys by service line', 'App download campaigns', 'Find-a-doctor nurture']],
-  ['AI agents', 'Week 25+', ['Agents in a controlled harness', 'Demand and campaign agents', 'Concierge on web, app and SMS']],
+  ['Conferences', 'Weeks 3-12', ['Sessions and speakers', 'My Agenda and badges', 'Certain retired']],
+  ['Classes improved', 'Weeks 13-20', ['Shared event model', 'Instant confirmation, waitlists', 'Check-in and reporting']],
+  ['Engagement', 'From Phase 2 go-live', ['PEI journeys by service line', 'App adoption campaigns', 'Find-a-doctor nurture']],
+  ['AI agents', 'Week 21+', ['Agents in a controlled harness', 'Demand and campaign agents', 'Concierge on web, app and SMS']],
 ];
 road.forEach(([h, t, items], i) => {
   const x = L + i * 3.1;
@@ -367,8 +386,8 @@ addInvestmentSlide(h, 'Roadmap and next steps');
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'Roadmap and next steps' });
 s.addText('Next steps', { placeholder: 'title' });
 const steps = [
-  'Walk through the current class solution with Lucky Rai’s team',
-  'Confirm how registration opens inside the My Memorial Hermann app',
+  'Walk through today’s Experience Cloud site, the app and Certain',
+  'Confirm what is not working today and why Certain is being replaced',
   'Confirm yearly volumes: classes, conferences, registrants',
   'Confirm conference must-haves: sessions, badges, sponsors, CME',
   'Agree the payment approach: keep both gateways or consolidate',

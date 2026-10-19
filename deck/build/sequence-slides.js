@@ -87,12 +87,12 @@ function addOverallDesignSlide(h, sectionTitle) {
   const { pres, txt, L, R, MUTED_LIGHT } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Overall solution design', { placeholder: 'title' });
-  txt(s, 'One flow from sign-up to follow-up for classes and conferences, replacing the home-built class tool and Certain', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
+  txt(s, 'One flow for conferences and classes on your existing Experience Cloud site and app; replaces Certain', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
   sequence(s, h, {
     x: 1.55, y: 1.92, w: R - 1.55, bottom: 6.62, phaseX: L,
     parts: [
       { id: 'p', label: 'Registrant' },
-      { id: 'ch', label: 'Website or My MH app', color: ACCENT.cyan },
+      { id: 'ch', label: 'Website or app', color: ACCENT.cyan },
       { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
       { id: 'pay', label: 'Payment gateway' },
       { id: 'sf', label: 'Salesforce event app', color: ACCENT.cyan },
@@ -115,8 +115,8 @@ function addOverallDesignSlide(h, sectionTitle) {
       { from: 'st', to: 'sf', label: 'Add a session in one click' },
     ],
   });
-  txt(s, 'Conferences follow the same flow, adding sessions, speakers and My Agenda.', { x: L, y: 6.68, w: 9, h: 0.26, fontSize: 10.5, italic: true, color: MUTED_LIGHT });
-  s.addNotes('This is the whole solution on one page, in the order a registrant experiences it. Register: website or the existing My Memorial Hermann app, with a seat held while they pay. Pay: the gateway hosts the card page; we receive only a token. Confirm: Salesforce records the registration and Marketing Cloud sends confirmation and reminders. Attend: QR check-in. Engage: patient engagement initiatives. Grow: staff see demand and add sessions. It replaces both the home-built class tool and Certain.');
+  txt(s, 'Classes and conferences share this flow; conferences add sessions, speakers and My Agenda.', { x: L, y: 6.68, w: 9, h: 0.26, fontSize: 10.5, italic: true, color: MUTED_LIGHT });
+  s.addNotes('This is the whole solution on one page, in the order a registrant experiences it. Register: website or the existing My Memorial Hermann app, with a seat held while they pay. Pay: the gateway hosts the card page; we receive only a token. Confirm: Salesforce records the registration and Marketing Cloud sends confirmation and reminders. Attend: QR check-in. Engage: patient engagement initiatives. Grow: staff see demand and add sessions. It replaces Certain and builds on today’s Experience Cloud site and app.');
   return s;
 }
 

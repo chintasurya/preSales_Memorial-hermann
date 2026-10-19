@@ -14,6 +14,7 @@
 | 2026-10-15 | Surya asked for team and commercials: 5-person pod (2 Salesforce developers, 1 Marketing Cloud developer, 1 Scrum Master or PM, 1 QA), 2-week sprints with a milestone at each sprint end, pyramid team diagram, and pricing shown as $700,000 standard value struck through with a 50% upfront partner credit ($350,000). Previews built (`deck/build/delivery-slides.js`, `deck/previews/preview-*.jpg`). **Approved and added: deck now 28 slides (sprint plan 16, pod 17, investment 26).** |
 | 2026-10-15 | Surya: Investment slide states the pricing is for an offshore delivery model (subtitle, OFFSHORE tag, footnote). |
 | 2026-10-19 | Surya found class registration already runs on Experience Cloud and a mobile app registers for events. Alignment review: core ask is replacing Certain (conferences with sessions) on one Salesforce platform; deck currently over-scopes by rebuilding class registration. Reframe proposed, pending Surya's decision. |
+| 2026-10-19 | Surya asked to rework the deck. Preview built (`deck/previews/reworked-deck-preview.pptx`, 29 slides): new "Build on what already works" (keep / improve / replace) slide, conferences as Phase 1 (replaces Certain), classes improved in Phase 2, 10 sprints / 20 weeks, investment resized proportionally to $580,000 standard and $290,000 partner. **Main deck unchanged until Surya approves.** |
 
 ## Manager direction (Sandeep)
 
