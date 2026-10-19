@@ -13,6 +13,7 @@
 | 2026-10-15 | Surya: sequence slides (6, 11, 13) moved to the white background for readability. |
 | 2026-10-15 | Surya asked for team and commercials: 5-person pod (2 Salesforce developers, 1 Marketing Cloud developer, 1 Scrum Master or PM, 1 QA), 2-week sprints with a milestone at each sprint end, pyramid team diagram, and pricing shown as $700,000 standard value struck through with a 50% upfront partner credit ($350,000). Previews built (`deck/build/delivery-slides.js`, `deck/previews/preview-*.jpg`). **Approved and added: deck now 28 slides (sprint plan 16, pod 17, investment 26).** |
 | 2026-10-15 | Surya: Investment slide states the pricing is for an offshore delivery model (subtitle, OFFSHORE tag, footnote). |
+| 2026-10-19 | Surya found class registration already runs on Experience Cloud and a mobile app registers for events. Alignment review: core ask is replacing Certain (conferences with sessions) on one Salesforce platform; deck currently over-scopes by rebuilding class registration. Reframe proposed, pending Surya's decision. |
 
 ## Manager direction (Sandeep)
 
@@ -23,6 +24,10 @@
 - Show the future plan.
 
 ## Open questions
+
+- Why replace Certain (cost, experience, data in a separate system, payments)? What is not working with today's class registration, if anything?
+- Does the mobile app use the same Experience Cloud registration? Which app is it?
+- Do they want one platform for classes and conferences, or only a Certain replacement?
 
 - Volumes, conference must-haves (CME, badges, sponsors), payment approach, Certain renewal date.
 - Who built the home-built class solution (in house or a partner).

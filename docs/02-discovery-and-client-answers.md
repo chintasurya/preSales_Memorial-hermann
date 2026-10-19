@@ -37,3 +37,16 @@
 6. Which 2 to 3 service lines should the first engagement journeys target?
 
 Parked for now at the user's request: consent, HIPAA and budget questions.
+
+## Current state observed (2026-10-19)
+
+- Class listings live on Sitecore (memorialhermann.org/patients-visitors/classes-events). "Register Now"
+  redirects to a separate site to finish registration; Surya confirms this is a Salesforce Experience
+  Cloud site (the home-built solution Kevin mentioned).
+- Payment is taken at sign-up; listings warn that confirmation can take up to 24 hours and not to
+  resubmit payment after an error. Some classes are phone-only (713-222-CARE).
+- Surya reports a mobile app where people can register for events (not yet verified which app; the
+  site also lists an "Everyday Well" app).
+- Implication: class registration already exists on Salesforce. The only tool Kevin said they want to
+  replace is Certain (conferences). Reframe: replace Certain with Salesforce conference and session
+  management and unify classes on the same model, enhancing (not rebuilding) the existing class flow.
