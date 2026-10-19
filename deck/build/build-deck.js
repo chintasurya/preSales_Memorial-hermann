@@ -159,11 +159,11 @@ s.addText('Business opportunity', { placeholder: 'title' });
 s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: L, y: 1.6, w: CW, h: 1.22, rectRadius: 0.12, fill: { color: '000000' }, line: { color: 'FF0068', width: 2 }, objectName: 'primary-ask' });
 txt(s, 'PRIMARY ASK', { x: L + 0.3, y: 1.74, w: 4, h: 0.24, fontSize: 10, bold: true, color: 'FF0068', charSpacing: 3 });
 txt(s, 'Replace Certain with conference and session management on Salesforce', { x: L + 0.3, y: 2.0, w: 8.2, h: 0.7, fontSize: 21, bold: true, color: 'FFFFFF', valign: 'middle' });
-txt(s, '1 to 2 multi-day conferences a year, with session management, for providers, caregivers and consumers. Authorize.net today.', { x: 9.1, y: 1.78, w: 3.45, h: 0.95, fontSize: 11.5, color: 'D9D9D9', valign: 'middle' });
+txt(s, '1 to 2 multi-day conferences a year, with session management, for providers, caregivers and consumers. Authorize.net today, moving to Chase.', { x: 9.1, y: 1.78, w: 3.45, h: 0.95, fontSize: 11.5, color: 'D9D9D9', valign: 'middle' });
 txt(s, 'Also: run classes on the same platform, building on today\u2019s registration instead of rebuilding it.', { x: L, y: 3.08, w: CW, h: 0.32, fontSize: 14, bold: true, color: C.text1 });
 ruledTable(s, L, 3.5, [2.45, 5.2, 4.58], [
   ['Area', 'Today', 'Where we take it'],
-  ['Conferences', 'Certain for multi-day events; Authorize.net payments', 'Replace with Salesforce conference and session management'],
+  ['Conferences', 'Certain for multi-day events; Authorize.net payments', 'Replace with Salesforce conference and session management, paid through Chase'],
   ['Classes and events', 'Sitecore listings open a home-built Experience Cloud site; Chase payments; confirmation up to 24 hours', 'Keep the site and improve it on one shared event model'],
   ['Mobile app', 'People can already register for events in the app', 'Keep it, connected to the same event model'],
   ['Platform', 'Health Cloud and Marketing Cloud; Epic not needed', 'Built on what Memorial Hermann already owns'],
@@ -174,9 +174,9 @@ s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Introduction' });
 s.addText('Build on what already works', { placeholder: 'title' });
 txt(s, 'No rebuild of today’s class registration. Replace only Certain, then bring every event onto one platform.', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
 const kir = [
-  ['KEEP', '00A9C0', '007C8C', ['Sitecore class listings', 'Experience Cloud registration site', 'Mobile app registration', 'Health Cloud and Marketing Cloud']],
+  ['KEEP', '00A9C0', '007C8C', ['Sitecore class listings', 'Experience Cloud registration site', 'Mobile app registration', 'Chase payments, now for conferences too', 'Health Cloud and Marketing Cloud']],
   ['IMPROVE', 'D9B200', '7A6100', ['Instant confirmation (today up to 24 hours)', 'Safe payment retries', 'Live seats and waitlists', 'Check-in and reporting', 'One shared event model']],
-  ['REPLACE', 'FF0068', 'C8005A', ['Certain, with Salesforce conference and session management', 'My Agenda portal on Experience Cloud', 'Authorize.net checkout inside the platform', 'Certain data migrated']],
+  ['REPLACE', 'FF0068', 'C8005A', ['Certain, with Salesforce conference and session management', 'My Agenda portal on Experience Cloud', 'Authorize.net, by reusing today’s Chase checkout', 'Certain data migrated']],
   ['ADD LATER', '8C8C96', '4D4D4D', ['Patient engagement initiatives (PEIs)', 'App adoption campaigns', 'AI agents in a controlled harness']],
 ];
 kir.forEach(([k, line, ink, items], i) => {
@@ -211,7 +211,7 @@ cols.forEach(([h, sub, items], i) => {
   if (i < 2) s.addShape(pres.shapes.LINE, { x: x + 3.62, y: 2.08, w: 0.45, h: 0, line: { color: C.background1, width: 1.25, endArrowType: 'triangle' } });
 });
 txt(s, 'CONNECTS TO', { x: L, y: 5.62, w: 2, h: 0.3, fontSize: 10, bold: true, color: C.background1, charSpacing: 3 });
-const conns = ['Chase', 'Authorize.net', 'Sitecore', 'Zoom / Teams', 'Health Cloud', 'Marketing Cloud'];
+const conns = ['Chase', 'Experience Cloud', 'Sitecore', 'Zoom / Teams', 'Health Cloud', 'Marketing Cloud'];
 conns.forEach((c, i) => pill(s, c, L + i * 2.05, 6.0, 1.85, [C.accent1, C.accent2, C.accent3][i % 3], C.background1));
 txt(s, 'Reliable, secure and scalable by design: waiting room and seat holds for busy events, encrypted data, full audit trail.', { x: L, y: 6.55, w: CW, h: 0.3, fontSize: 11, italic: true, color: C.accent1 });
 
@@ -287,7 +287,7 @@ ruledTable(s, L, 1.7, [2.2, 5.0, 5.03], [
   ['', 'Phase 1  ·  Conferences (replaces Certain)', 'Phase 2  ·  Classes on the shared platform'],
   ['Scope', 'Multi-day agenda, tracks, rooms and session capacity', 'Today’s classes moved onto the shared event model'],
   ['Registration', 'Providers and guests, ticket types, My Agenda on Experience Cloud', 'Existing Experience Cloud site and app, now with instant confirmation'],
-  ['Payments', 'Authorize.net checkout, or one consolidated gateway', 'Chase checkout with safe payment retries and refunds'],
+  ['Payments', 'Chase checkout, reusing today’s class integration', 'Chase checkout with safe payment retries and refunds'],
   ['Engagement', 'Speaker and attendee communications, badges, CME [to confirm]', 'Reminder journeys, waitlists, QR check-in'],
   ['Data', 'Certain history migrated', 'Class history kept; registrants matched to Health Cloud'],
   ['Built in', 'Load test before each conference opens', 'Live seats, waitlists, encryption, monitoring'],
@@ -413,7 +413,7 @@ const steps = [
   'Confirm what is not working today and why Certain is being replaced',
   'Confirm yearly volumes: classes, conferences, registrants',
   'Confirm conference must-haves: sessions, badges, sponsors, CME',
-  'Agree the payment approach: keep both gateways or consolidate',
+  'Confirm Chase for conference payments with finance',
   'Share the Certain renewal date so Phase 2 lands before it',
   'Pick 2 to 3 service lines for the first engagement journeys',
 ];

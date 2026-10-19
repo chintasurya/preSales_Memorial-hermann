@@ -14,7 +14,7 @@ const SPRINTS = [
   ['design', 'Review today\u2019s Experience Cloud site, app and Certain; design', 'Design sign-off'],
   ['p1', 'Shared event model; sessions, tracks, rooms, speakers', 'Conference model demo'],
   ['p1', 'My Agenda portal on Experience Cloud; ticket types', 'Attendee portal demo'],
-  ['p1', 'Authorize.net checkout; badges; CME [to confirm]', 'Pay and badge end to end'],
+  ['p1', 'Chase checkout for conferences; badges; CME [to confirm]', 'Pay and badge end to end'],
   ['p1', 'Certain data migration, load test, user testing', 'Testing sign-off'],
   ['p1', 'Conference go-live and hypercare', 'Phase 1 live, Certain retired'],
   ['p2', 'Move classes onto the shared model; keep current pages', 'Classes on shared model'],

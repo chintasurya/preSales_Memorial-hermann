@@ -32,7 +32,7 @@
 1. About how many classes, conferences and registrants per year?
 2. What is not working with the home-built solution and with Certain?
 3. Conference must-haves: session selection, speakers, badges, sponsors, CME credits?
-4. Keep both Chase and Authorize.net, or consolidate on one gateway?
+4. Can conference payments move to Chase (our recommendation), retiring Authorize.net with Certain?
 5. When does the Certain contract renew? Can we review the current setup with Lucky Rai's team?
 6. Which 2 to 3 service lines should the first engagement journeys target?
 

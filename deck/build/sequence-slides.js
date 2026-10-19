@@ -94,7 +94,7 @@ function addOverallDesignSlide(h, sectionTitle) {
       { id: 'p', label: 'Registrant' },
       { id: 'ch', label: 'Website or app', color: ACCENT.cyan },
       { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
-      { id: 'pay', label: 'Payment gateway' },
+      { id: 'pay', label: 'Chase payment page' },
       { id: 'sf', label: 'Salesforce event app', color: ACCENT.cyan },
       { id: 'mc', label: 'Marketing Cloud', color: ACCENT.magenta },
       { id: 'st', label: 'Event staff' },
@@ -169,14 +169,14 @@ function addPaymentSequenceSlide(h, sectionTitle) {
     parts: [
       { id: 'p', label: 'Registrant (web or app)' },
       { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
-      { id: 'gw', label: 'Gateway hosted page', color: ACCENT.magenta },
+      { id: 'gw', label: 'Chase hosted page', color: ACCENT.magenta },
       { id: 'sf', label: 'Salesforce', color: ACCENT.cyan },
     ],
     rows: [
       { from: 'reg', to: 'gw', label: 'Create payment session (amount, reference)' },
       { from: 'gw', to: 'reg', dashed: true, label: 'Session token' },
       { from: 'reg', to: 'p', dashed: true, label: 'Open hosted payment page' },
-      { from: 'p', to: 'gw', label: 'Card details typed into the gateway page' },
+      { from: 'p', to: 'gw', label: 'Card details typed into the Chase page' },
       { from: 'gw', to: 'p', dashed: true, label: 'Approved' },
       { from: 'gw', to: 'reg', label: 'Signed webhook (token, last 4, approval code)' },
       { type: 'self', at: 'reg', label: 'Verify signature, idempotency check' },
@@ -185,8 +185,8 @@ function addPaymentSequenceSlide(h, sectionTitle) {
     ],
   });
   const px = 9.2, pw = 3.58;
-  txt(s, 'Gateway choice', { x: px, y: 1.7, w: pw, h: 0.35, fontSize: 16, bold: true, color: C.text1 });
-  [['OPTION A', 'Keep both', 'Chase for classes, Authorize.net for conferences', '007C8C'], ['OPTION B', 'Consolidate on one', 'One gateway for every event; simpler reconciliation', 'C8005A']].forEach(([k, t, d, col], i) => {
+  txt(s, 'One gateway: Chase', { x: px, y: 1.7, w: pw, h: 0.35, fontSize: 16, bold: true, color: C.text1 });
+  [['RECOMMENDED', 'Chase for every event', 'Reuse today’s class integration; Authorize.net retires with Certain', '007C8C'], ['TO CONFIRM', 'Finance sign-off', 'Chase merchant setup for conference fees [to confirm]', 'C8005A']].forEach(([k, t, d, col], i) => {
     const y = 2.15 + i * 1.32;
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: px, y, w: pw, h: 1.18, rectRadius: 0.1, line: { color: 'D0D0D6', width: 1 }, fill: { color: 'F2F2F2' } });
     txt(s, k, { x: px + 0.2, y: y + 0.12, w: pw - 0.4, h: 0.22, fontSize: 9, bold: true, color: col, charSpacing: 2 });
@@ -199,7 +199,7 @@ function addPaymentSequenceSlide(h, sectionTitle) {
     { text: 'Automatic receipts', options: { bullet: true, breakLine: true } },
     { text: 'Daily settlement reconciliation', options: { bullet: true } },
   ], { isTextBox: true, x: px, y: 5.35, w: pw, h: 1.2, fontSize: 12, color: MUTED_LIGHT, margin: 0, valign: 'top', paraSpaceAfter: 4 });
-  s.addNotes('The card is typed directly into the gateway page; the registration service only creates the session and receives a signed webhook with a token. Salesforce stores the token reference, last 4 digits, amount and status. Gateway choice is Memorial Hermann finance\'s decision; both are supported.');
+  s.addNotes('The card is typed directly into the gateway page; the registration service only creates the session and receives a signed webhook with a token. Salesforce stores the token reference, last 4 digits, amount and status. Chase already takes class payments in Salesforce, so conferences reuse that integration and Authorize.net retires with Certain: one gateway, one reconciliation. Merchant setup for conference fees to confirm with Memorial Hermann finance.');
   return s;
 }
 

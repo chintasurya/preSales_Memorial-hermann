@@ -27,7 +27,7 @@ Channels (Sitecore website, existing My Memorial Hermann app, QR / deep links) g
 (CDN cache, WAF, bot defense, rate limits, virtual waiting room for hot events only), then a
 registration service (API, atomic seat inventory with 10-minute holds, durable queue with retries and
 dead letter) into Salesforce Health Cloud (event app, person accounts, Platform Events), then
-Marketing Cloud. Payments on the gateway's hosted page (Chase or Authorize.net). Recommended host
+Marketing Cloud. Payments on Chase's hosted page (Chase for every event; Authorize.net retires with Certain). Recommended host
 for the registration layer: Heroku with Redis; MuleSoft or AWS as alternatives. Reason: a surge of
 writes to one event record causes Salesforce record locking and API limit problems; the buffer turns
 a spike into a steady stream while Salesforce stays the system of record.

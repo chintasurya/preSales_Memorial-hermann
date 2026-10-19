@@ -13,7 +13,7 @@ phases: Phase 1 replaces the home-built class registration; Phase 2 replaces Cer
 | Register | Public listings, sign-up, checkout, conference "My Agenda" | Sitecore pages calling Salesforce APIs (matches today), or a Salesforce Experience Cloud site (better for the attendee portal; needs licenses) |
 | Manage | Events, series, sessions, speakers, capacity, waitlists, refunds, check-in, reporting | Custom Salesforce Lightning app on the Health Cloud org |
 | Engage | Confirmations, reminders, calendar invites, virtual links, patient engagement initiatives | Marketing Cloud journeys |
-| Pay | Hosted checkout; card data never stored in Salesforce | Chase and/or Authorize.net |
+| Pay | Hosted checkout; card data never stored in Salesforce | Chase (already used for classes) |
 | Connect | Virtual sessions, website, records | Zoom / Teams, Sitecore, Health Cloud person accounts |
 
 ## Data model (custom objects)
@@ -37,12 +37,14 @@ separately.
 
 ## Payments
 
-Flow: registrant checks out, hosted payment page, Chase or Authorize.net, payment record in
+Flow: registrant checks out, Chase hosted payment page, payment record in
 Salesforce, receipts / refunds / daily reconciliation. Supports free, paid, discount codes and
 per-couple pricing, full and partial refunds.
 
-- Option A: keep both gateways (Chase for classes, Authorize.net for conferences).
-- Option B: consolidate on one gateway. Decision for MH finance.
+- **Decision (Surya, 2026-10-19): one gateway, Chase.** Chase already takes class payments in
+  Salesforce, so conferences reuse that integration and Authorize.net retires with Certain. One
+  gateway, one reconciliation.
+- [to confirm] with MH finance: Chase merchant setup for conference fees (same or separate merchant ID).
 
 ## Phases and timeline (indicative)
 

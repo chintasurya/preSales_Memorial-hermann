@@ -83,7 +83,7 @@ async function addSecuritySlide(h, sectionTitle) {
   txt(s, 'Card data never enters our systems', { x: L, y: 1.6, w: 5.8, h: 0.4, fontSize: 17, bold: true, color: C.text1 });
   const flow = [
     ['FaUser', 'Registrant', 'Website, Experience Cloud or app'],
-    ['FaCreditCard', 'Gateway hosted page', 'Card typed here (Chase or Authorize.net)'],
+    ['FaCreditCard', 'Chase hosted page', 'Card typed here (Chase, as for classes today)'],
     ['FaKey', 'Signed webhook', 'Token, last 4 digits, approval code'],
     ['FaDatabase', 'Salesforce payment record', 'Token reference, last 4, amount, status'],
   ];

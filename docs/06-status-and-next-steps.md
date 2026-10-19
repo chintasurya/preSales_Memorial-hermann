@@ -16,6 +16,7 @@
 | 2026-10-19 | Surya found class registration already runs on Experience Cloud and a mobile app registers for events. Alignment review: core ask is replacing Certain (conferences with sessions) on one Salesforce platform; deck currently over-scopes by rebuilding class registration. Reframe proposed, pending Surya's decision. |
 | 2026-10-19 | Surya asked to rework the deck. Preview built (`deck/previews/reworked-deck-preview.pptx`, 29 slides): new "Build on what already works" (keep / improve / replace) slide, conferences as Phase 1 (replaces Certain), classes improved in Phase 2, 10 sprints / 20 weeks, investment resized proportionally to $580,000 standard and $290,000 partner. **Main deck unchanged until Surya approves.** |
 | 2026-10-19 | Surya approved the rework (slide 3 renamed "Business opportunity") and shared draft 2 with his edits. Edits carried into the build; "What each phase delivers" restored and placed after the timeline. Main deck now 30 slides. Logo slot added on the title slide; Memorial Hermann logo file still needed (cannot be downloaded from this environment). |
+| 2026-10-19 | Surya: conferences use Chase, already integrated for classes, instead of Authorize.net (which goes with Certain). Deck updated (slides 3, 4, 6, 7, 13, 14, 17, 18, 29 and the conference mockup). Finance sign-off on Chase merchant setup for conference fees [to confirm]. |
 
 ## Manager direction (Sandeep)
 
