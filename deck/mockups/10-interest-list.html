@@ -1,0 +1,90 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Interest list and priority invitations - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:640px;font-family:Arial,"Liberation Sans",sans-serif;background:#e9ecef;color:#1d2733;position:relative}
+.wrap{display:flex;gap:22px;padding:16px 20px}
+.lbl{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:17px;font-weight:700}
+.n{width:30px;height:30px;border-radius:50%;background:#3b2a6b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.n.sf{background:#014486}
+.panel{background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.14);overflow:hidden}
+.bar{height:38px;background:#f1f3f5;border-bottom:1px solid #dde1e5;display:flex;align-items:center;padding:0 14px;font-size:12px;color:#5b6670}
+.ev{display:flex;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid #eceff2}
+.date{width:70px;height:70px;border-radius:10px;background:#f3f0fa;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+.date b{font-size:24px;color:#3b2a6b}.date span{font-size:11px;text-transform:uppercase;color:#5b6670;letter-spacing:1px}
+.ev h3{font-size:18px;margin-bottom:4px}.ev p{font-size:13px;color:#5b6670}
+.full{margin-left:auto;font-size:12px;font-weight:700;color:#b42318;background:#fdecea;padding:6px 10px;border-radius:12px}
+.form{padding:16px 20px}
+.form h4{font-size:17px;margin-bottom:4px}
+.form .sub{font-size:13px;color:#5b6670;margin-bottom:14px}
+.in{height:38px;border:1px solid #cfd5db;border-radius:7px;display:flex;align-items:center;padding:0 12px;font-size:13px;color:#3b4652;margin-bottom:9px}
+.two{display:flex;gap:9px}.two .in{flex:1}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 12px}
+.chip{font-size:12px;padding:6px 11px;border-radius:14px;border:1px solid #cfd5db;color:#3b4652}
+.chip.on{background:#3b2a6b;color:#fff;border-color:#3b2a6b}
+.cb{display:flex;gap:8px;font-size:12.5px;color:#3b4652;align-items:flex-start;margin-bottom:8px}
+.cb i{width:16px;height:16px;border-radius:3px;background:#3b2a6b;flex:none;margin-top:1px}
+.btn{height:44px;border-radius:8px;background:#3b2a6b;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:6px}
+.done{margin:4px 20px 18px;background:#e3f6ea;border-radius:10px;padding:12px 14px;font-size:13px;color:#1d4f2f}
+.done b{display:block;font-size:14px;margin-bottom:3px}
+/* Salesforce side */
+.sf{background:#f3f3f3}
+.g{height:44px;background:#fff;display:flex;align-items:center;padding:0 16px;gap:14px;border-bottom:1px solid #dddbda;font-size:13px;color:#3e3e3c}
+.g b{font-size:16px;color:#181818}
+.g .on{border-bottom:3px solid #0176d3;font-weight:700;color:#181818;height:44px;display:flex;align-items:center}
+.kpis{display:flex;gap:10px;padding:12px 14px}
+.kpi{flex:1;background:#fff;border:1px solid #dddbda;border-radius:6px;padding:10px 12px}
+.kpi span{font-size:12px;color:#706e6b}.kpi b{display:block;font-size:24px;margin-top:3px;color:#181818}
+.card{background:#fff;border:1px solid #dddbda;border-radius:6px;margin:0 14px 12px}
+.ch{padding:10px 14px;border-bottom:1px solid #dddbda;font-size:14px;font-weight:700;display:flex;justify-content:space-between;align-items:center;color:#181818}
+.ch span{font-weight:400;font-size:12px;color:#706e6b}
+table{width:100%;border-collapse:collapse;font-size:12.5px;color:#181818}
+th{text-align:left;background:#fafaf9;color:#444;padding:8px 12px;border-bottom:1px solid #dddbda}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0}
+.bars{display:inline-block;height:9px;border-radius:4px;background:#c8005a;vertical-align:middle;margin-right:6px}
+.pill{font-size:11px;padding:3px 8px;border-radius:10px;font-weight:700}
+.p1{background:#fdecea;color:#b42318}.p2{background:#e5f1fb;color:#014486}.p3{background:#e3f6ea;color:#2e844a}
+.act{display:flex;gap:12px;align-items:center;padding:12px 14px;font-size:13px;color:#3e3e3c}
+.sbtn{border-radius:4px;padding:9px 14px;font-size:13px;background:#0176d3;color:#fff;font-weight:700;white-space:nowrap}
+.steps{display:flex;gap:6px;padding:0 14px 12px}
+.st{flex:1;background:#fff;border:1px solid #dddbda;border-radius:6px;padding:9px 10px;font-size:12px;color:#3e3e3c}
+.st b{display:block;color:#014486;font-size:12px;margin-bottom:2px}
+.note{position:absolute;left:20px;bottom:8px;font-size:12px;color:#706e6b}
+</style></head><body>
+<div class="wrap">
+ <div style="width:560px;flex:none">
+  <div class="lbl"><div class="n">1</div>Registrant: fully booked, register interest</div>
+  <div class="panel">
+   <div class="bar">Website, registration site or app</div>
+   <div class="ev"><div class="date"><b>25</b><span>Jan</span></div><div><h3>Maternity Center Tour</h3><p>The Woodlands · Sun 2:00 PM</p></div><div class="full">Fully booked</div></div>
+   <div class="form"><h4>Get first access to the next date</h4><div class="sub">People on the interest list are invited before a new date opens to everyone.</div>
+    <div class="two"><div class="in">Jordan Rivera</div><div class="in">jordan@email.com</div></div>
+    <div class="in">(713) 555-0147 · text me</div>
+    <div style="font-size:12px;color:#5b6670;margin-bottom:6px">Preferred location and time</div>
+    <div class="chips"><div class="chip on">The Woodlands</div><div class="chip on">Katy</div><div class="chip">Memorial City</div><div class="chip on">Weekends</div><div class="chip">Evenings</div></div>
+    <div class="cb"><i></i>Email or text me when a new date opens. I can opt out at any time.</div>
+    <div class="btn">Notify me first</div></div>
+   <div class="done"><b>You're on the priority list</b>You will get a 48-hour head start [to confirm] to book the next date before it opens to the public.</div>
+  </div>
+ </div>
+ <div style="flex:1">
+  <div class="lbl"><div class="n sf">2</div>Organizer: see demand and invite interest first</div>
+  <div class="panel sf">
+   <div class="g"><b>Event Manager</b><span>Events</span><span>Sessions</span><span>Registrations</span><span class="on">Interest</span><span>Reports</span></div>
+   <div class="kpis"><div class="kpi"><span>People on interest lists</span><b>1,284</b></div><div class="kpi"><span>Fully booked this month</span><b>9</b></div><div class="kpi"><span>Invited, then booked</span><b>64%</b></div><div class="kpi"><span>Top demand</span><b style="font-size:17px;margin-top:8px">Childbirth classes</b></div></div>
+   <div class="card"><div class="ch">Demand beyond capacity<span>Last 90 days, sample data</span></div>
+    <table><tr><th>Class, event or session</th><th>Seats</th><th>Booked</th><th>Interested</th><th>Top preference</th><th>Status</th></tr>
+    <tr><td>Maternity Center Tour</td><td>20</td><td>20</td><td><span class="bars" style="width:120px"></span>186</td><td>The Woodlands, weekends</td><td><span class="pill p1">Full</span></td></tr>
+    <tr><td>Childbirth Preparation</td><td>30</td><td>30</td><td><span class="bars" style="width:96px"></span>142</td><td>Katy, Saturdays</td><td><span class="pill p1">Full</span></td></tr>
+    <tr><td>Living well after a heart attack (session)</td><td>60</td><td>60</td><td><span class="bars" style="width:52px"></span>77</td><td>Community track</td><td><span class="pill p1">Full</span></td></tr>
+    <tr><td>CPR and AED for Family and Friends</td><td>24</td><td>24</td><td><span class="bars" style="width:40px"></span>58</td><td>Online, evenings</td><td><span class="pill p2">New date drafted</span></td></tr>
+    <tr><td>Breastfeeding Basics</td><td>25</td><td>21</td><td><span class="bars" style="width:8px"></span>4</td><td>Memorial City</td><td><span class="pill p3">Open</span></td></tr>
+    </table></div>
+   <div class="card" style="margin-bottom:12px"><div class="ch">Maternity Center Tour: open a new date<span>186 interested</span></div>
+    <div class="act"><div style="flex:1">New date: Sun Feb 8, 2:00 PM · 20 seats · The Woodlands</div><div class="sbtn">Invite interest list first</div></div>
+    <div class="steps"><div class="st"><b>1 · Priority invite</b>Interest list gets email and text</div><div class="st"><b>2 · Head start</b>48 hours to book [to confirm]</div><div class="st"><b>3 · Public release</b>Remaining seats go on the website</div></div></div>
+  </div>
+ </div>
+</div>
+<div class="note">Concept mockup, sample data</div>
+</body></html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Staff conference and session setup - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:800px;font-family:Arial,"Liberation Sans",sans-serif;background:#f3f3f3;color:#181818;position:relative}
+.g{height:50px;background:#fff;display:flex;align-items:center;padding:0 18px;gap:16px;border-bottom:1px solid #dddbda}
+.waffle{width:22px;height:22px;background:radial-gradient(#706e6b 2px,transparent 2.5px) 0 0/7px 7px}
+.appname{font-size:18px;font-weight:700}
+.tabs{display:flex;gap:2px;margin-left:16px;height:50px}
+.tab{padding:0 15px;display:flex;align-items:center;font-size:14px;color:#3e3e3c}
+.tab.on{border-bottom:3px solid #0176d3;font-weight:700;color:#181818}
+.gsearch{margin-left:auto;width:320px;height:32px;border:1px solid #c9c9c9;border-radius:4px;font-size:13px;color:#706e6b;display:flex;align-items:center;padding:0 12px}
+.wrap{display:flex;gap:16px;padding:14px 18px}
+.lbl{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:17px;font-weight:700}
+.n{width:30px;height:30px;border-radius:50%;background:#014486;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.card{background:#fff;border:1px solid #dddbda;border-radius:6px}
+.mh{padding:14px 18px;border-bottom:1px solid #dddbda;font-size:17px;font-weight:700;text-align:center}
+.form{padding:14px 18px}
+.fl{font-size:12px;color:#3e3e3c;margin-bottom:4px}
+.fl i{color:#ba0517;font-style:normal}
+.in{height:34px;border:1px solid #c9c9c9;border-radius:4px;display:flex;align-items:center;padding:0 10px;font-size:13px;margin-bottom:11px;color:#181818}
+.in.dd:after{content:"\25BE";margin-left:auto;color:#706e6b}
+.radio{display:flex;gap:8px;margin-bottom:12px}
+.radio div{flex:1;height:36px;border:1px solid #c9c9c9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.radio .on{border:2px solid #0176d3;background:#eef4ff;font-weight:700;color:#014486}
+.two{display:flex;gap:10px}.two>div{flex:1}
+.sec{font-size:12px;font-weight:700;background:#f3f3f3;padding:6px 10px;border-radius:4px;margin:4px 0 10px;color:#3e3e3c}
+.tk{display:flex;justify-content:space-between;font-size:13px;padding:6px 10px;border:1px solid #ecebea;border-radius:4px;margin-bottom:6px}
+.foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 18px;border-top:1px solid #dddbda;background:#f3f3f3}
+.btn{border:1px solid #c9c9c9;border-radius:4px;padding:8px 14px;font-size:13px;color:#0176d3;background:#fff}
+.btn.pri{background:#0176d3;color:#fff;border-color:#0176d3}
+.hdr{padding:14px 18px;border-bottom:1px solid #dddbda}
+.hrow{display:flex;align-items:center;gap:12px}
+.icon{width:40px;height:40px;border-radius:6px;background:#c8005a;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+.title small{display:block;font-size:12px;color:#706e6b}
+.title b{font-size:20px}
+.btns{margin-left:auto;display:flex;gap:6px}
+.fields{display:flex;gap:34px;margin-top:12px;font-size:13px}
+.fields span{display:block;color:#706e6b;margin-bottom:3px}
+.path{display:flex;margin:12px 18px;gap:4px}
+.ps{flex:1;height:32px;background:#ecebea;color:#3e3e3c;font-size:12.5px;display:flex;align-items:center;justify-content:center;clip-path:polygon(0 0,95% 0,100% 50%,95% 100%,0 100%,5% 50%)}
+.ps.done{background:#2e844a;color:#fff}.ps.cur{background:#014486;color:#fff;font-weight:700}
+.ch{padding:10px 16px;border-top:1px solid #dddbda;border-bottom:1px solid #dddbda;font-size:14px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;background:#fafaf9;color:#444;padding:8px 12px;border-bottom:1px solid #dddbda}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0}
+.trk{font-size:11px;padding:2px 7px;border-radius:9px;font-weight:700}
+.t1{background:#fde6ef;color:#b0004f}.t2{background:#e5f1fb;color:#014486}.t3{background:#e3f6ea;color:#2e844a}
+.meter{width:70px;height:7px;background:#ecebea;border-radius:4px;display:inline-block;vertical-align:middle;margin-right:6px}
+.meter i{display:block;height:7px;border-radius:4px;background:#0176d3}
+.modal{position:absolute;right:30px;top:250px;width:470px;background:#fff;border-radius:8px;box-shadow:0 14px 50px rgba(0,0,0,.35);border:1px solid #c9c9c9}
+.dim{position:absolute;left:620px;right:18px;top:104px;bottom:32px;background:rgba(8,7,7,.28);border-radius:6px}
+.note{position:absolute;left:18px;bottom:8px;font-size:12px;color:#706e6b}
+</style></head><body>
+<div class="g"><div class="waffle"></div><div class="appname">Event Manager</div>
+ <div class="tabs"><div class="tab">Home</div><div class="tab on">Events</div><div class="tab">Sessions</div><div class="tab">Speakers</div><div class="tab">Registrations</div><div class="tab">Interest</div><div class="tab">Check-in</div><div class="tab">Reports</div></div>
+ <div class="gsearch">Search events, sessions, people...</div></div>
+<div class="wrap">
+ <div style="width:586px;flex:none">
+  <div class="lbl"><div class="n">1</div>Create the conference</div>
+  <div class="card">
+   <div class="mh">New Event</div>
+   <div class="form">
+    <div class="fl"><i>*</i> Event type</div>
+    <div class="radio"><div>Class</div><div>Event</div><div class="on">Conference</div></div>
+    <div class="fl"><i>*</i> Event name</div><div class="in">Heart and Vascular Symposium 2027</div>
+    <div class="two"><div><div class="fl"><i>*</i> Start</div><div class="in">Mar 12, 2027</div></div><div><div class="fl"><i>*</i> End</div><div class="in">Mar 13, 2027</div></div></div>
+    <div class="two"><div><div class="fl">Venue</div><div class="in dd">Texas Medical Center, Hall A-B</div></div><div><div class="fl">Service line</div><div class="in dd">Heart and Vascular</div></div></div>
+    <div class="two"><div><div class="fl">Registration opens</div><div class="in">Nov 1, 2026</div></div><div><div class="fl">Total capacity</div><div class="in">450</div></div></div>
+    <div class="sec">Ticket types</div>
+    <div class="tk"><span>Provider (physician, APP)</span><b>$295</b></div>
+    <div class="tk"><span>Nurse and allied health</span><b>$195</b></div>
+    <div class="tk"><span>Caregiver and community</span><b>$50</b></div>
+    <div class="two" style="margin-top:8px"><div><div class="fl">Payment</div><div class="in dd">Chase</div></div><div><div class="fl">Marketing journey</div><div class="in dd">Conference attendee</div></div></div>
+   </div>
+   <div class="foot"><div class="btn">Cancel</div><div class="btn pri">Save and add sessions</div></div>
+  </div>
+ </div>
+ <div style="flex:1">
+  <div class="lbl"><div class="n">2</div>Add sessions, speakers and rooms</div>
+  <div class="card" style="height:664px">
+   <div class="hdr"><div class="hrow"><div class="icon">CF</div><div class="title"><small>Conference</small><b>Heart and Vascular Symposium 2027</b></div><div class="btns"><div class="btn">Preview agenda</div><div class="btn pri">New Session</div></div></div>
+    <div class="fields"><div><span>Dates</span>Mar 12-13, 2027</div><div><span>Tracks</span>4</div><div><span>Registered</span>238 / 450</div><div><span>Payment</span>Chase</div></div></div>
+   <div class="path"><div class="ps done">Draft</div><div class="ps cur">Agenda build</div><div class="ps">Registration open</div><div class="ps">Live</div><div class="ps">Closed</div></div>
+   <div class="ch">Sessions (24)<span style="font-weight:400;color:#0176d3;font-size:12.5px">View all</span></div>
+   <table><tr><th>Session</th><th>Day / time</th><th>Room</th><th>Track</th><th>Seats</th></tr>
+   <tr><td>Advances in heart failure care</td><td>Fri 9:00</td><td>Hall A</td><td><span class="trk t1">Cardiology</span></td><td><span class="meter"><i style="width:82%"></i></span>164 / 200</td></tr>
+   <tr><td>Nursing in the cardiac ICU</td><td>Fri 9:00</td><td>Room 204</td><td><span class="trk t2">Nursing</span></td><td><span class="meter"><i style="width:55%"></i></span>44 / 80</td></tr>
+   <tr><td>Structural heart: case reviews</td><td>Fri 10:30</td><td>Hall B</td><td><span class="trk t1">Cardiology</span></td><td><span class="meter"><i style="width:95%"></i></span>114 / 120</td></tr>
+   <tr><td>Living well after a heart attack</td><td>Fri 10:30</td><td>Room 110</td><td><span class="trk t3">Community</span></td><td><span class="meter"><i style="width:100%"></i></span>60 / 60</td></tr>
+   <tr><td>Imaging in valve disease</td><td>Sat 9:00</td><td>Hall A</td><td><span class="trk t1">Cardiology</span></td><td><span class="meter"><i style="width:40%"></i></span>80 / 200</td></tr>
+   <tr><td>Cardiac rehab essentials</td><td>Sat 10:30</td><td>Room 204</td><td><span class="trk t2">Nursing</span></td><td><span class="meter"><i style="width:30%"></i></span>24 / 80</td></tr>
+   </table>
+   <div class="ch">Speakers (18)<span style="font-weight:400;color:#0176d3;font-size:12.5px">Invite speaker</span></div>
+   <table><tr><td>Dr. A. Patel (sample)</td><td>Cardiology</td><td>2 sessions</td><td>Confirmed</td></tr><tr><td>R. Chen, RN (sample)</td><td>Nursing</td><td>1 session</td><td>Invited</td></tr></table>
+  </div>
+ </div>
+</div>
+<div class="dim"></div>
+<div class="modal">
+ <div class="mh">New Session</div>
+ <div class="form">
+  <div class="fl"><i>*</i> Session title</div><div class="in">Heart failure: new therapies in practice</div>
+  <div class="two"><div><div class="fl"><i>*</i> Day</div><div class="in dd">Day 2 · Sat Mar 13</div></div><div><div class="fl"><i>*</i> Time</div><div class="in">1:30 PM - 2:45 PM</div></div></div>
+  <div class="two"><div><div class="fl">Track</div><div class="in dd">Cardiology</div></div><div><div class="fl">Room</div><div class="in dd">Hall A (200)</div></div></div>
+  <div class="two"><div><div class="fl">Speaker</div><div class="in dd">Dr. A. Patel (sample)</div></div><div><div class="fl">Seat limit</div><div class="in">200</div></div></div>
+  <div class="two"><div><div class="fl">Open to</div><div class="in dd">Providers, nurses</div></div><div><div class="fl">CME credits [to confirm]</div><div class="in">1.25</div></div></div>
+ </div>
+ <div class="foot"><div class="btn">Cancel</div><div class="btn">Save and new</div><div class="btn pri">Save</div></div>
+</div>
+<div class="note">Concept mockup, sample data</div>
+</body></html>

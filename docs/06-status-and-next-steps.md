@@ -17,6 +17,8 @@
 | 2026-10-19 | Surya asked to rework the deck. Preview built (`deck/previews/reworked-deck-preview.pptx`, 29 slides): new "Build on what already works" (keep / improve / replace) slide, conferences as Phase 1 (replaces Certain), classes improved in Phase 2, 10 sprints / 20 weeks, investment resized proportionally to $580,000 standard and $290,000 partner. **Main deck unchanged until Surya approves.** |
 | 2026-10-19 | Surya approved the rework (slide 3 renamed "Business opportunity") and shared draft 2 with his edits. Edits carried into the build; "What each phase delivers" restored and placed after the timeline. Main deck now 30 slides. Logo slot added on the title slide; Memorial Hermann logo file still needed (cannot be downloaded from this environment). |
 | 2026-10-19 | Surya: conferences use Chase, already integrated for classes, instead of Authorize.net (which goes with Certain). Deck updated (slides 3, 4, 6, 7, 13, 14, 17, 18, 29 and the conference mockup). Finance sign-off on Chase merchant setup for conference fees [to confirm]. |
+| 2026-10-20 | Current-state discovery call with the client today; question list in `09-current-state-discovery-questions.md` (top 12 plus 10 sections). Solution overview follows next week. |
+| 2026-10-20 | Surya asked for three new concept screen slides to replace the old screenshot slides (8-10): registrant booking (Sitecore listing, then session details, Chase payment, add to calendar), staff conference and session setup in Salesforce, and an interest list for fully booked events with organizer demand view. Also a dedicated Certain to Salesforce transition slide and a 6-week transition (weeks 7-12) in the timeline and sprint plan. Preview built (`deck/previews/screens-and-transition-preview.pptx`, 31 slides; mockups 07-10). **Main deck unchanged until Surya approves.** History window for migration left as a client question, not stated on the slide. |
 
 ## Manager direction (Sandeep)
 
@@ -38,9 +40,10 @@
 
 ## Next actions
 
-1. Add the Memorial Hermann logo file, then review the 30-slide deck with Sandeep.
-2. Ask Kevin for a walkthrough of the current solution with Lucky Rai's team.
-3. Return with a scoped plan, team and estimate.
+1. Run today's current-state call; record answers in `02-discovery-and-client-answers.md`.
+2. Surya to approve the screen and transition previews, then update the main deck.
+3. Add the Memorial Hermann logo file, then review the deck with Sandeep.
+4. Return next week with the solution overview, scoped plan, team and estimate.
 
 ## Artifacts
 

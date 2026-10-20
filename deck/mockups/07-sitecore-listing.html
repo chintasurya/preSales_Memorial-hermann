@@ -1,0 +1,73 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Classes, events and conferences listing - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1120px;height:1000px;font-family:Arial,"Liberation Sans",sans-serif;background:#e9ecef;color:#1d2733}
+.browser{margin:20px;height:960px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+.chrome{height:44px;background:#f1f3f5;display:flex;align-items:center;gap:9px;padding:0 16px;border-bottom:1px solid #dde1e5}
+.dot{width:12px;height:12px;border-radius:50%}
+.url{margin-left:14px;flex:1;height:28px;background:#fff;border:1px solid #d5dade;border-radius:14px;font-size:14px;color:#5b6670;display:flex;align-items:center;padding:0 14px}
+.top{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid #e5e8eb}
+.brand{font-size:21px;font-weight:700;color:#3b2a6b}
+.nav{display:flex;gap:22px;font-size:14px;color:#3b4652}
+.hero{padding:24px 32px 6px}
+.hero h1{font-size:30px}
+.hero p{font-size:15px;color:#5b6670;margin-top:6px}
+.search{margin-top:14px;display:flex;gap:10px}
+.search .box{flex:1;height:44px;border:1px solid #cfd5db;border-radius:8px;display:flex;align-items:center;padding:0 14px;color:#8a949e;font-size:15px}
+.search .btn{height:44px;padding:0 24px;background:#3b2a6b;color:#fff;border-radius:8px;display:flex;align-items:center;font-weight:700}
+.tabs{display:flex;gap:8px;padding:16px 32px 4px}
+.tab{padding:9px 18px;border-radius:20px;border:1px solid #cfd5db;font-size:14px;font-weight:700;color:#3b4652}
+.tab.on{background:#3b2a6b;border-color:#3b2a6b;color:#fff}
+.tab small{font-weight:400;opacity:.8;margin-left:4px}
+.list{padding:12px 32px;display:flex;flex-direction:column;gap:12px}
+.card{border:1px solid #e1e5e9;border-radius:12px;padding:16px 20px;display:flex;gap:18px;align-items:center}
+.card.hl{border:2px solid #3b2a6b;box-shadow:0 6px 22px rgba(59,42,107,.18)}
+.date{width:78px;height:78px;border-radius:10px;background:#f3f0fa;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+.date b{font-size:26px;color:#3b2a6b}
+.date span{font-size:12px;text-transform:uppercase;color:#5b6670;letter-spacing:1px}
+.info{flex:1}
+.kind{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.k-conf{color:#b0004f}.k-class{color:#0b5c80}.k-event{color:#1d6b3a}
+.info h3{font-size:18px;margin-bottom:5px}
+.meta{font-size:13px;color:#5b6670;display:flex;gap:14px;flex-wrap:wrap}
+.right{text-align:right;width:150px;flex:none}
+.price{font-size:16px;font-weight:700;margin-bottom:4px}
+.seats{font-size:12px;color:#1d6b3a;font-weight:700;margin-bottom:8px}
+.seats.low{color:#b54708}
+.book{display:inline-block;padding:10px 26px;background:#3b2a6b;color:#fff;border-radius:8px;font-weight:700;font-size:15px}
+.book.full{background:#fff;color:#3b2a6b;border:2px solid #3b2a6b;padding:8px 14px;font-size:14px}
+.cursor{position:absolute;width:0;height:0}
+.foot{padding:4px 32px;font-size:12px;color:#8a949e}
+</style></head><body>
+<div class="browser">
+ <div class="chrome"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><div class="url">memorialhermann.org/patients-visitors/classes-events</div></div>
+ <div class="top"><div class="brand">Memorial Hermann</div><div class="nav"><span>Find a Doctor</span><span>Locations</span><span>Services</span><span><b>Classes &amp; Events</b></span></div></div>
+ <div class="hero"><h1>Classes, events and conferences</h1><p>One place for every class, community event and professional conference.</p>
+  <div class="search"><div class="box">Search, e.g. "CPR", "childbirth", "cardiology symposium"</div><div class="box" style="flex:0 0 210px">Near: Houston, TX</div><div class="btn">Search</div></div></div>
+ <div class="tabs"><div class="tab on">All <small>48</small></div><div class="tab">Conferences <small>2</small></div><div class="tab">Classes <small>34</small></div><div class="tab">Events <small>12</small></div></div>
+ <div class="list">
+  <div class="card hl"><div class="date"><b>12</b><span>Mar</span></div>
+   <div class="info"><div class="kind k-conf">Conference · 2 days</div><h3>Heart and Vascular Symposium 2027</h3>
+    <div class="meta"><span>Texas Medical Center</span><span>24 sessions · 4 tracks</span><span>CME available [to confirm]</span></div></div>
+   <div class="right"><div class="price">From $295</div><div class="seats">212 places left</div><div class="book">Book</div></div></div>
+  <div class="card"><div class="date"><b>18</b><span>Jan</span></div>
+   <div class="info"><div class="kind k-class">Class · 3 hours</div><h3>Childbirth Preparation</h3>
+    <div class="meta"><span>Memorial Hermann Katy</span><span>Sat 9:00 AM</span><span>Per couple</span></div></div>
+   <div class="right"><div class="price">$80</div><div class="seats low">3 seats left</div><div class="book">Book</div></div></div>
+  <div class="card"><div class="date"><b>21</b><span>Jan</span></div>
+   <div class="info"><div class="kind k-class">Class · Online</div><h3>CPR and AED for Family and Friends</h3>
+    <div class="meta"><span>Virtual</span><span>Tue 6:30 PM</span></div></div>
+   <div class="right"><div class="price">$35</div><div class="seats">14 seats left</div><div class="book">Book</div></div></div>
+  <div class="card"><div class="date"><b>25</b><span>Jan</span></div>
+   <div class="info"><div class="kind k-event">Event · Tour</div><h3>Maternity Center Tour</h3>
+    <div class="meta"><span>Memorial Hermann The Woodlands</span><span>Sun 2:00 PM</span></div></div>
+   <div class="right"><div class="price">Free</div><div class="seats low">Fully booked</div><div class="book full">Notify me</div></div></div>
+  <div class="card"><div class="date"><b>08</b><span>Feb</span></div>
+   <div class="info"><div class="kind k-event">Event · Community</div><h3>Heart Health Screening Day</h3>
+    <div class="meta"><span>Memorial Hermann Sugar Land</span><span>Sat 8:00 AM</span></div></div>
+   <div class="right"><div class="price">Free</div><div class="seats">60 places left</div><div class="book">Book</div></div></div>
+ </div>
+ <div class="foot">Concept mockup, sample data. Listings stay on today's Sitecore site; data comes from Salesforce.</div>
+</div>
+</body></html>

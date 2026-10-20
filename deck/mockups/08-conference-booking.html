@@ -1,0 +1,102 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Conference booking steps - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1320px;height:840px;font-family:Arial,"Liberation Sans",sans-serif;background:#e9ecef;color:#1d2733}
+.row{display:flex;gap:30px;padding:20px 20px;align-items:flex-start}
+.col{width:400px;flex:none}
+.step{display:flex;align-items:center;gap:10px;margin-bottom:12px;height:40px}
+.num{width:34px;height:34px;border-radius:50%;background:#3b2a6b;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:17px}
+.step b{font-size:19px}
+.panel{background:#fff;border-radius:14px;height:740px;overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.16);position:relative}
+.bar{height:40px;background:#f1f3f5;border-bottom:1px solid #dde1e5;display:flex;align-items:center;padding:0 14px;font-size:12px;color:#5b6670}
+.ph{padding:16px 20px 12px;border-bottom:1px solid #eceff2}
+.ph small{font-size:11px;font-weight:700;letter-spacing:1.5px;color:#b0004f;text-transform:uppercase}
+.ph h2{font-size:19px;margin-top:4px}
+.ph p{font-size:13px;color:#5b6670;margin-top:4px}
+.days{display:flex;gap:6px;padding:12px 20px 4px}
+.day{flex:1;text-align:center;padding:8px 0;border-radius:8px;border:1px solid #cfd5db;font-size:13px;font-weight:700;color:#3b4652}
+.day.on{background:#3b2a6b;color:#fff;border-color:#3b2a6b}
+.slot{font-size:11px;font-weight:700;color:#8a949e;letter-spacing:1px;padding:12px 20px 6px}
+.sess{margin:0 20px 8px;border:1px solid #e1e5e9;border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start}
+.sess.sel{border:2px solid #3b2a6b;background:#f7f5fc}
+.sess.dis{opacity:.55}
+.ck{width:18px;height:18px;border-radius:4px;border:2px solid #9aa4ad;flex:none;margin-top:2px}
+.sel .ck{background:#3b2a6b;border-color:#3b2a6b}
+.sess h4{font-size:14px;margin-bottom:3px}
+.sess .m{font-size:12px;color:#5b6670}
+.trk{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:9px;margin-top:5px;margin-right:4px}
+.t1{background:#fde6ef;color:#b0004f}.t2{background:#e2f3fb;color:#0b5c80}.t3{background:#e3f6ea;color:#1d6b3a}
+.left{font-size:11px;color:#b54708;font-weight:700}
+.btnrow{position:absolute;left:20px;right:20px;bottom:18px}
+.btn{height:48px;border-radius:8px;background:#3b2a6b;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+.btn.ghost{background:#fff;color:#3b2a6b;border:2px solid #3b2a6b;margin-top:10px}
+.sum{margin:14px 20px;border:1px solid #e1e5e9;border-radius:10px;padding:12px 14px;font-size:13px}
+.sum .l{display:flex;justify-content:space-between;margin-bottom:7px;color:#3b4652}
+.sum .t{display:flex;justify-content:space-between;font-weight:700;font-size:16px;border-top:1px solid #e1e5e9;padding-top:9px;margin-top:4px}
+.chase{margin:6px 20px;border:2px dashed #0b5c80;border-radius:12px;padding:14px}
+.chase .h{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#0b5c80;font-weight:700;margin-bottom:12px}
+.lock{font-size:11px;background:#e2f3fb;padding:3px 8px;border-radius:9px}
+.f{height:40px;border:1px solid #cfd5db;border-radius:7px;margin-bottom:9px;display:flex;align-items:center;padding:0 12px;font-size:13px;color:#8a949e}
+.two{display:flex;gap:9px}.two .f{flex:1}
+.hold{margin:10px 20px;background:#fff7e6;border:1px solid #f3d38a;border-radius:8px;padding:9px 12px;font-size:12px;color:#7a5200}
+.ok{margin:16px auto 6px;width:64px;height:64px;border-radius:50%;background:#e3f6ea;display:flex;align-items:center;justify-content:center;font-size:34px;color:#1d6b3a;font-weight:700}
+.center{text-align:center;padding:0 24px}
+.center h2{font-size:21px}
+.center p{font-size:13px;color:#5b6670;margin-top:6px}
+.qr{width:110px;height:110px;margin:12px auto 4px;background:
+ linear-gradient(90deg,#1d2733 10px,transparent 10px) 0 0/20px 20px,
+ linear-gradient(#1d2733 10px,transparent 10px) 0 0/20px 20px;border:8px solid #fff;outline:2px solid #1d2733;opacity:.85}
+.agenda{margin:12px 20px;border:1px solid #e1e5e9;border-radius:10px;padding:10px 12px;font-size:12.5px}
+.agenda .a{display:flex;gap:10px;padding:5px 0;border-bottom:1px dotted #d5dade}
+.agenda .a:last-child{border:none}
+.agenda .a b{width:70px;flex:none;color:#3b2a6b}
+.cal{display:flex;gap:8px;margin:12px 20px 0}
+.cal div{flex:1;height:40px;border:1px solid #cfd5db;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#3b4652}
+.arrow{position:absolute;top:400px;width:30px;text-align:center;font-size:30px;color:#3b2a6b;font-weight:700}
+</style></head><body>
+<div class="row">
+ <div class="col">
+  <div class="step"><div class="num">1</div><b>Session details</b></div>
+  <div class="panel">
+   <div class="bar">Registration · Experience Cloud site</div>
+   <div class="ph"><small>Conference · 12-13 Mar 2027</small><h2>Heart and Vascular Symposium</h2><p>Choose your sessions. Seats are held while you pay.</p></div>
+   <div class="days"><div class="day on">Day 1 · Fri</div><div class="day">Day 2 · Sat</div></div>
+   <div class="slot">9:00 AM - 10:15 AM</div>
+   <div class="sess sel"><div class="ck"></div><div><h4>Advances in heart failure care</h4><div class="m">Hall A · Dr. A. Patel (sample)</div><span class="trk t1">Cardiology</span><span class="trk t3">CME 1.25</span></div></div>
+   <div class="sess"><div class="ck"></div><div><h4>Nursing in the cardiac ICU</h4><div class="m">Room 204 · R. Chen, RN (sample)</div><span class="trk t2">Nursing</span></div></div>
+   <div class="slot">10:30 AM - 11:45 AM</div>
+   <div class="sess sel"><div class="ck"></div><div><h4>Structural heart: case reviews</h4><div class="m">Hall B · Dr. M. Lopez (sample)</div><span class="trk t1">Cardiology</span><span class="trk t3">CME 1.25</span><div class="left">6 seats left</div></div></div>
+   <div class="sess dis"><div class="ck"></div><div><h4>Living well after a heart attack</h4><div class="m">Room 110 · Community track</div><div class="left">Full · join waitlist</div></div></div>
+   <div class="btnrow"><div class="btn">Continue · 2 sessions selected</div></div>
+  </div>
+ </div>
+ <div class="col">
+  <div class="step"><div class="num">2</div><b>Pay securely</b></div>
+  <div class="panel">
+   <div class="bar">Registration · Experience Cloud site</div>
+   <div class="ph"><small>Checkout</small><h2>Review and pay</h2></div>
+   <div class="sum"><div class="l"><span>Provider registration (2 days)</span><span>$295.00</span></div><div class="l"><span>2 sessions, Day 1</span><span>Included</span></div><div class="l"><span>Lunch both days</span><span>Included</span></div><div class="t"><span>Total</span><span>$295.00</span></div></div>
+   <div class="hold">Your seats are held for 10:00 minutes.</div>
+   <div class="chase"><div class="h"><span>CHASE HOSTED PAYMENT PAGE</span><span class="lock">Secure</span></div>
+    <div class="f">Name on card</div><div class="f">Card number</div><div class="two"><div class="f">MM / YY</div><div class="f">CVV</div></div><div class="f">Billing ZIP</div></div>
+   <div class="center" style="margin-top:6px"><p>Card details go straight to Chase. Memorial Hermann and Salesforce never store them.</p></div>
+   <div class="btnrow"><div class="btn">Pay $295.00</div></div>
+  </div>
+ </div>
+ <div class="col">
+  <div class="step"><div class="num">3</div><b>Booked · add to calendar</b></div>
+  <div class="panel">
+   <div class="bar">Registration · Experience Cloud site</div>
+   <div class="ok">&#10003;</div>
+   <div class="center"><h2>You're registered</h2><p>Confirmation sent to your email right away. Show this code at check-in.</p></div>
+   <div class="qr"></div>
+   <div class="agenda"><div class="a"><b>Fri 9:00</b><span>Advances in heart failure care · Hall A</span></div><div class="a"><b>Fri 10:30</b><span>Structural heart: case reviews · Hall B</span></div><div class="a"><b>Sat</b><span>Choose Day 2 sessions any time in My Agenda</span></div></div>
+   <div class="cal"><div>+ Outlook</div><div>+ Google</div><div>+ Apple</div></div>
+   <div class="btnrow"><div class="btn">View My Agenda</div><div class="btn ghost">Open in the Memorial Hermann app</div></div>
+  </div>
+ </div>
+</div>
+<div class="arrow" style="left:420px">&#8250;</div>
+<div class="arrow" style="left:850px">&#8250;</div>
+</body></html>

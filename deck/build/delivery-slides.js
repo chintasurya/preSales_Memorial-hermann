@@ -9,14 +9,15 @@ const PHASES = {
   p1: { name: 'Phase 1 \u00B7 Conferences', line: 'FF0068', ink: 'C8005A' },
   p2: { name: 'Phase 2 \u00B7 Classes', line: 'D9B200', ink: '7A6100' },
 };
+const TRANSITION = { name: 'Certain transition', color: '45289F' };
 
 const SPRINTS = [
   ['design', 'Review today\u2019s Experience Cloud site, app and Certain; design', 'Design sign-off'],
   ['p1', 'Shared event model; sessions, tracks, rooms, speakers', 'Conference model demo'],
   ['p1', 'My Agenda portal on Experience Cloud; ticket types', 'Attendee portal demo'],
   ['p1', 'Chase checkout for conferences; badges; CME [to confirm]', 'Pay and badge end to end'],
-  ['p1', 'Certain data migration, load test, user testing', 'Testing sign-off'],
-  ['p1', 'Conference go-live and hypercare', 'Phase 1 live, Certain retired'],
+  ['p1', 'Load test, user testing, conference reporting', 'Testing sign-off'],
+  ['p1', 'Final data load, conference go-live, hypercare', 'Phase 1 live, Certain retired'],
   ['p2', 'Move classes onto the shared model; keep current pages', 'Classes on shared model'],
   ['p2', 'Instant confirmation, safe payment retries, waitlists', 'Registration improvements demo'],
   ['p2', 'QR check-in, reporting, app connected, PEI journeys', 'User testing starts'],
@@ -39,25 +40,36 @@ function addSprintPlanSlide(h, sectionTitle) {
     txt(s, p.name, { x: lx + 0.42, y: 1.84, w, h: 0.28, fontSize: 11, bold: true, color: p.ink, valign: 'middle' });
     lx += 0.42 + w + 0.35;
   }
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: lx, y: 1.9, w: 0.32, h: 0.16, rectRadius: 0.08, fill: { color: TRANSITION.color }, line: { color: TRANSITION.color } });
+  txt(s, TRANSITION.name, { x: lx + 0.42, y: 1.84, w: 1.7, h: 0.28, fontSize: 11, bold: true, color: TRANSITION.color, valign: 'middle' });
   s.addShape(pres.shapes.DIAMOND, { x: R - 1.95, y: 1.89, w: 0.18, h: 0.18, fill: { color: INK }, line: { color: INK } });
   txt(s, 'Sprint-end milestone', { x: R - 1.7, y: 1.84, w: 1.7, h: 0.28, fontSize: 11, color: MUTED, valign: 'middle' });
 
   const perRow = Math.ceil(SPRINTS.length / 2);
-  const gap = 0.14, cw = (CW - (perRow - 1) * gap) / perRow, ch = 2.08;
+  const gap = 0.14, cw = (CW - (perRow - 1) * gap) / perRow, ch = 1.85, rowGap = 0.5;
   SPRINTS.forEach(([ph, scope, milestone], i) => {
     const row = Math.floor(i / perRow), col = i % perRow;
-    const x = L + col * (cw + gap), y = 2.3 + row * (ch + 0.16);
+    const x = L + col * (cw + gap), y = 2.3 + row * (ch + rowGap);
     const p = PHASES[ph], live = GO_LIVE.has(i);
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w: cw, h: ch, rectRadius: 0.1, fill: { color: live ? INK : CARD }, line: { color: p.line, width: 1.75 }, objectName: `sprint-${i + 1}` });
     const ink = live ? 'FFFFFF' : INK, muted = live ? 'D9D9D9' : MUTED;
     txt(s, `SPRINT ${i + 1}`, { x: x + 0.15, y: y + 0.13, w: cw - 0.3, h: 0.24, fontSize: 11, bold: true, color: live ? p.line : p.ink, charSpacing: 2 });
     txt(s, `Weeks ${2 * i + 1}-${2 * i + 2}`, { x: x + 0.15, y: y + 0.38, w: cw - 0.3, h: 0.22, fontSize: 10, color: muted });
     txt(s, scope, { x: x + 0.15, y: y + 0.66, w: cw - 0.3, h: 0.66, fontSize: 11, color: ink });
-    s.addShape(pres.shapes.LINE, { x: x + 0.15, y: y + 1.4, w: cw - 0.3, h: 0, line: { color: live ? '555555' : CARD_LINE, width: 0.75 } });
-    s.addShape(pres.shapes.DIAMOND, { x: x + 0.15, y: y + 1.55, w: 0.17, h: 0.17, fill: { color: live ? p.line : INK }, line: { color: live ? p.line : INK } });
-    txt(s, milestone, { x: x + 0.42, y: y + 1.48, w: cw - 0.55, h: 0.5, fontSize: 10.5, bold: true, color: ink });
+    s.addShape(pres.shapes.LINE, { x: x + 0.15, y: y + 1.3, w: cw - 0.3, h: 0, line: { color: live ? '555555' : CARD_LINE, width: 0.75 } });
+    s.addShape(pres.shapes.DIAMOND, { x: x + 0.15, y: y + 1.45, w: 0.17, h: 0.17, fill: { color: live ? p.line : INK }, line: { color: live ? p.line : INK } });
+    txt(s, milestone, { x: x + 0.42, y: y + 1.38, w: cw - 0.55, h: 0.42, fontSize: 10.5, bold: true, color: ink });
   });
-  s.addNotes('Two-week sprints, each closing with a demo and a milestone Memorial Hermann signs off. Sprint 1 assesses today’s Experience Cloud site, app and Certain. Sprints 2 to 6 deliver conference and session management (live at week 12, Certain retired). Sprints 7 to 10 move classes onto the same platform and improve them (live at week 20). Sprint scope is refined after the current-state walkthrough.');
+  // Certain transition band under sprints 4-6 (weeks 7-12)
+  const band = (from, to, label) => {
+    const row = Math.floor(from / perRow), x = L + (from % perRow) * (cw + gap), w = (to - from + 1) * cw + (to - from) * gap;
+    const y = 2.3 + row * (ch + rowGap) + ch + 0.08;
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h: 0.3, rectRadius: 0.06, fill: { color: TRANSITION.color }, line: { color: TRANSITION.color }, objectName: `transition-band-${from + 1}` });
+    txt(s, label, { x: x + 0.12, y, w: w - 0.24, h: 0.3, fontSize: 10, bold: true, color: 'FFFFFF', valign: 'middle' });
+  };
+  band(3, 4, 'CERTAIN TRANSITION  \u00B7  Weeks 7-10: export, map, trial loads');
+  band(5, 5, 'Weeks 11-12: cutover');
+  s.addNotes('Two-week sprints, each closing with a demo and a milestone Memorial Hermann signs off. Sprint 1 assesses today’s Experience Cloud site, app and Certain. Sprints 2 to 6 deliver conference and session management (live at week 12, Certain retired), with the six-week Certain to Salesforce data transition running in weeks 7 to 12. Sprints 7 to 10 move classes onto the same platform and improve them (live at week 20). Sprint scope is refined after the current-state walkthrough.');
   return s;
 }
 
