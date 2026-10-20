@@ -32,5 +32,6 @@ read the relevant files here first and build on them instead of starting over.
 - Class registration already exists (Sitecore listings open a home-built Experience Cloud site; a mobile app also registers). Build on it; never propose rebuilding it or a new mobile app.
 - The primary ask is replacing Certain (conferences with session management). Lead with it.
 - Payments: Chase for every event (reuse the class integration); Authorize.net retires with Certain.
+- Certain migration: 6-week transition in weeks 7-12, cutover between conferences, Authorize.net kept only for past refunds; history window is a client question.
 - Client logo goes at `deck/assets/client/memorial-hermann-logo.png`; the build adds it to the title slide when present.
 - Screens in the deck are concept mockups (`deck/mockups/*.html`), labelled as such.

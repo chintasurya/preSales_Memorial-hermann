@@ -244,7 +244,7 @@ const lineY = 3.95;
 s.addShape(pres.shapes.LINE, { x: 0.68, y: lineY, w: W - 1.36, h: 0, line: { color: C.background1, width: 3 } });
 [0.55, W - 0.81].forEach(x => s.addShape(pres.shapes.OVAL, { x, y: lineY - 0.13, w: 0.26, h: 0.26, fill: { color: C.background1 }, line: { color: C.background1 } }));
 const blocks = [
-  { x: 1.15, up: false, w: 3.3, h: 'Weeks 1-2  ·  Assess and design', b: 'Review today’s Experience Cloud site, the app and Certain; shared event model; payment decision' },
+  { x: 1.15, up: false, w: 3.3, h: 'Weeks 1-2  ·  Assess and design', b: 'Review today’s Experience Cloud site, the app, Certain and a sample of its data; shared event model' },
   { x: 3.85, up: true, w: 3.3, h: 'Weeks 3-12  ·  Phase 1 live', b: 'Conferences: sessions, speakers, My Agenda, badges. Certain data moved and Certain retired' },
   { x: 6.95, up: false, w: 3.3, h: 'Weeks 13-20  ·  Phase 2 live', b: 'Classes on the shared model: instant confirmation, waitlists, check-in, reporting' },
   { x: 9.7, up: true, w: 2.9, h: 'Week 21+  ·  Grow', b: 'Patient engagement initiatives, app adoption, AI agents in a controlled harness' },
@@ -260,8 +260,8 @@ blocks.forEach(({ x, up, w, h, b }) => {
 const wk = n => 3.85 + (n - 3) * 0.31;
 s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: wk(7), y: lineY - 0.09, w: wk(13) - wk(7) - 0.12, h: 0.18, rectRadius: 0.09, fill: { color: C.accent3 }, line: { color: C.background1, width: 1 }, objectName: 'certain-transition' });
 txt(s, 'Certain transition', { x: wk(7), y: lineY + 0.25, w: 1.85, h: 0.32, fontSize: 13, bold: true, color: C.background1 });
-txt(s, 'Weeks 7-12: export, map, two trial loads, cutover', { x: wk(7), y: lineY + 0.65, w: 1.75, h: 0.7, fontSize: 11, color: C.background1 });
-s.addNotes('Phase 1 replaces Certain around week 12, with a six-week Certain to Salesforce data transition in weeks 7 to 12; time it to land before the Certain renewal. Phase 2 brings classes onto the same platform and improves them by week 20, without rebuilding the registration site. Engagement work can start once classes are on the shared model.');
+txt(s, 'Weeks 7-12: export, map, two trial loads, cutover between conferences', { x: wk(7), y: lineY + 0.65, w: 1.75, h: 0.9, fontSize: 11, color: C.background1 });
+s.addNotes('Phase 1 replaces Certain around week 12, with a six-week Certain to Salesforce data transition in weeks 7 to 12; cutover is planned between conferences and before the Certain renewal. Phase 2 brings classes onto the same platform and improves them by week 20, without rebuilding the registration site. Engagement work can start once classes are on the shared model.');
 
 // What each phase delivers (restored by Surya in draft 2)
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Delivery plan' });
@@ -272,7 +272,7 @@ ruledTable(s, L, 1.7, [2.2, 5.0, 5.03], [
   ['Registration', 'Providers and guests, ticket types, My Agenda on Experience Cloud', 'Existing Experience Cloud site and app, now with instant confirmation'],
   ['Payments', 'Chase checkout, reusing today’s class integration', 'Chase checkout with safe payment retries and refunds'],
   ['Engagement', 'Speaker and attendee communications, badges, CME [to confirm]', 'Reminder journeys, waitlists, QR check-in'],
-  ['Data', 'Certain data moved in a six-week transition (weeks 7-12)', 'Class history kept; registrants matched to Health Cloud'],
+  ['Data', 'Certain data moved in a six-week transition (weeks 7-12)', 'Class data stays in place: the shared model extends today’s objects'],
   ['Built in', 'Load test before each conference opens', 'Live seats, waitlists, encryption, monitoring'],
   ['Retires', 'Certain', 'Nothing retired; today’s registration is improved'],
 ], { rowH: 0.6, bodySize: 13 });
@@ -400,7 +400,7 @@ const steps = [
   'Confirm yearly volumes: classes, conferences, registrants',
   'Confirm conference must-haves: sessions, badges, sponsors, CME',
   'Confirm Chase for conference payments with finance',
-  'Share the Certain renewal date so Phase 2 lands before it',
+  'Share the Certain renewal date and conference calendar to set the cutover',
   'Pick 2 to 3 service lines for the first engagement journeys',
 ];
 steps.forEach((t, i) => {

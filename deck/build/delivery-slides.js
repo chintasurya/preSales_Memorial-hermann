@@ -12,13 +12,13 @@ const PHASES = {
 const TRANSITION = { name: 'Certain transition', color: '45289F' };
 
 const SPRINTS = [
-  ['design', 'Review today\u2019s Experience Cloud site, app and Certain; design', 'Design sign-off'],
+  ['design', 'Review today\u2019s site, app and a Certain data sample; design', 'Design sign-off'],
   ['p1', 'Shared event model; sessions, tracks, rooms, speakers', 'Conference model demo'],
   ['p1', 'My Agenda portal on Experience Cloud; ticket types', 'Attendee portal demo'],
   ['p1', 'Chase checkout for conferences; badges; CME [to confirm]', 'Pay and badge end to end'],
   ['p1', 'Load test, user testing, conference reporting', 'Testing sign-off'],
   ['p1', 'Final data load, conference go-live, hypercare', 'Phase 1 live, Certain retired'],
-  ['p2', 'Move classes onto the shared model; keep current pages', 'Classes on shared model'],
+  ['p2', 'Classes onto the shared model by extending today\u2019s objects', 'Classes on shared model'],
   ['p2', 'Instant confirmation, safe payment retries, waitlists', 'Registration improvements demo'],
   ['p2', 'QR check-in, reporting, app connected, PEI journeys', 'User testing starts'],
   ['p2', 'User testing, go-live, knowledge transfer', 'Phase 2 live'],

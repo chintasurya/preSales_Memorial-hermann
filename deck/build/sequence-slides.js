@@ -186,7 +186,7 @@ function addPaymentSequenceSlide(h, sectionTitle) {
   });
   const px = 9.2, pw = 3.58;
   txt(s, 'One gateway: Chase', { x: px, y: 1.7, w: pw, h: 0.35, fontSize: 16, bold: true, color: C.text1 });
-  [['RECOMMENDED', 'Chase for every event', 'Reuse today’s class integration; Authorize.net retires with Certain', '007C8C'], ['TO CONFIRM', 'Finance sign-off', 'Chase merchant setup for conference fees [to confirm]', 'C8005A']].forEach(([k, t, d, col], i) => {
+  [['RECOMMENDED', 'Chase for every event', 'Reuse today’s class integration; Authorize.net kept only for past refunds', '007C8C'], ['TO CONFIRM', 'Finance sign-off', 'Chase merchant setup for conference fees [to confirm]', 'C8005A']].forEach(([k, t, d, col], i) => {
     const y = 2.15 + i * 1.32;
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: px, y, w: pw, h: 1.18, rectRadius: 0.1, line: { color: 'D0D0D6', width: 1 }, fill: { color: 'F2F2F2' } });
     txt(s, k, { x: px + 0.2, y: y + 0.12, w: pw - 0.4, h: 0.22, fontSize: 9, bold: true, color: col, charSpacing: 2 });
@@ -199,7 +199,7 @@ function addPaymentSequenceSlide(h, sectionTitle) {
     { text: 'Automatic receipts', options: { bullet: true, breakLine: true } },
     { text: 'Daily settlement reconciliation', options: { bullet: true } },
   ], { isTextBox: true, x: px, y: 5.35, w: pw, h: 1.2, fontSize: 12, color: MUTED_LIGHT, margin: 0, valign: 'top', paraSpaceAfter: 4 });
-  s.addNotes('The card is typed directly into the gateway page; the registration service only creates the session and receives a signed webhook with a token. Salesforce stores the token reference, last 4 digits, amount and status. Chase already takes class payments in Salesforce, so conferences reuse that integration and Authorize.net retires with Certain: one gateway, one reconciliation. Merchant setup for conference fees to confirm with Memorial Hermann finance.');
+  s.addNotes('The card is typed directly into the gateway page; the registration service only creates the session and receives a signed webhook with a token. Salesforce stores the token reference, last 4 digits, amount and status. Chase already takes class payments in Salesforce, so conferences reuse that integration: one gateway, one reconciliation. Authorize.net stays open only until refunds on payments taken before cutover are done, because its card tokens cannot move to Chase. Merchant setup for conference fees to confirm with Memorial Hermann finance.');
   return s;
 }
 

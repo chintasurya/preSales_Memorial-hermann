@@ -18,7 +18,8 @@
 | 2026-10-19 | Surya approved the rework (slide 3 renamed "Business opportunity") and shared draft 2 with his edits. Edits carried into the build; "What each phase delivers" restored and placed after the timeline. Main deck now 30 slides. Logo slot added on the title slide; Memorial Hermann logo file still needed (cannot be downloaded from this environment). |
 | 2026-10-19 | Surya: conferences use Chase, already integrated for classes, instead of Authorize.net (which goes with Certain). Deck updated (slides 3, 4, 6, 7, 13, 14, 17, 18, 29 and the conference mockup). Finance sign-off on Chase merchant setup for conference fees [to confirm]. |
 | 2026-10-20 | Current-state discovery call with the client today; question list in `09-current-state-discovery-questions.md` (top 12 plus 10 sections). Solution overview follows next week. |
-| 2026-10-20 | Surya asked for three new concept screen slides to replace the old screenshot slides (8-10): registrant booking (Sitecore listing, then session details, Chase payment, add to calendar), staff conference and session setup in Salesforce, and an interest list for fully booked events with organizer demand view. Also a dedicated Certain to Salesforce transition slide and a 6-week transition (weeks 7-12) in the timeline and sprint plan. Preview built (`deck/previews/screens-and-transition-preview.pptx`, 31 slides; mockups 07-10). **Main deck unchanged until Surya approves.** History window for migration left as a client question, not stated on the slide. |
+| 2026-10-20 | Surya asked for three new concept screen slides to replace the old screenshot slides (8-10): registrant booking (Sitecore listing, then session details, Chase payment, add to calendar), staff conference and session setup in Salesforce, and an interest list for fully booked events with organizer demand view. Also a dedicated Certain to Salesforce transition slide and a 6-week transition (weeks 7-12) in the timeline and sprint plan. Preview built (`deck/previews/screens-and-transition-preview.pptx`, 31 slides; mockups 07-10). History window for migration left as a client question, not stated on the slide. |
+| 2026-10-20 | Surya asked whether migration impacts the solution, then asked to update the deck. Main deck rebuilt (31 slides) with the new screens (8-10), Certain transition (18), timeline and sprint plan, plus migration impacts: Certain data sample in Sprint 1, Certain IDs kept, emails and journeys off during loads, cutover between conferences, Authorize.net open only for past refunds, Phase 2 extends today's class objects. Old screenshot slides (conference agenda, class and app, staff console) removed. |
 
 ## Manager direction (Sandeep)
 
@@ -41,7 +42,6 @@
 ## Next actions
 
 1. Run today's current-state call; record answers in `02-discovery-and-client-answers.md`.
-2. Surya to approve the screen and transition previews, then update the main deck.
 3. Add the Memorial Hermann logo file, then review the deck with Sandeep.
 4. Return next week with the solution overview, scoped plan, team and estimate.
 
