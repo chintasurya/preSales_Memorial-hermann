@@ -94,9 +94,9 @@ function addOverallDesignSlide(h, sectionTitle) {
       { id: 'p', label: 'Registrant' },
       { id: 'ch', label: 'Website or app', color: ACCENT.cyan },
       { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
-      { id: 'pay', label: 'Chase payment page' },
+      { id: 'pay', label: 'Payment gateway (Chase)' },
       { id: 'sf', label: 'Salesforce event app', color: ACCENT.cyan },
-      { id: 'mc', label: 'Marketing Cloud', color: ACCENT.magenta },
+      { id: 'mc', label: 'Salesforce email', color: ACCENT.magenta },
       { id: 'st', label: 'Event staff' },
     ],
     rows: [
@@ -104,8 +104,8 @@ function addOverallDesignSlide(h, sectionTitle) {
       { from: 'ch', to: 'reg', label: 'Register and hold a seat' },
       { from: 'reg', to: 'p', dashed: true, label: 'Seat held for 10 minutes' },
       { phase: 'Pay', from: 'p', to: 'pay', label: 'Pay on hosted page (free events skip this)' },
-      { from: 'pay', to: 'reg', dashed: true, label: 'Signed webhook, token only' },
-      { from: 'reg', to: 'sf', label: 'Create registration (queued, idempotent)' },
+      { from: 'pay', to: 'reg', dashed: true, label: 'Signed webhook (payment confirmation)' },
+      { from: 'reg', to: 'sf', label: 'Create registration (queued, duplicate-safe)' },
       { phase: 'Confirm', from: 'sf', to: 'mc', label: 'Registration event' },
       { from: 'mc', to: 'p', dashed: true, label: 'Confirmation, QR code, calendar invite, reminders' },
       { phase: 'Attend', from: 'st', to: 'sf', label: 'QR check-in at the door' },
@@ -116,7 +116,7 @@ function addOverallDesignSlide(h, sectionTitle) {
     ],
   });
   txt(s, 'Classes and conferences share this flow; conferences add sessions, speakers and My Agenda.', { x: L, y: 6.68, w: 9, h: 0.26, fontSize: 10.5, italic: true, color: MUTED_LIGHT });
-  s.addNotes('This is the whole solution on one page, in the order a registrant experiences it. Register: website or the existing My Memorial Hermann app, with a seat held while they pay. Pay: the gateway hosts the card page; we receive only a token. Confirm: Salesforce records the registration and Marketing Cloud sends confirmation and reminders. Attend: QR check-in. Engage: patient engagement initiatives. Grow: staff see demand and add sessions. It replaces Certain and builds on today’s Experience Cloud site and app.');
+  s.addNotes('This is the whole solution on one page, in the order a registrant experiences it. Register: website or the existing My Memorial Hermann app, with a seat held while they pay. Pay: the gateway hosts the card page; we receive only a token. Confirm: Salesforce records the registration and sends the confirmation, QR code, calendar invite and reminders from Salesforce email, so confirmation is instant. Attend: QR check-in. Engage: patient engagement initiatives. Grow: staff see demand and add sessions. It replaces Certain and builds on today’s Experience Cloud site and app.');
   return s;
 }
 
