@@ -11,24 +11,29 @@ const PHASES = {
 };
 const TRANSITION = { name: 'Certain transition', color: '45289F' };
 
+// [phase, card label, weeks, scope, milestone]
 const SPRINTS = [
-  ['design', 'Review today\u2019s site, app and a Certain data sample; design', 'Design sign-off'],
-  ['p1', 'Shared event model; sessions, tracks, rooms, speakers', 'Conference model demo'],
-  ['p1', 'My Agenda portal on Experience Cloud; ticket types', 'Attendee portal demo'],
-  ['p1', 'Chase checkout for conferences; badges; CME [to confirm]', 'Pay and badge end to end'],
-  ['p1', 'Load test, user testing, conference reporting', 'Testing sign-off'],
-  ['p1', 'Final data load, conference go-live, hypercare', 'Phase 1 live, Certain retired'],
-  ['p2', 'Classes onto the shared model by extending today\u2019s objects', 'Classes on shared model'],
-  ['p2', 'Instant confirmation, safe payment retries, waitlists', 'Registration improvements demo'],
-  ['p2', 'QR check-in, reporting, app connected, PEI journeys', 'User testing starts'],
-  ['p2', 'User testing, go-live, knowledge transfer', 'Phase 2 live'],
+  ['design', 'SPRINT 1', 'Weeks 1-2', 'Review today’s site, app and a Certain data sample; design', 'Design sign-off'],
+  ['p1', 'SPRINT 2', 'Weeks 3-4', 'Shared event model; sessions, tracks, rooms', 'Conference model demo'],
+  ['p1', 'SPRINT 3', 'Weeks 5-6', 'Speakers, ticket types and pricing', 'Speakers and tickets demo'],
+  ['p1', 'SPRINT 4', 'Weeks 7-8', 'My Agenda portal on Experience Cloud', 'Attendee portal demo'],
+  ['p1', 'SPRINT 5', 'Weeks 9-10', 'Session picks, seat limits, holds, waitlists', 'Session booking demo'],
+  ['p1', 'SPRINT 6', 'Weeks 11-12', 'Chase checkout for conferences; refunds', 'Pay end to end'],
+  ['p1', 'SPRINT 7', 'Weeks 13-14', 'Badges, check-in, CME [to confirm]; journeys', 'Check-in demo'],
+  ['p1', 'SPRINT 8', 'Weeks 15-16', 'Conference reporting; load test', 'Load test passed'],
+  ['p1', 'SPRINT 9', 'Weeks 17-18', 'User testing and fixes', 'Testing sign-off'],
+  ['p1', 'SPRINT 10', 'Weeks 19-20', 'Final data load, go-live, hypercare', 'Phase 1 live, Certain retired'],
+  ['p2', 'SPRINT 11', 'Weeks 21-22', 'Classes onto the shared model; instant confirmation, waitlists', 'Classes on shared model'],
+  ['p2', 'SPRINT 12', 'Weeks 23-24', 'QR check-in, reporting, app connected; user testing', 'Testing sign-off'],
+  ['p2', 'GO-LIVE', 'Week 25', 'Classes go-live, hypercare, knowledge transfer', 'Phase 2 live'],
 ];
-const GO_LIVE = new Set([5, 9]);
+const GO_LIVE = new Set([9, 12]);
+const SPRINT_COUNT = SPRINTS.filter(r => r[1].startsWith('SPRINT')).length;
 
 function addSprintPlanSlide(h, sectionTitle) {
   const { pres, txt, L, R, CW } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
-  s.addText(`Delivery plan: ${SPRINTS.length} two-week sprints`, { placeholder: 'title' });
+  s.addText(`Delivery plan: ${SPRINT_COUNT} two-week sprints and a go-live week`, { placeholder: 'title' });
   txt(s, 'A working demo and a milestone sign-off with Memorial Hermann at the end of every sprint', { x: L, y: 1.42, w: 9.5, h: 0.32, fontSize: 14, color: MUTED });
 
   // legend
@@ -45,20 +50,20 @@ function addSprintPlanSlide(h, sectionTitle) {
   s.addShape(pres.shapes.DIAMOND, { x: R - 1.95, y: 1.89, w: 0.18, h: 0.18, fill: { color: INK }, line: { color: INK } });
   txt(s, 'Sprint-end milestone', { x: R - 1.7, y: 1.84, w: 1.7, h: 0.28, fontSize: 11, color: MUTED, valign: 'middle' });
 
-  const perRow = Math.ceil(SPRINTS.length / 2);
-  const gap = 0.14, cw = (CW - (perRow - 1) * gap) / perRow, ch = 1.85, rowGap = 0.5;
-  SPRINTS.forEach(([ph, scope, milestone], i) => {
+  const perRow = Math.ceil(SPRINTS.length / 2), small = perRow > 5;
+  const gap = small ? 0.1 : 0.14, cw = (CW - (perRow - 1) * gap) / perRow, ch = 1.85, rowGap = 0.5, pad = small ? 0.11 : 0.15;
+  SPRINTS.forEach(([ph, label, weeks, scope, milestone], i) => {
     const row = Math.floor(i / perRow), col = i % perRow;
     const x = L + col * (cw + gap), y = 2.3 + row * (ch + rowGap);
     const p = PHASES[ph], live = GO_LIVE.has(i);
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w: cw, h: ch, rectRadius: 0.1, fill: { color: live ? INK : CARD }, line: { color: p.line, width: 1.75 }, objectName: `sprint-${i + 1}` });
     const ink = live ? 'FFFFFF' : INK, muted = live ? 'D9D9D9' : MUTED;
-    txt(s, `SPRINT ${i + 1}`, { x: x + 0.15, y: y + 0.13, w: cw - 0.3, h: 0.24, fontSize: 11, bold: true, color: live ? p.line : p.ink, charSpacing: 2 });
-    txt(s, `Weeks ${2 * i + 1}-${2 * i + 2}`, { x: x + 0.15, y: y + 0.38, w: cw - 0.3, h: 0.22, fontSize: 10, color: muted });
-    txt(s, scope, { x: x + 0.15, y: y + 0.66, w: cw - 0.3, h: 0.66, fontSize: 11, color: ink });
-    s.addShape(pres.shapes.LINE, { x: x + 0.15, y: y + 1.3, w: cw - 0.3, h: 0, line: { color: live ? '555555' : CARD_LINE, width: 0.75 } });
-    s.addShape(pres.shapes.DIAMOND, { x: x + 0.15, y: y + 1.45, w: 0.17, h: 0.17, fill: { color: live ? p.line : INK }, line: { color: live ? p.line : INK } });
-    txt(s, milestone, { x: x + 0.42, y: y + 1.38, w: cw - 0.55, h: 0.42, fontSize: 10.5, bold: true, color: ink });
+    txt(s, label, { x: x + pad, y: y + 0.13, w: cw - 2 * pad, h: 0.24, fontSize: small ? 10 : 11, bold: true, color: live ? p.line : p.ink, charSpacing: 2 });
+    txt(s, weeks, { x: x + pad, y: y + 0.38, w: cw - 2 * pad, h: 0.22, fontSize: small ? 9.5 : 10, color: muted });
+    txt(s, scope, { x: x + pad, y: y + 0.64, w: cw - 2 * pad, h: 0.64, fontSize: small ? 10 : 11, color: ink });
+    s.addShape(pres.shapes.LINE, { x: x + pad, y: y + 1.3, w: cw - 2 * pad, h: 0, line: { color: live ? '555555' : CARD_LINE, width: 0.75 } });
+    s.addShape(pres.shapes.DIAMOND, { x: x + pad, y: y + 1.45, w: 0.15, h: 0.15, fill: { color: live ? p.line : INK }, line: { color: live ? p.line : INK } });
+    txt(s, milestone, { x: x + pad + 0.24, y: y + 1.36, w: cw - 2 * pad - 0.24, h: 0.44, fontSize: small ? 9.5 : 10.5, bold: true, color: ink });
   });
   // Certain transition band under sprints 4-6 (weeks 7-12)
   const band = (from, to, label) => {
@@ -67,16 +72,15 @@ function addSprintPlanSlide(h, sectionTitle) {
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h: 0.3, rectRadius: 0.06, fill: { color: TRANSITION.color }, line: { color: TRANSITION.color }, objectName: `transition-band-${from + 1}` });
     txt(s, label, { x: x + 0.12, y, w: w - 0.24, h: 0.3, fontSize: 10, bold: true, color: 'FFFFFF', valign: 'middle' });
   };
-  band(3, 4, 'CERTAIN TRANSITION  \u00B7  Weeks 7-10: export, map, trial loads');
-  band(5, 5, 'Weeks 11-12: cutover');
-  s.addNotes('Two-week sprints, each closing with a demo and a milestone Memorial Hermann signs off. Sprint 1 assesses today’s Experience Cloud site, app and Certain. Sprints 2 to 6 deliver conference and session management (live at week 12, Certain retired), with the six-week Certain to Salesforce data transition running in weeks 7 to 12. Sprints 7 to 10 move classes onto the same platform and improve them (live at week 20). Sprint scope is refined after the current-state walkthrough.');
+  band(7, 9, 'CERTAIN TRANSITION  \u00B7  Weeks 15-20: export, map, trial loads, cutover');
+  s.addNotes('Two-week sprints, each closing with a demo and a milestone Memorial Hermann signs off. Sprint 1 assesses today’s Experience Cloud site, app and Certain. Sprints 2 to 10 deliver conference and session management (live at week 20, Certain retired), with the six-week Certain to Salesforce data transition in weeks 15 to 20. Sprints 11 and 12 move classes onto the same platform and improve them, with go-live and handover in week 25. Sprint scope is refined after the current-state walkthrough.');
   return s;
 }
 
 async function addPodSlide(h, sectionTitle) {
   const { pres, txt, L } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
-  s.addText('A dedicated five-person delivery pod', { placeholder: 'title' });
+  s.addText('A dedicated four-person delivery pod', { placeholder: 'title' });
 
   // Pyramid: three stacked triangles give three bands; white rules separate them.
   const cx = 2.75, top = 1.85, base = 6.3, bw = 4.4, H = base - top;
@@ -95,14 +99,14 @@ async function addPodSlide(h, sectionTitle) {
     s.addShape(pres.shapes.LINE, { x: cx - w / 2 - 0.05, y, w: w + 0.1, h: 0, line: { color: 'FFFFFF', width: 5 } });
   });
   // headcounts inside the bands
-  const counts = [['1', top + H / 3 - 0.62, '000000'], ['1', top + H * 2 / 3 - 0.72, '000000'], ['3', base - 0.82, 'FFFFFF']];
+  const counts = [['1', top + H / 3 - 0.62, '000000'], ['1', top + H * 2 / 3 - 0.72, '000000'], ['2', base - 0.82, 'FFFFFF']];
   counts.forEach(([n, y, col]) => txt(s, n, { x: cx - 0.6, y, w: 1.2, h: 0.6, fontFace: h.LIGHT_FONT, fontSize: 32, color: col, align: 'center', valign: 'middle' }));
 
   // tier labels with leader lines
   const labels = [
-    { y: top + H / 6 + 0.12, k: 'LEAD', t: 'Scrum Master or Project Manager', d: 'Runs sprints, milestones, risks and status', col: '007C8C' },
+    { y: top + H / 6 + 0.12, k: 'LEAD', t: 'Project Manager', d: 'Runs sprints, milestones, risks and status', col: '007C8C' },
     { y: top + H / 2, k: 'QUALITY', t: 'QA Engineer', d: 'Test plans, automation, load tests, user testing support', col: '7A6100' },
-    { y: top + H * 5 / 6, k: 'BUILD', t: '2 Salesforce Developers + 1 Marketing Cloud Developer', d: 'Event app, registration, payments, integrations, journeys and PEIs', col: 'C8005A' },
+    { y: top + H * 5 / 6, k: 'BUILD', t: '2 Developers: Salesforce and Marketing Cloud', d: 'Event app, registration, payments, journeys, data migration', col: 'C8005A' },
   ];
   labels.forEach(({ y, k, t, d, col }) => {
     const edge = cx + widthAt(y) / 2;
@@ -134,8 +138,8 @@ async function addPodSlide(h, sectionTitle) {
   txt(s, 'FROM MEMORIAL HERMANN', { x: px, y: 5.42, w: pw - 0.2, h: 0.22, fontSize: 9, bold: true, color: '007C8C', charSpacing: 2 });
   txt(s, 'A product owner, plus an Epic and app contact from Lucky Rai’s team', { x: px, y: 5.66, w: pw - 0.25, h: 0.5, fontSize: 10.5, color: INK });
 
-  txt(s, '5 people  ·  10 sprints  ·  20 weeks', { x: L, y: 6.45, w: 4.4, h: 0.3, fontSize: 13, bold: true, color: INK, align: 'center' });
-  s.addNotes('A small, dedicated pod: one Scrum Master or Project Manager leading delivery, one QA engineer embedded in every sprint, and a build team of two Salesforce developers and one Marketing Cloud developer. Memorial Hermann provides a product owner and an Epic and app contact.');
+  txt(s, '4 people  ·  12 sprints  ·  25 weeks', { x: L, y: 6.45, w: 4.4, h: 0.3, fontSize: 13, bold: true, color: INK, align: 'center' });
+  s.addNotes('A small, dedicated pod: one Project Manager leading delivery and running the sprints, one QA engineer embedded in every sprint, and two developers covering Salesforce and Marketing Cloud. Memorial Hermann provides a product owner and an Epic and app contact.');
   return s;
 }
 
@@ -143,7 +147,7 @@ function addInvestmentSlide(h, sectionTitle) {
   const { pres, txt, L } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Investment', { placeholder: 'title' });
-  txt(s, 'Offshore delivery model: fixed scope, five-person pod, 10 sprints', { x: L, y: 1.42, w: 9, h: 0.32, fontSize: 14, color: MUTED });
+  txt(s, 'Offshore delivery model: fixed scope, four-person pod, 25 weeks', { x: L, y: 1.42, w: 9, h: 0.32, fontSize: 14, color: MUTED });
 
   // price card
   const cx = L, cy = 1.95, cw = 4.6, chh = 4.45;
@@ -162,10 +166,10 @@ function addInvestmentSlide(h, sectionTitle) {
   // breakdown table
   const tx = 5.55, colW = [3.6, 1.1, 1.3, 1.23];
   const rows = [
-    ['Phase', 'Sprints', 'Standard', 'Partner'],
-    ['Phase 1 · Conferences, replaces Certain', '1-6', '$350,000', '$175,000'],
-    ['Phase 2 · Classes on the shared platform', '7-10', '$230,000', '$115,000'],
-    ['Total program', '10 sprints', '$580,000', '$290,000'],
+    ['Phase', 'Weeks', 'Standard', 'Partner'],
+    ['Phase 1 · Conferences, replaces Certain', '1-20', '$464,000', '$232,000'],
+    ['Phase 2 · Classes on the shared platform', '21-25', '$116,000', '$58,000'],
+    ['Total program', '25', '$580,000', '$290,000'],
   ];
   const totalW = colW.reduce((a, b) => a + b, 0);
   let y = 1.95;
@@ -187,7 +191,7 @@ function addInvestmentSlide(h, sectionTitle) {
   const iy = 4.05;
   txt(s, 'Included', { x: tx, y: iy, w: 3.5, h: 0.3, fontSize: 14, bold: true, color: INK });
   s.addText([
-    { text: 'Dedicated five-person offshore pod for 20 weeks', options: { bullet: true, breakLine: true } },
+    { text: 'Dedicated four-person offshore pod for 25 weeks', options: { bullet: true, breakLine: true } },
     { text: 'Sprint demos and milestone sign-offs', options: { bullet: true, breakLine: true } },
     { text: 'Testing, load testing, go-live and hypercare', options: { bullet: true, breakLine: true } },
     { text: 'Documentation and handover to your admins', options: { bullet: true } },
@@ -199,7 +203,7 @@ function addInvestmentSlide(h, sectionTitle) {
     { text: 'Waiting room subscription', options: { bullet: true } },
   ], { isTextBox: true, x: tx + 3.85, y: iy + 0.36, w: 3.38, h: 1.6, fontSize: 11, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 4 });
   txt(s, 'Pricing is for an offshore delivery model. Indicative, billed at sprint milestones; final commercials in the statement of work.', { x: tx, y: 6.1, w: totalW, h: 0.3, fontSize: 10.5, italic: true, color: MUTED });
-  s.addNotes('Pricing is for an offshore delivery model. Standard program value is $580,000. As a strategic partner, Memorial Hermann receives a 50% partnership credit applied upfront, for an investment of $290,000. Billing follows sprint milestones. Licenses and third-party fees are outside this price.');
+  s.addNotes('Pricing is for an offshore delivery model. Standard program value is $580,000: a four-person pod for 25 weeks (Phase 1 weeks 1 to 20, $464,000; Phase 2 weeks 21 to 25, $116,000). As a strategic partner, Memorial Hermann receives a 50% partnership credit applied upfront, for an investment of $290,000. Billing follows sprint milestones. Licenses and third-party fees are outside this price.');
   return s;
 }
 

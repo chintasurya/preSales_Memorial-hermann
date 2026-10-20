@@ -73,14 +73,14 @@ function addCertainTransitionSlide(h, sectionTitle) {
   const { pres, txt, L, CW } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Certain to Salesforce transition', { placeholder: 'title' });
-  txt(s, 'Six weeks (weeks 7 to 12) alongside Phase 1, with cutover planned between conferences. Certain stays live until sign-off.', { x: L, y: 1.42, w: CW, h: 0.32, fontSize: 14, color: MUTED });
+  txt(s, 'Six weeks (weeks 15 to 20) at the end of Phase 1, with cutover planned between conferences. Certain stays live until sign-off.', { x: L, y: 1.42, w: CW, h: 0.32, fontSize: 14, color: MUTED });
 
   const steps = [
-    ['WEEKS 7-8', 'Inventory and export', 'Data sample reviewed in Sprint 1 to shape the model; full export; history window agreed'],
-    ['WEEKS 7-8', 'Map and cleanse', 'Certain IDs kept for traceability; duplicates removed; attendees matched'],
-    ['WEEKS 9-10', 'Trial loads', 'Two rehearsal loads with emails and journeys switched off; counts and totals reconciled'],
-    ['WEEKS 11-12', 'Cutover', 'Between conferences, so only history moves; final delta load; go live on Salesforce'],
-    ['WEEK 12+', 'Retire Certain', 'Read-only until the contract ends; Authorize.net open only for past refunds'],
+    ['WEEKS 15-16', 'Inventory and export', 'Data sample reviewed in Sprint 1 to shape the model; full export; history window agreed'],
+    ['WEEKS 15-16', 'Map and cleanse', 'Certain IDs kept for traceability; duplicates removed; attendees matched'],
+    ['WEEKS 17-18', 'Trial loads', 'Two rehearsal loads with emails and journeys switched off; counts and totals reconciled'],
+    ['WEEKS 19-20', 'Cutover', 'Between conferences, so only history moves; final delta load; go live on Salesforce'],
+    ['WEEK 20+', 'Retire Certain', 'Read-only until the contract ends; Authorize.net open only for past refunds'],
   ];
   const gap = 0.15, cw = (CW - 4 * gap) / 5, y0 = 1.9, ch = 1.55;
   steps.forEach(([wk, t, d], i) => {
@@ -121,10 +121,10 @@ function addCertainTransitionSlide(h, sectionTitle) {
     'Rollback ready: Certain stays live until sign-off',
     'No emails or journeys fire for migrated records',
     'Certain contract covers the read-only period [to confirm]',
-    'Delivered by the same five-person pod',
+    'Delivered by the same four-person pod',
   ].map((t, i, a) => ({ text: t, options: { bullet: true, breakLine: i < a.length - 1 } })), { isTextBox: true, x: bx + 0.2, y: ty + 0.55, w: bw - 0.4, h: 2.2, fontSize: 11.5, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 5 });
 
-  s.addNotes('Data migration from Certain is planned as its own six-week workstream inside Phase 1 (weeks 7 to 12), so conferences go live on Salesforce with their data. A sample Certain export is reviewed in Sprint 1 so the event model fits Certain’s data; every record keeps its Certain ID. Two trial loads run with emails and journeys switched off and are reconciled before the final load. Cutover is planned between conferences so only history moves; if a conference is open, its registrations move with new QR codes and a welcome email. How many years of history to bring across is Memorial Hermann’s decision, agreed in discovery; older history can stay in an archive export. Card data is never migrated: payment history moves as a summary marked Authorize.net, and Authorize.net stays open only until refunds on past payments are done. For Phase 2 the shared model extends today’s class objects where possible, so classes need no second migration.');
+  s.addNotes('Data migration from Certain is planned as its own six-week workstream at the end of Phase 1 (weeks 15 to 20), so conferences go live on Salesforce with their data. A sample Certain export is reviewed in Sprint 1 so the event model fits Certain’s data; every record keeps its Certain ID. Two trial loads run with emails and journeys switched off and are reconciled before the final load. Cutover is planned between conferences so only history moves; if a conference is open, its registrations move with new QR codes and a welcome email. How many years of history to bring across is Memorial Hermann’s decision, agreed in discovery; older history can stay in an archive export. Card data is never migrated: payment history moves as a summary marked Authorize.net, and Authorize.net stays open only until refunds on past payments are done. For Phase 2 the shared model extends today’s class objects where possible, so classes need no second migration.');
   return s;
 }
 

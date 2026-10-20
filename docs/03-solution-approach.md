@@ -60,7 +60,7 @@ renewal.
 
 ## Certain to Salesforce transition (data migration)
 
-Six-week workstream, weeks 7-12, alongside Phase 1, delivered by the same pod (no price change for a
+Six-week workstream, weeks 15-20, at the end of Phase 1, delivered by the same pod (no price change for a
 modest, clean history window). Impacts on the solution:
 
 - **Data model:** a sample Certain export is reviewed in Sprint 1 so the event model fits Certain's
@@ -105,7 +105,7 @@ platform inside your org, 7 Overall solution design, 8 Registrant view (Sitecore
 sessions, Chase payment, add to calendar), 9 Staff view (conference and session setup), 10 Fully
 booked: interest list and organizer demand view, 11 Every seat filled, 12 Seat flow detail,
 13 Payments and data security, 14 Payment sequence, 15 Section 02, 16 Timeline (with Certain
-transition weeks 7-12), 17 What each phase delivers, 18 Certain to Salesforce transition, 19 Sprint
+transition weeks 15-20), 17 What each phase delivers, 18 Certain to Salesforce transition, 19 Sprint
 plan, 20 Delivery pod, 21 Section 03, 22 Value statement, 23 PEI journey, 24 Campaigns, 25 Website
 registrants into the app, 26 KPIs, 27 Roadmap, 28 AI agents in a controlled harness, 29 Investment,
 30 Next steps, 31 Thank you.
@@ -117,13 +117,16 @@ speaker notes removed on agenda, slide 3, slide 6 and the AI harness slide. Sour
 
 ## Team and commercials (approved by Surya, 2026-10-15)
 
-- Pod of 5: 1 Scrum Master or Project Manager, 1 QA engineer, 2 Salesforce developers,
-  1 Marketing Cloud developer. Memorial Hermann provides a product owner and an Epic/app contact.
-- 10 two-week sprints (20 weeks), demo and milestone sign-off at every sprint end. Sprint 1 assess,
-  2-6 Phase 1 conferences (live week 12, Certain retired), 7-10 Phase 2 classes improved (live week 20).
+- Pod of 4 (Surya, 2026-10-20): 1 Project Manager (runs the sprints), 1 QA engineer, 2 developers
+  covering Salesforce and Marketing Cloud. Memorial Hermann provides a product owner and an Epic/app contact.
+- 25 weeks (Surya, 2026-10-20): 12 two-week sprints plus a go-live week. Sprint 1 assess (with a
+  Certain data sample); sprints 2-10 Phase 1 conferences (live week 20, Certain retired), with the
+  Certain transition in weeks 15-20; sprints 11-12 Phase 2 classes, go-live and handover week 25.
+  Grow from week 26. Demo and milestone sign-off at every sprint end.
 - Pricing is for an **offshore delivery model** (labelled on the Investment slide).
-- Standard program value $580,000 (struck through, placeholder scaled from the $700,000 example);
-  strategic partner investment $290,000 after a 50% partnership credit applied upfront. Phase 1
-  $350,000 to $175,000, Phase 2 $230,000 to $115,000. Indicative, billed at sprint milestones, final in the SOW.
+- Standard program value $580,000 (struck through, placeholder) unchanged: 4 people x 25 weeks is the
+  same 100 person-weeks as the earlier 5 x 20. Strategic partner investment $290,000 after a 50%
+  partnership credit applied upfront. Phase 1 (weeks 1-20) $464,000 to $232,000; Phase 2 (weeks 21-25)
+  $116,000 to $58,000. Indicative, billed at sprint milestones, final in the SOW.
 - Not included: Salesforce licenses (Shield, Agentforce, Data Cloud), gateway fees, waiting room
   subscription.

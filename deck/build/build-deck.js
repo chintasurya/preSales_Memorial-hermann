@@ -234,7 +234,7 @@ addPaymentSequenceSlide(h, 'The solution');
 pres.addSection({ title: 'Delivery plan' });
 s = pres.addSlide({ masterName: 'IG Section Gold', sectionTitle: 'Delivery plan' });
 s.addText('02  DELIVERY PLAN', { placeholder: 'title' });
-s.addText('Ten sprints: conferences live at week 12, classes improved by week 20', { placeholder: 'body' });
+s.addText('Twelve sprints: conferences live at week 20, classes improved by week 25', { placeholder: 'body' });
 
 // 11. Timeline (template timeline style)
 s = pres.addSlide({ masterName: 'IG Spectrum', sectionTitle: 'Delivery plan' });
@@ -245,9 +245,9 @@ s.addShape(pres.shapes.LINE, { x: 0.68, y: lineY, w: W - 1.36, h: 0, line: { col
 [0.55, W - 0.81].forEach(x => s.addShape(pres.shapes.OVAL, { x, y: lineY - 0.13, w: 0.26, h: 0.26, fill: { color: C.background1 }, line: { color: C.background1 } }));
 const blocks = [
   { x: 1.15, up: false, w: 3.3, h: 'Weeks 1-2  ·  Assess and design', b: 'Review today’s Experience Cloud site, the app, Certain and a sample of its data; shared event model' },
-  { x: 3.85, up: true, w: 3.3, h: 'Weeks 3-12  ·  Phase 1 live', b: 'Conferences: sessions, speakers, My Agenda, badges. Certain data moved and Certain retired' },
-  { x: 6.95, up: false, w: 3.3, h: 'Weeks 13-20  ·  Phase 2 live', b: 'Classes on the shared model: instant confirmation, waitlists, check-in, reporting' },
-  { x: 9.7, up: true, w: 2.9, h: 'Week 21+  ·  Grow', b: 'Patient engagement initiatives, app adoption, AI agents in a controlled harness' },
+  { x: 3.85, up: true, w: 3.3, h: 'Weeks 3-20  ·  Phase 1 live', b: 'Conferences: sessions, speakers, My Agenda, badges. Certain data moved and Certain retired' },
+  { x: 6.95, up: false, w: 3.3, h: 'Weeks 21-25  ·  Phase 2 live', b: 'Classes on the shared model: instant confirmation, waitlists, check-in, reporting' },
+  { x: 9.7, up: true, w: 2.9, h: 'Week 26+  ·  Grow', b: 'Patient engagement initiatives, app adoption, AI agents in a controlled harness' },
 ];
 blocks.forEach(({ x, up, w, h, b }) => {
   const y = up ? 2.45 : lineY + 0.25;
@@ -256,12 +256,12 @@ blocks.forEach(({ x, up, w, h, b }) => {
   txt(s, b, { x: x + 0.2, y: y + 0.4, w, h: 0.85, fontSize: 12, color: C.background1 });
   s.addShape(pres.shapes.OVAL, { x: x - 0.09, y: lineY - 0.09, w: 0.18, h: 0.18, fill: { color: C.accent2 }, line: { color: C.accent2 } });
 });
-// Certain transition: weeks 7-12 on the Phase 1 stretch of the line (week 3 at x 3.85, week 13 at x 6.95)
-const wk = n => 3.85 + (n - 3) * 0.31;
-s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: wk(7), y: lineY - 0.09, w: wk(13) - wk(7) - 0.12, h: 0.18, rectRadius: 0.09, fill: { color: C.accent3 }, line: { color: C.background1, width: 1 }, objectName: 'certain-transition' });
-txt(s, 'Certain transition', { x: wk(7), y: lineY + 0.25, w: 1.85, h: 0.32, fontSize: 13, bold: true, color: C.background1 });
-txt(s, 'Weeks 7-12: export, map, two trial loads, cutover between conferences', { x: wk(7), y: lineY + 0.65, w: 1.75, h: 0.9, fontSize: 11, color: C.background1 });
-s.addNotes('Phase 1 replaces Certain around week 12, with a six-week Certain to Salesforce data transition in weeks 7 to 12; cutover is planned between conferences and before the Certain renewal. Phase 2 brings classes onto the same platform and improves them by week 20, without rebuilding the registration site. Engagement work can start once classes are on the shared model.');
+// Certain transition: weeks 15-20 on the Phase 1 stretch of the line (week 3 at x 3.85, week 21 at x 6.95)
+const wk = n => 3.85 + (n - 3) * 3.1 / 18;
+s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: wk(15), y: lineY - 0.09, w: wk(21) - wk(15) - 0.12, h: 0.18, rectRadius: 0.09, fill: { color: C.accent3 }, line: { color: C.background1, width: 1 }, objectName: 'certain-transition' });
+txt(s, 'Certain transition', { x: 4.95, y: lineY + 0.25, w: 1.85, h: 0.32, fontSize: 13, bold: true, color: C.background1 });
+txt(s, 'Weeks 15-20: export, map, two trial loads, cutover between conferences', { x: 4.95, y: lineY + 0.65, w: 1.75, h: 0.9, fontSize: 11, color: C.background1 });
+s.addNotes('Phase 1 replaces Certain around week 20, with a six-week Certain to Salesforce data transition in weeks 15 to 20; cutover is planned between conferences and before the Certain renewal. Phase 2 brings classes onto the same platform and improves them by week 25, without rebuilding the registration site. Engagement work can start once classes are on the shared model.');
 
 // What each phase delivers (restored by Surya in draft 2)
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Delivery plan' });
@@ -272,7 +272,7 @@ ruledTable(s, L, 1.7, [2.2, 5.0, 5.03], [
   ['Registration', 'Providers and guests, ticket types, My Agenda on Experience Cloud', 'Existing Experience Cloud site and app, now with instant confirmation'],
   ['Payments', 'Chase checkout, reusing today’s class integration', 'Chase checkout with safe payment retries and refunds'],
   ['Engagement', 'Speaker and attendee communications, badges, CME [to confirm]', 'Reminder journeys, waitlists, QR check-in'],
-  ['Data', 'Certain data moved in a six-week transition (weeks 7-12)', 'Class data stays in place: the shared model extends today’s objects'],
+  ['Data', 'Certain data moved in a six-week transition (weeks 15-20)', 'Class data stays in place: the shared model extends today’s objects'],
   ['Built in', 'Load test before each conference opens', 'Live seats, waitlists, encryption, monitoring'],
   ['Retires', 'Certain', 'Nothing retired; today’s registration is improved'],
 ], { rowH: 0.6, bodySize: 13 });
@@ -370,10 +370,10 @@ pres.addSection({ title: 'Roadmap and next steps' });
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Roadmap and next steps' });
 s.addText('Roadmap: from registration to relationship', { placeholder: 'title' });
 const road = [
-  ['Conferences', 'Weeks 3-12', ['Sessions and speakers', 'My Agenda and badges', 'Certain retired']],
-  ['Classes improved', 'Weeks 13-20', ['Shared event model', 'Instant confirmation, waitlists', 'Check-in and reporting']],
+  ['Conferences', 'Weeks 3-20', ['Sessions and speakers', 'My Agenda and badges', 'Certain retired']],
+  ['Classes improved', 'Weeks 21-25', ['Shared event model', 'Instant confirmation, waitlists', 'Check-in and reporting']],
   ['Engagement', 'From Phase 2 go-live', ['PEI journeys by service line', 'App adoption campaigns', 'Find-a-doctor nurture']],
-  ['AI agents', 'Week 21+', ['Agents in a controlled harness', 'Demand and campaign agents', 'Concierge on web, app and SMS']],
+  ['AI agents', 'Week 26+', ['Agents in a controlled harness', 'Demand and campaign agents', 'Concierge on web, app and SMS']],
 ];
 road.forEach(([h, t, items], i) => {
   const x = L + i * 3.1;
