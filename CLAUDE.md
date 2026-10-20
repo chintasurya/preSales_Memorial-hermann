@@ -16,6 +16,7 @@ read the relevant files here first and build on them instead of starting over.
 | Manager direction, status, open questions, next actions | `docs/06-status-and-next-steps.md` |
 | Insight Global deck template rules (colors, fonts, layouts) | `docs/07-brand-template.md` |
 | Detailed design: architecture, high-demand handling, security, reliability, scalability, AI agent harness | `docs/08-detailed-design.md` (review page: `docs/08-detailed-design-review.html`) |
+| Current-state discovery call questions (2026-10-20) | `docs/09-current-state-discovery-questions.md` |
 | Client deck (PowerPoint) and how to rebuild it | `deck/` (see `README.md`) |
 
 ## Working rules
