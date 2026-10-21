@@ -1,0 +1,167 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Web booking flow - concept</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:2400px;height:1010px;font-family:Arial,"Liberation Sans",sans-serif;background:#e9ecef;color:#1d2733}
+.grid{display:grid;grid-template-columns:1170px 1170px;gap:24px 20px;padding:16px 20px}
+.lbl{display:flex;align-items:center;gap:12px;height:46px;font-size:24px;font-weight:700}
+.n{width:38px;height:38px;border-radius:50%;background:#1d2733;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.win{background:#fff;border-radius:12px;height:428px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.16);position:relative}
+.chrome{height:40px;background:#f1f3f5;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid #dde1e5}
+.dot{width:11px;height:11px;border-radius:50%}
+.url{margin-left:12px;flex:1;height:26px;background:#fff;border:1px solid #d5dade;border-radius:13px;font-size:13px;color:#5b6670;display:flex;align-items:center;padding:0 12px}
+.top{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;border-bottom:1px solid #e5e8eb}
+.brand{font-size:19px;font-weight:700;color:#3b2a6b}
+.nav{display:flex;gap:20px;font-size:13px;color:#3b4652}
+.steps{display:flex;gap:8px;font-size:13px;color:#8a949e;font-weight:700}
+.steps .on{color:#3b2a6b}
+.pad{padding:18px 26px}
+h1{font-size:24px}
+.sub{font-size:14px;color:#5b6670;margin-top:4px}
+.tabs{display:flex;gap:8px;margin:14px 0 12px}
+.tab{padding:7px 15px;border-radius:18px;border:1px solid #cfd5db;font-size:13px;font-weight:700;color:#3b4652}
+.tab.on{background:#3b2a6b;border-color:#3b2a6b;color:#fff}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid #e1e5e9;border-radius:10px;padding:13px 16px;display:flex;gap:14px;align-items:center}
+.card.hl{border:2px solid #3b2a6b;box-shadow:0 5px 18px rgba(59,42,107,.16)}
+.date{width:62px;height:62px;border-radius:9px;background:#f3f0fa;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+.date b{font-size:22px;color:#3b2a6b}.date span{font-size:11px;text-transform:uppercase;color:#5b6670;letter-spacing:1px}
+.info{flex:1}
+.kind{font-size:10.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;margin-bottom:3px}
+.k-conf{color:#b0004f}.k-class{color:#0b5c80}.k-event{color:#1d6b3a}
+.info h3{font-size:15.5px;margin-bottom:3px}
+.meta{font-size:12px;color:#5b6670}
+.right{text-align:right;flex:none}
+.price{font-size:14px;font-weight:700;margin-bottom:5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 20px;background:#3b2a6b;color:#fff;border-radius:7px;font-weight:700;font-size:14px}
+.btn.ghost{background:#fff;color:#3b2a6b;border:2px solid #3b2a6b;padding:6px 14px}
+.btn.wide{display:flex;width:100%;height:44px;font-size:15px}
+.cols{display:flex;gap:20px}
+.main{flex:1}
+.side{width:330px;flex:none;border:1px solid #e1e5e9;border-radius:10px;padding:14px 16px;background:#fafbfc}
+.side h4{font-size:15px;margin-bottom:10px}
+.days{display:flex;gap:6px;margin:12px 0 10px}
+.day{padding:7px 16px;border-radius:7px;border:1px solid #cfd5db;font-size:13px;font-weight:700;color:#3b4652}
+.day.on{background:#3b2a6b;color:#fff;border-color:#3b2a6b}
+.slot{font-size:11px;font-weight:700;color:#8a949e;letter-spacing:1px;margin:8px 0 6px}
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sess{border:1px solid #e1e5e9;border-radius:9px;padding:9px 11px;display:flex;gap:9px}
+.sess.sel{border:2px solid #3b2a6b;background:#f7f5fc}
+.sess.dis{opacity:.55}
+.ck{width:16px;height:16px;border-radius:4px;border:2px solid #9aa4ad;flex:none;margin-top:2px}
+.sel .ck{background:#3b2a6b;border-color:#3b2a6b}
+.sess h5{font-size:13px;margin-bottom:2px}
+.sess .m{font-size:11.5px;color:#5b6670}
+.trk{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:9px;margin-top:4px;margin-right:3px}
+.t1{background:#fde6ef;color:#b0004f}.t2{background:#e2f3fb;color:#0b5c80}.t3{background:#e3f6ea;color:#1d6b3a}.t4{background:#eef0ff;color:#3b2a6b}
+.warn{font-size:11px;color:#b54708;font-weight:700}
+.line{display:flex;justify-content:space-between;font-size:13px;color:#3b4652;margin-bottom:7px}
+.tot{display:flex;justify-content:space-between;font-weight:700;font-size:16px;border-top:1px solid #e1e5e9;padding-top:9px;margin:4px 0 12px}
+.hold{background:#fff7e6;border:1px solid #f3d38a;border-radius:7px;padding:8px 11px;font-size:12px;color:#7a5200;margin-bottom:12px}
+.chase{flex:1;border:2px dashed #0b5c80;border-radius:12px;padding:16px 18px}
+.chase .h{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#0b5c80;font-weight:700;margin-bottom:14px}
+.lock{font-size:11px;background:#e2f3fb;padding:3px 9px;border-radius:9px}
+.f{height:40px;border:1px solid #cfd5db;border-radius:7px;margin-bottom:10px;display:flex;align-items:center;padding:0 12px;font-size:13px;color:#8a949e}
+.two{display:flex;gap:10px}.two .f{flex:1}
+.note{font-size:12px;color:#5b6670;margin-top:6px}
+.ok{width:54px;height:54px;border-radius:50%;background:#e3f6ea;display:flex;align-items:center;justify-content:center;font-size:30px;color:#1d6b3a;font-weight:700}
+.qr{width:104px;height:104px;background:linear-gradient(90deg,#1d2733 9px,transparent 9px) 0 0/18px 18px,linear-gradient(#1d2733 9px,transparent 9px) 0 0/18px 18px;border:7px solid #fff;outline:2px solid #1d2733;opacity:.85;flex:none}
+.ag{border:1px solid #e1e5e9;border-radius:9px;padding:8px 12px;font-size:12.5px;margin-top:12px}
+.ag .a{display:flex;gap:10px;padding:5px 0;border-bottom:1px dotted #d5dade}.ag .a:last-child{border:none}
+.ag .a b{width:70px;flex:none;color:#3b2a6b}
+.cal{display:flex;gap:8px;margin:10px 0 14px}
+.cal div{flex:1;height:38px;border:1px solid #cfd5db;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#3b4652}
+.join{border:1px solid #c9d7f5;background:#f3f7ff;border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.join b{font-size:14px;display:block;margin-bottom:4px}
+.join p{font-size:12px;color:#3b4652}
+.foot{position:absolute;left:26px;bottom:10px;font-size:11px;color:#8a949e}
+</style></head><body>
+<div class="grid">
+ <div>
+  <div class="lbl"><div class="n">1</div>Classes and Events page (Sitecore)</div>
+  <div class="win">
+   <div class="chrome"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><div class="url">memorialhermann.org/patients-visitors/classes-events</div></div>
+   <div class="top"><div class="brand">Memorial Hermann</div><div class="nav"><span>Find a Doctor</span><span>Locations</span><span>Services</span><span><b>Classes &amp; Events</b></span></div></div>
+   <div class="pad"><h1>Classes, events and conferences</h1><div class="sub">One place for every class, community event and professional conference.</div>
+    <div class="tabs"><div class="tab on">All</div><div class="tab">Conferences</div><div class="tab">Classes</div><div class="tab">Events</div></div>
+    <div class="cards">
+     <div class="card hl"><div class="date"><b>12</b><span>Mar</span></div><div class="info"><div class="kind k-conf">Conference · 2 days · In person and online</div><h3>Heart and Vascular Symposium 2027</h3><div class="meta">Texas Medical Center · 24 sessions</div></div><div class="right"><div class="price">From $295</div><div class="btn">Book</div></div></div>
+     <div class="card"><div class="date"><b>18</b><span>Jan</span></div><div class="info"><div class="kind k-class">Class · 3 hours</div><h3>Childbirth Preparation</h3><div class="meta">Memorial Hermann Katy · Sat 9:00 AM</div></div><div class="right"><div class="price">$80</div><div class="btn">Book</div></div></div>
+     <div class="card"><div class="date"><b>21</b><span>Jan</span></div><div class="info"><div class="kind k-class">Class · Online</div><h3>CPR and AED for Family and Friends</h3><div class="meta">Virtual · Tue 6:30 PM</div></div><div class="right"><div class="price">$35</div><div class="btn">Book</div></div></div>
+     <div class="card"><div class="date"><b>25</b><span>Jan</span></div><div class="info"><div class="kind k-event">Event · Tour</div><h3>Maternity Center Tour</h3><div class="meta">The Woodlands · Fully booked</div></div><div class="right"><div class="price">Free</div><div class="btn ghost">Join waitlist</div></div></div>
+    </div>
+   </div>
+   <div class="foot">Concept mockup, sample data</div>
+  </div>
+ </div>
+ <div>
+  <div class="lbl"><div class="n">2</div>Session details (registration site)</div>
+  <div class="win">
+   <div class="chrome"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><div class="url">Registration site (Experience Cloud) · Heart and Vascular Symposium 2027</div></div>
+   <div class="top"><div class="brand">Memorial Hermann</div><div class="steps"><span class="on">1 Sessions</span><span>›</span><span>2 Pay</span><span>›</span><span>3 Confirmed</span></div></div>
+   <div class="pad cols">
+    <div class="main"><h1>Choose your sessions</h1><div class="sub">12-13 Mar 2027 · Texas Medical Center and online</div>
+     <div class="days"><div class="day on">Day 1 · Fri</div><div class="day">Day 2 · Sat</div></div>
+     <div class="slot">9:00 AM - 10:15 AM</div>
+     <div class="srow">
+      <div class="sess sel"><div class="ck"></div><div><h5>Advances in heart failure care</h5><div class="m">Hall A · Dr. A. Patel (sample)</div><span class="trk t1">Cardiology</span><span class="trk t3">CME 1.25</span><span class="trk t4">Online too</span></div></div>
+      <div class="sess"><div class="ck"></div><div><h5>Nursing in the cardiac ICU</h5><div class="m">Room 204 · R. Chen, RN (sample)</div><span class="trk t2">Nursing</span></div></div>
+     </div>
+     <div class="slot">10:30 AM - 11:45 AM</div>
+     <div class="srow">
+      <div class="sess sel"><div class="ck"></div><div><h5>Structural heart: case reviews</h5><div class="m">Hall B · Dr. M. Lopez (sample)</div><span class="trk t1">Cardiology</span><span class="trk t3">CME 1.25</span><div class="warn">6 seats left</div></div></div>
+      <div class="sess dis"><div class="ck"></div><div><h5>Living well after a heart attack</h5><div class="m">Room 110 · Community track</div><div class="warn">Full · join waitlist</div></div></div>
+     </div>
+    </div>
+    <div class="side"><h4>Your registration</h4>
+     <div class="line"><span>Provider (2 days)</span><span>$295.00</span></div>
+     <div class="line"><span>Attend</span><span>In person</span></div>
+     <div class="line"><span>Day 1 sessions</span><span>2 selected</span></div>
+     <div class="line"><span>Day 2 sessions</span><span>Choose later</span></div>
+     <div class="tot"><span>Total</span><span>$295.00</span></div>
+     <div class="btn wide">Continue to payment</div>
+     <div class="note">Seats are held for 10 minutes while you pay.</div></div>
+   </div>
+  </div>
+ </div>
+ <div>
+  <div class="lbl"><div class="n">3</div>Pay securely (Chase hosted page)</div>
+  <div class="win">
+   <div class="chrome"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><div class="url">Registration site (Experience Cloud) · Checkout</div></div>
+   <div class="top"><div class="brand">Memorial Hermann</div><div class="steps"><span>1 Sessions</span><span>›</span><span class="on">2 Pay</span><span>›</span><span>3 Confirmed</span></div></div>
+   <div class="pad cols">
+    <div class="side" style="width:390px;background:#fff"><h4>Order summary</h4>
+     <div class="line"><span>Heart and Vascular Symposium</span><span></span></div>
+     <div class="line"><span>Provider registration (2 days)</span><span>$295.00</span></div>
+     <div class="line"><span>2 sessions, Day 1</span><span>Included</span></div>
+     <div class="line"><span>Lunch both days</span><span>Included</span></div>
+     <div class="tot"><span>Total</span><span>$295.00</span></div>
+     <div class="hold">Your seats are held for 10:00 minutes.</div>
+     <div class="note">Cancellations and refunds follow today's Chase process.</div></div>
+    <div class="chase"><div class="h"><span>CHASE HOSTED PAYMENT PAGE</span><span class="lock">Secure</span></div>
+     <div class="f">Name on card</div><div class="f">Card number</div><div class="two"><div class="f">MM / YY</div><div class="f">CVV</div><div class="f">Billing ZIP</div></div>
+     <div class="btn wide" style="margin-top:8px">Pay $295.00</div>
+     <div class="note">Card details go straight to Chase. Memorial Hermann and Salesforce never store them.</div></div>
+   </div>
+  </div>
+ </div>
+ <div>
+  <div class="lbl"><div class="n">4</div>Booked: add to calendar and join online</div>
+  <div class="win">
+   <div class="chrome"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><div class="url">Registration site (Experience Cloud) · Confirmation</div></div>
+   <div class="top"><div class="brand">Memorial Hermann</div><div class="steps"><span>1 Sessions</span><span>›</span><span>2 Pay</span><span>›</span><span class="on">3 Confirmed</span></div></div>
+   <div class="pad cols">
+    <div class="main">
+     <div style="display:flex;gap:16px;align-items:center"><div class="ok">&#10003;</div><div><h1>You're registered</h1><div class="sub">Confirmation sent to your email right away. Show the QR code at check-in.</div></div></div>
+     <div style="display:flex;gap:16px;align-items:flex-start;margin-top:14px"><div class="qr"></div>
+      <div class="ag" style="flex:1;margin-top:0"><div class="a"><b>Fri 9:00</b><span>Advances in heart failure care · Hall A</span></div><div class="a"><b>Fri 10:30</b><span>Structural heart: case reviews · Hall B</span></div><div class="a"><b>Sat</b><span>Choose Day 2 sessions any time in My Agenda</span></div></div></div>
+    </div>
+    <div class="side" style="width:360px;background:#fff"><h4>Add to your calendar</h4>
+     <div class="cal"><div>Outlook</div><div>Google</div><div>Apple</div></div>
+     <div class="join"><b>Joining online?</b><p>Your personal Zoom or Teams link [to confirm] arrives before each session and works from anywhere.</p></div>
+     <div class="btn wide">View My Agenda</div></div>
+   </div>
+  </div>
+ </div>
+</div>
+</body></html>

@@ -50,3 +50,16 @@ Parked for now at the user's request: consent, HIPAA and budget questions.
 - Implication: class registration already exists on Salesforce. The only tool Kevin said they want to
   replace is Certain (conferences). Reframe: replace Certain with Salesforce conference and session
   management and unify classes on the same model, enhancing (not rebuilding) the existing class flow.
+
+## Call with Kevin Kelly (2026-10-20), as reported by Surya
+
+- **Scope:** add conference setup (conferences with sessions) into the existing Salesforce event and
+  class solution. Not a new platform, not a rebuild of classes.
+- **Data migration:** not needed. No Certain data moves to Salesforce.
+- **Payments:** Chase integration for conference payments. Cancellations and refunds reuse the
+  existing workflows in today's class solution.
+- **Waitlist:** keep the waitlist / interest list feature in scope.
+- **Mobile app:** not in scope. Screens should be web based.
+- **Virtual sessions:** Certain provides a conference video link today; access is IP restricted, so
+  not everyone can join. Proposal (Surya): integrate Zoom or Microsoft Teams so the join link works
+  for attendees anywhere. Which platform MH licenses is [to confirm].

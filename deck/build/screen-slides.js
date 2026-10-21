@@ -18,17 +18,13 @@ function stepLabel(s, h, n, text, x, y, w) {
 }
 
 function addBookingFlowSlide(h, sectionTitle) {
-  const { pres, txt, L, R } = h;
-  const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
+  const { txt, L, CW } = h;
+  const s = h.pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Registrant view: find it, book it, pay, add to calendar', { placeholder: 'title' });
-  const lw = 4.98, lh = lw * 1000 / 1120;
-  const rx = L + lw + 0.3, rw = R - rx, rh = rw * 840 / 1320;
-  stepLabel(s, h, 1, 'Sitecore page: conferences, classes and events', L, 1.5, lw + 0.3);
-  stepLabel(s, h, 2, 'Click Book on a conference: session details, pay, add to calendar', rx, 1.5, rw);
-  frame(s, '07-sitecore-listing.png', L, 2.0, lw, lh);
-  frame(s, '08-conference-booking.png', rx, 2.0, rw, rh);
-  txt(s, 'Concept mockup, sample data. Listings stay on Sitecore; booking runs on the existing Experience Cloud site and app; payment on Chase’s hosted page.', { x: L, y: 6.58, w: R - L, h: 0.28, fontSize: 10.5, italic: true, color: MUTED });
-  s.addNotes('One listing for conferences, classes and events, on the Sitecore page people already use. Book on a conference opens the registration site: pick sessions by day (seats are held while paying), pay on Chase’s hosted page, then get an instant confirmation with a QR code for check-in and add-to-calendar links. Classes and events use the same flow without the session step.');
+  const iw = 11.6, ih = iw * 1010 / 2400;
+  frame(s, '11-web-booking-flow.png', L + (CW - iw) / 2, 1.58, iw, ih);
+  txt(s, 'Concept mockup, sample data. Web only: listings stay on Sitecore, booking runs on the existing Experience Cloud site, payment on Chase\u2019s hosted page.', { x: L, y: 6.55, w: CW, h: 0.28, fontSize: 10.5, italic: true, color: MUTED });
+  s.addNotes('One listing for conferences, classes and events, on the Sitecore page people already use. Book on a conference opens the registration site: pick sessions by day (seats are held while paying), pay on Chase\u2019s hosted page, then get an instant confirmation with a QR code for check-in, add-to-calendar links and, for online attendees, a personal Zoom or Teams join link. Cancellations and refunds use today\u2019s Chase workflows. Classes and events use the same flow without the session step.');
   return s;
 }
 
@@ -45,7 +41,7 @@ function addStaffSetupSlide(h, sectionTitle) {
     ['Ticket types per audience', 'Provider, nurse, caregiver and community prices'],
     ['Sessions in minutes', 'Day, time, room, track, speaker, seat limit, CME [to confirm]'],
     ['Payment and journey', 'Chase checkout and a Marketing Cloud journey set per event'],
-    ['Publish', 'The agenda appears on the website and app'],
+    ['Publish', 'The agenda appears on the website'],
   ];
   items.forEach(([t, d], i) => {
     const y = 2.3 + i * 0.78;

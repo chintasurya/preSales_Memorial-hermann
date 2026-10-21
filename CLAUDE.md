@@ -31,8 +31,9 @@ read the relevant files here first and build on them instead of starting over.
 - PEI means **patient engagement initiatives**.
 - Class registration already exists (Sitecore listings open a home-built Experience Cloud site; a mobile app also registers). Build on it; never propose rebuilding it or a new mobile app.
 - The primary ask is replacing Certain (conferences with session management). Lead with it.
+- Scope after the 2026-10-20 call: add conference setup into the existing event and class solution; no data migration; reuse existing Chase cancellation and refund workflows; keep waitlist; mobile app out of scope (web screens only); virtual sessions via Zoom or Teams [platform to confirm].
 - Payments: Chase for every event (reuse the class integration); Authorize.net retires with Certain.
 - Plan: 25 weeks, 4-person pod (1 PM, 1 QA, 2 developers). Phase 1 weeks 3-20, Phase 2 weeks 21-25, grow week 26+.
-- Certain migration: 6-week transition in weeks 15-20, cutover between conferences, Authorize.net kept only for past refunds; history window is a client question.
+- Certain migration: not needed (Kevin, 2026-10-20). Earlier 6-week transition plan is superseded.
 - Client logo goes at `deck/assets/client/memorial-hermann-logo.png`; the build adds it to the title slide when present.
 - Screens in the deck are concept mockups (`deck/mockups/*.html`), labelled as such.
