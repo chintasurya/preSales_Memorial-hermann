@@ -109,9 +109,9 @@ home-built tool and Certain. Present AppExchange as the faster alternative.
 (web only: Sitecore listing, sessions, Chase payment, confirmation with calendar and Zoom or Teams link),
 9 Staff view, 10 Fully booked: waitlist and interest list, 11 Every seat filled, 12 Seat flow detail,
 13 Payments and data security, 14 Payment sequence, 15 Section 02, 16 Timeline (8 weeks), 17 What the
-eight weeks deliver, 18 Sprint plan (4 sprints), 19 Delivery pod (4 people), 20 Section 03, 21 Value
+eight weeks deliver, 18 Sprint plan (4 sprints), 19 Delivery team (3 people), 20 Section 03, 21 Value
 statement, 22 PEI journey, 23 Campaigns, 24 Website registrants into the app, 25 KPIs, 26 Roadmap,
-27 AI agents in a controlled harness, 28 Investment, 29 Next steps, 30 Thank you.
+27 AI agents in a controlled harness, 28 Commercials, 29 Next steps, 30 Thank you.
 
 Surya's draft 2 edits carried forward: "Business opportunity" heading and agenda item, restored
 "What each phase delivers" slide, value statement moved lower, "Salesforce licenses" wording,
@@ -127,8 +127,7 @@ speaker notes removed on agenda, slide 3, slide 6 and the AI harness slide. Sour
   waitlists, Chase checkout, Zoom or Teams links; sprint 4 badges, check-in, testing, go-live (Certain
   retired). Grow from week 9. No data migration; refunds reuse today's Chase workflows.
 - Pricing is for an **offshore delivery model** (labelled on the Investment slide).
-- Investment (Surya, 2026-10-22): $60,000 partner price, shown as $120,000 standard struck through with
-  a 50% partnership credit. Assess and design (weeks 1-2) $30,000 to $15,000; build, test and go live
-  (weeks 3-8) $90,000 to $45,000. Indicative, billed at sprint milestones, final in the SOW.
+- Commercials (Surya, 2026-10-22): $60,000 for 8 weeks, offshore. No strikethrough, no partner credit,
+  no rate cards. Team table: 1 Project Manager, 1 Salesforce Developer, 1 QA Engineer (3 people).
 - Not included: Salesforce licenses (Shield, Agentforce, Data Cloud), Zoom or Teams licenses, gateway
   fees, waiting room subscription.

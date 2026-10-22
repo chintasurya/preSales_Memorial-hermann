@@ -271,7 +271,7 @@ ruledTable(s, L, 1.7, [2.4, 9.83], [
   ['Data', 'No migration: conferences start fresh in Salesforce'],
   ['Retires', 'Certain and its IP-restricted video link'],
 ], { rowH: 0.6, bodySize: 13 });
-s.addNotes('Everything here lands in eight weeks with the same four-person pod. Classes and events stay as they are; conferences are added alongside them.');
+s.addNotes('Everything here lands in eight weeks with the same three-person team. Classes and events stay as they are; conferences are added alongside them.');
 
 // Sprint plan and delivery pod
 addSprintPlanSlide(h, 'Delivery plan');

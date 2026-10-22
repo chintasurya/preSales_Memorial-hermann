@@ -58,7 +58,7 @@ function addSprintPlanSlide(h, sectionTitle) {
 async function addPodSlide(h, sectionTitle) {
   const { pres, txt, L } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
-  s.addText('A dedicated four-person delivery pod', { placeholder: 'title' });
+  s.addText('A dedicated three-person delivery team', { placeholder: 'title' });
 
   // Pyramid: three stacked triangles give three bands; white rules separate them.
   const cx = 2.75, top = 1.85, base = 6.3, bw = 4.4, H = base - top;
@@ -77,14 +77,14 @@ async function addPodSlide(h, sectionTitle) {
     s.addShape(pres.shapes.LINE, { x: cx - w / 2 - 0.05, y, w: w + 0.1, h: 0, line: { color: 'FFFFFF', width: 5 } });
   });
   // headcounts inside the bands
-  const counts = [['1', top + H / 3 - 0.62, '000000'], ['1', top + H * 2 / 3 - 0.72, '000000'], ['2', base - 0.82, 'FFFFFF']];
+  const counts = [['1', top + H / 3 - 0.62, '000000'], ['1', top + H * 2 / 3 - 0.72, '000000'], ['1', base - 0.82, 'FFFFFF']];
   counts.forEach(([n, y, col]) => txt(s, n, { x: cx - 0.6, y, w: 1.2, h: 0.6, fontFace: h.LIGHT_FONT, fontSize: 32, color: col, align: 'center', valign: 'middle' }));
 
   // tier labels with leader lines
   const labels = [
     { y: top + H / 6 + 0.12, k: 'LEAD', t: 'Project Manager', d: 'Runs sprints, milestones, risks and status', col: '007C8C' },
     { y: top + H / 2, k: 'QUALITY', t: 'QA Engineer', d: 'Test plans, automation, load tests, user testing support', col: '7A6100' },
-    { y: top + H * 5 / 6, k: 'BUILD', t: '2 Developers: Salesforce and Marketing Cloud', d: 'Conference setup, registration, Chase, Zoom or Teams, emails', col: 'C8005A' },
+    { y: top + H * 5 / 6, k: 'BUILD', t: 'Salesforce Developer', d: 'Conference setup, registration, Chase, Zoom or Teams, emails', col: 'C8005A' },
   ];
   labels.forEach(({ y, k, t, d, col }) => {
     const edge = cx + widthAt(y) / 2;
@@ -116,38 +116,39 @@ async function addPodSlide(h, sectionTitle) {
   txt(s, 'FROM MEMORIAL HERMANN', { x: px, y: 5.42, w: pw - 0.2, h: 0.22, fontSize: 9, bold: true, color: '007C8C', charSpacing: 2 });
   txt(s, 'A product owner, plus an Epic and app contact from Lucky Rai’s team', { x: px, y: 5.66, w: pw - 0.25, h: 0.5, fontSize: 10.5, color: INK });
 
-  txt(s, '4 people  ·  4 sprints  ·  8 weeks', { x: L, y: 6.45, w: 4.4, h: 0.3, fontSize: 13, bold: true, color: INK, align: 'center' });
-  s.addNotes('A small, dedicated pod: one Project Manager leading delivery and running the sprints, one QA engineer embedded in every sprint, and two developers covering Salesforce and Marketing Cloud. Memorial Hermann provides a product owner and an Epic and app contact.');
+  txt(s, '3 people  ·  4 sprints  ·  8 weeks', { x: L, y: 6.45, w: 4.4, h: 0.3, fontSize: 13, bold: true, color: INK, align: 'center' });
+  s.addNotes('A small, dedicated offshore team: one Project Manager leading delivery and running the sprints, one QA Engineer embedded in every sprint, and one Salesforce Developer. Memorial Hermann provides a product owner and an Epic and app contact.');
   return s;
 }
 
 function addInvestmentSlide(h, sectionTitle) {
   const { pres, txt, L } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
-  s.addText('Investment', { placeholder: 'title' });
-  txt(s, 'Offshore delivery model: fixed scope, four-person pod, 8 weeks', { x: L, y: 1.42, w: 9, h: 0.32, fontSize: 14, color: MUTED });
+  s.addText('Commercials', { placeholder: 'title' });
+  txt(s, 'Offshore delivery model: fixed scope, three-person team, 8 weeks', { x: L, y: 1.42, w: 9, h: 0.32, fontSize: 14, color: MUTED });
 
   // price card
   const cx = L, cy = 1.95, cw = 4.6, chh = 4.45;
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: cx, y: cy, w: cw, h: chh, rectRadius: 0.14, fill: { color: INK }, line: { color: INK }, objectName: 'price-card' });
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: cx + cw - 1.55, y: cy + 0.3, w: 1.2, h: 0.32, rectRadius: 0.16, fill: { type: 'none' }, line: { color: '00D6F2', width: 1.25 } });
   txt(s, 'OFFSHORE', { x: cx + cw - 1.55, y: cy + 0.3, w: 1.2, h: 0.32, fontSize: 9.5, bold: true, color: '00D6F2', align: 'center', valign: 'middle', charSpacing: 2 });
-  txt(s, 'STANDARD PROGRAM VALUE', { x: cx + 0.35, y: cy + 0.35, w: cw - 2.0, h: 0.24, fontSize: 10, bold: true, color: 'BFBFBF', charSpacing: 2 });
-  s.addText('$120,000', { isTextBox: true, x: cx + 0.35, y: cy + 0.62, w: cw - 0.7, h: 0.6, fontFace: h.LIGHT_FONT, fontSize: 30, color: '8C8C8C', strike: 'sngStrike', margin: 0, valign: 'top' });
-  s.addShape(pres.shapes.LINE, { x: cx + 0.35, y: cy + 1.45, w: cw - 0.7, h: 0, line: { color: '444444', width: 0.75 } });
-  txt(s, 'STRATEGIC PARTNER INVESTMENT', { x: cx + 0.35, y: cy + 1.65, w: cw - 0.7, h: 0.24, fontSize: 10, bold: true, color: '00D6F2', charSpacing: 2 });
-  txt(s, '$60,000', { x: cx + 0.35, y: cy + 1.95, w: cw - 0.7, h: 1.0, fontFace: h.LIGHT_FONT, fontSize: 54, color: 'FFFFFF' });
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: cx + 0.35, y: cy + 3.1, w: 3.4, h: 0.42, rectRadius: 0.21, fill: { color: 'FF0068' }, line: { color: 'FF0068' } });
-  txt(s, '50% partnership credit, applied upfront', { x: cx + 0.35, y: cy + 3.1, w: 3.4, h: 0.42, fontSize: 12, bold: true, color: 'FFFFFF', align: 'center', valign: 'middle' });
-  txt(s, 'You save $60,000 on the full program', { x: cx + 0.35, y: cy + 3.72, w: cw - 0.7, h: 0.3, fontSize: 12, color: 'D9D9D9' });
+  txt(s, 'PROGRAM INVESTMENT', { x: cx + 0.35, y: cy + 0.35, w: cw - 2.0, h: 0.24, fontSize: 10, bold: true, color: '00D6F2', charSpacing: 2 });
+  txt(s, '$60,000', { x: cx + 0.35, y: cy + 1.2, w: cw - 0.7, h: 1.1, fontFace: h.LIGHT_FONT, fontSize: 60, color: 'FFFFFF' });
+  s.addShape(pres.shapes.LINE, { x: cx + 0.35, y: cy + 2.65, w: cw - 0.7, h: 0, line: { color: '444444', width: 0.75 } });
+  [['Scope', 'Conference and session setup; Certain retired'], ['Duration', '8 weeks, 4 two-week sprints'], ['Billing', 'At sprint milestones']].forEach(([k, v], i) => {
+    const y = cy + 2.85 + i * 0.48;
+    txt(s, k, { x: cx + 0.35, y, w: 1.2, h: 0.3, fontSize: 11, bold: true, color: 'BFBFBF' });
+    txt(s, v, { x: cx + 1.5, y, w: cw - 1.85, h: 0.3, fontSize: 11.5, color: 'FFFFFF' });
+  });
 
-  // breakdown table
-  const tx = 5.55, colW = [3.6, 1.1, 1.3, 1.23];
+  // team table: roles and headcount only
+  const tx = 5.55, colW = [5.43, 1.8];
   const rows = [
-    ['Phase', 'Weeks', 'Standard', 'Partner'],
-    ['Assess and design', '1-2', '$30,000', '$15,000'],
-    ['Build, test and go live', '3-8', '$90,000', '$45,000'],
-    ['Total program', '8', '$120,000', '$60,000'],
+    ['Team', 'Resources'],
+    ['Project Manager', '1'],
+    ['Salesforce Developer', '1'],
+    ['QA Engineer', '1'],
+    ['Total', '3'],
   ];
   const totalW = colW.reduce((a, b) => a + b, 0);
   let y = 1.95;
@@ -155,34 +156,30 @@ function addInvestmentSlide(h, sectionTitle) {
     let x = tx;
     const head = ri === 0, total = ri === rows.length - 1;
     r.forEach((c, ci) => {
-      const right = ci >= 2;
-      const opts = { x: x + 0.06, y, w: colW[ci] - 0.12, h: head ? 0.36 : 0.5, fontSize: head ? 12 : 12, bold: head || total || ci === 3, color: ci === 2 && !head ? '8C8C8C' : INK, align: right ? 'right' : 'left', valign: 'middle' };
-      if (ci === 2 && !head) s.addText(c, { isTextBox: true, margin: 0, strike: 'sngStrike', ...opts });
-      else txt(s, c, opts);
+      txt(s, c, { x: x + 0.06, y, w: colW[ci] - 0.12, h: head ? 0.36 : 0.46, fontSize: 12.5, bold: head || total, color: INK, align: ci === 1 ? 'right' : 'left', valign: 'middle' });
       x += colW[ci];
     });
-    y += head ? 0.36 : 0.5;
+    y += head ? 0.36 : 0.46;
     s.addShape(pres.shapes.LINE, { x: tx, y, w: totalW, h: 0, line: head || ri === rows.length - 2 ? { color: INK, width: 1.25 } : { color: 'A0A0A8', width: 0.75, dashType: 'sysDot' } });
   });
 
   // included / not included
-  const iy = 4.05;
+  const iy = 4.4;
   txt(s, 'Included', { x: tx, y: iy, w: 3.5, h: 0.3, fontSize: 14, bold: true, color: INK });
   s.addText([
-    { text: 'Dedicated four-person offshore pod for 8 weeks', options: { bullet: true, breakLine: true } },
+    { text: 'Dedicated offshore team for 8 weeks', options: { bullet: true, breakLine: true } },
     { text: 'Sprint demos and milestone sign-offs', options: { bullet: true, breakLine: true } },
-    { text: 'Testing, load testing, go-live and hypercare', options: { bullet: true, breakLine: true } },
+    { text: 'Testing, go-live and hypercare', options: { bullet: true, breakLine: true } },
     { text: 'Documentation and handover to your admins', options: { bullet: true } },
-  ], { isTextBox: true, x: tx, y: iy + 0.36, w: 3.6, h: 1.6, fontSize: 11, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 4 });
+  ], { isTextBox: true, x: tx, y: iy + 0.36, w: 3.6, h: 1.3, fontSize: 11, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 4 });
   txt(s, 'Not included', { x: tx + 3.85, y: iy, w: 3.4, h: 0.3, fontSize: 14, bold: true, color: INK });
   s.addText([
     { text: 'Salesforce licenses', options: { bullet: true, breakLine: true } },
     { text: 'Zoom or Teams licenses', options: { bullet: true, breakLine: true } },
-    { text: 'Payment gateway transaction fees', options: { bullet: true, breakLine: true } },
-    { text: 'Waiting room subscription', options: { bullet: true } },
-  ], { isTextBox: true, x: tx + 3.85, y: iy + 0.36, w: 3.38, h: 1.6, fontSize: 11, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 4 });
-  txt(s, 'Pricing is for an offshore delivery model. Indicative, billed at sprint milestones; final commercials in the statement of work.', { x: tx, y: 6.1, w: totalW, h: 0.3, fontSize: 10.5, italic: true, color: MUTED });
-  s.addNotes('Pricing is for an offshore delivery model. Standard program value is $120,000 for a four-person pod over 8 weeks. As a strategic partner, Memorial Hermann receives a 50% partnership credit applied upfront, for an investment of $60,000. Billing follows sprint milestones. Licenses (Salesforce, Zoom or Teams) and third-party fees are outside this price.');
+    { text: 'Payment gateway transaction fees', options: { bullet: true } },
+  ], { isTextBox: true, x: tx + 3.85, y: iy + 0.36, w: 3.38, h: 1.3, fontSize: 11, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 4 });
+  txt(s, 'Pricing is for an offshore delivery model. Indicative; final commercials in the statement of work.', { x: tx, y: 6.1, w: totalW, h: 0.3, fontSize: 10.5, italic: true, color: MUTED });
+  s.addNotes('Pricing is for an offshore delivery model: $60,000 fixed for 8 weeks with a three-person team (one Project Manager, one Salesforce Developer, one QA Engineer). Billing follows sprint milestones. Licenses (Salesforce, Zoom or Teams) and gateway fees are outside this price.');
   return s;
 }
 
