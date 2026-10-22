@@ -6,6 +6,10 @@ A Salesforce event app built inside Memorial Hermann's existing Health Cloud org
 simple classes and multi-day conferences, with Marketing Cloud for every message. Delivered in two
 phases: Phase 1 replaces the home-built class registration; Phase 2 replaces Certain.
 
+> **Current scope (2026-10-22):** conferences only, added to the existing event and class solution, in 8
+> weeks; no data migration; Chase with today's refund workflows; Zoom or Teams for online sessions. The
+> original two-phase plan and timeline below are kept for history and are superseded.
+
 ## Architecture
 
 | Layer | What it does | Technology |
