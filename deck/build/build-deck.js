@@ -7,7 +7,7 @@ const { applyTheme } = require('./apply_theme.js');
 const { addDemandSlide, addSecuritySlide, addHarnessSlide } = require('./design-slides.js');
 const { addOverallDesignSlide, addSeatFlowSlide, addPaymentSequenceSlide } = require('./sequence-slides.js');
 const { addSprintPlanSlide, addPodSlide, addInvestmentSlide } = require('./delivery-slides.js');
-const { addBookingFlowSlide, addStaffSetupSlide, addInterestSlide, addCertainTransitionSlide } = require('./screen-slides.js');
+const { addBookingFlowSlide, addStaffSetupSlide, addInterestSlide } = require('./screen-slides.js');
 
 const ROOT = path.join(__dirname, '..');
 const BG = f => path.join(ROOT, 'assets', 'bg', f);
@@ -138,7 +138,7 @@ if (require('fs').existsSync(LOGO)) {
   const lh = 0.6, lw = lh * meta.width / meta.height;
   s.addImage({ path: LOGO, x: (W - lw) / 2, y: 5.6, w: lw, h: lh, objectName: 'Memorial Hermann logo' });
 }
-txt(s, 'CLASSES  ·  EVENTS  ·  CONFERENCES  ·  ENGAGEMENT', { x: 1.0, y: 5.15, w: W - 2, h: 0.3, fontSize: 11, color: C.background1, align: 'center', charSpacing: 4 });
+txt(s, 'CONFERENCES  ·  SESSIONS  ·  ONLINE ACCESS  ·  ENGAGEMENT', { x: 1.0, y: 5.15, w: W - 2, h: 0.3, fontSize: 11, color: C.background1, align: 'center', charSpacing: 4 });
 txt(s, 'OCTOBER 2026', { x: 1.0, y: 6.75, w: W - 2, h: 0.3, fontSize: 11, bold: true, color: C.background1, align: 'center', charSpacing: 5 });
 s.addNotes('Thank Kevin for the detailed answers. Today: how we solve the event registration problem on the Salesforce platform they already own, how we deliver it, and how the registration data can grow engagement and the network.');
 
@@ -161,24 +161,24 @@ s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: L, y: 1.6, w: CW, h: 1.22, rectRa
 txt(s, 'PRIMARY ASK', { x: L + 0.3, y: 1.74, w: 4, h: 0.24, fontSize: 10, bold: true, color: 'FF0068', charSpacing: 3 });
 txt(s, 'Replace Certain with conference and session management on Salesforce', { x: L + 0.3, y: 2.0, w: 8.2, h: 0.7, fontSize: 21, bold: true, color: 'FFFFFF', valign: 'middle' });
 txt(s, '1 to 2 multi-day conferences a year, with session management, for providers, caregivers and consumers. Authorize.net today, moving to Chase.', { x: 9.1, y: 1.78, w: 3.45, h: 0.95, fontSize: 11.5, color: 'D9D9D9', valign: 'middle' });
-txt(s, 'Also: run classes on the same platform, building on today\u2019s registration instead of rebuilding it.', { x: L, y: 3.08, w: CW, h: 0.32, fontSize: 14, bold: true, color: C.text1 });
+txt(s, 'Classes and events stay as they are. Conferences are added to the same solution in eight weeks.', { x: L, y: 3.08, w: CW, h: 0.32, fontSize: 14, bold: true, color: C.text1 });
 ruledTable(s, L, 3.5, [2.45, 5.2, 4.58], [
   ['Area', 'Today', 'Where we take it'],
-  ['Conferences', 'Certain for multi-day events; Authorize.net payments', 'Replace with Salesforce conference and session management, paid through Chase'],
-  ['Classes and events', 'Sitecore listings open a home-built Experience Cloud site; Chase payments; confirmation up to 24 hours', 'Keep the site and improve it on one shared event model'],
-  ['Mobile app', 'People can already register for events in the app', 'Keep it, connected to the same event model'],
+  ['Conferences', 'Certain for multi-day events; Authorize.net payments', 'Conference and session setup in today’s event solution, paid through Chase'],
+  ['Classes and events', 'Sitecore listings open a home-built Experience Cloud site; Chase payments and refunds', 'Keep as they are; conferences use the same site, payments and refunds'],
+  ['Online sessions', 'Certain video link, limited by IP restrictions', 'Personal Zoom or Teams links that work from anywhere'],
   ['Platform', 'Health Cloud and Marketing Cloud; Epic not needed', 'Built on what Memorial Hermann already owns'],
 ], { rowH: 0.62, bodySize: 12.5, headSize: 14 });
 
 // Keep, improve, replace
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Introduction' });
 s.addText('Build on what already works', { placeholder: 'title' });
-txt(s, 'No rebuild of today’s class registration. Replace only Certain, then bring every event onto one platform.', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
+txt(s, 'No rebuild and no data migration. Add conferences to today’s event solution and retire Certain.', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
 const kir = [
-  ['KEEP', '00A9C0', '007C8C', ['Sitecore class listings', 'Experience Cloud registration site', 'Mobile app registration', 'Chase payments, now for conferences too', 'Health Cloud and Marketing Cloud']],
-  ['IMPROVE', 'D9B200', '7A6100', ['Instant confirmation (today up to 24 hours)', 'Safe payment retries', 'Live seats and waitlists', 'Check-in and reporting', 'One shared event model']],
-  ['REPLACE', 'FF0068', 'C8005A', ['Certain, with Salesforce conference and session management', 'My Agenda portal on Experience Cloud', 'Authorize.net, by reusing today’s Chase checkout', 'Certain data migrated']],
-  ['ADD LATER', '8C8C96', '4D4D4D', ['Patient engagement initiatives (PEIs)', 'App adoption campaigns', 'AI agents in a controlled harness']],
+  ['KEEP', '00A9C0', '007C8C', ['Sitecore listings', 'Experience Cloud registration site', 'Chase payments, now for conferences too', 'Cancellation and refund workflows', 'Health Cloud and Marketing Cloud']],
+  ['ADD', 'D9B200', '7A6100', ['Conference and session setup', 'My Agenda for attendees', 'Session seat limits and waitlists', 'Zoom or Teams join links', 'Badges, check-in and reporting']],
+  ['REPLACE', 'FF0068', 'C8005A', ['Certain, with conference and session management in Salesforce', 'Authorize.net, by reusing today’s Chase checkout', 'Certain’s IP-restricted video link', 'No data migration needed']],
+  ['LATER', '8C8C96', '4D4D4D', ['Patient engagement initiatives (PEIs)', 'App adoption campaigns', 'Class improvements, if wanted', 'AI agents in a controlled harness']],
 ];
 kir.forEach(([k, line, ink, items], i) => {
   const cw4 = (CW - 3 * 0.2) / 4, x = L + i * (cw4 + 0.2), y = 1.95;
@@ -186,22 +186,22 @@ kir.forEach(([k, line, ink, items], i) => {
   txt(s, k, { x: x + 0.22, y: y + 0.22, w: cw4 - 0.44, h: 0.32, fontSize: 15, bold: true, color: i === 2 ? line : ink, charSpacing: 3 });
   bullets(s, items, { x: x + 0.22, y: y + 0.75, w: cw4 - 0.4, h: 3.3, fontSize: 13, color: i === 2 ? 'FFFFFF' : C.text1 });
 });
-txt(s, 'Lowest-risk path: what works stays, the one tool you want gone goes, and every event ends up on the same data, payments and reporting.', { x: L, y: 6.3, w: CW, h: 0.4, fontSize: 13, italic: true, color: MUTED_LIGHT });
-s.addNotes('This is the core of our position. We keep the Sitecore listings, the Experience Cloud registration site and the app. We improve classes where today’s experience is weak, such as confirmations that can take up to 24 hours. We replace only Certain. Engagement and AI come later.');
+txt(s, 'Lowest-risk path: what works stays, the one tool you want gone goes, and conferences join the same data, payments and reporting.', { x: L, y: 6.3, w: CW, h: 0.4, fontSize: 13, italic: true, color: MUTED_LIGHT });
+s.addNotes('This is the core of our position, as agreed with Kevin. We keep the Sitecore listings, the Experience Cloud registration site, Chase and today’s cancellation and refund workflows. We add conference and session setup, waitlists and Zoom or Teams links. We replace only Certain, with no data migration. Engagement, class improvements and AI come later if wanted.');
 
 // 4. Section 01
 pres.addSection({ title: 'The solution' });
 s = pres.addSlide({ masterName: 'IG Section Blue', sectionTitle: 'The solution' });
 s.addText('01  THE SOLUTION', { placeholder: 'title' });
-s.addText('Conferences first, then classes on the same Salesforce platform', { placeholder: 'body' });
+s.addText('Conferences added to the event solution you already run on Salesforce', { placeholder: 'body' });
 
 // 5. Solution overview
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'The solution' });
-s.addText('One event platform inside your Salesforce org', { placeholder: 'title' });
+s.addText('Conferences inside your Salesforce org', { placeholder: 'title' });
 const cols = [
-  ['Register', 'Your existing front doors', ['Sitecore listings and today’s Experience Cloud site', 'Existing mobile app', '“My Agenda” portal for conferences']],
-  ['Manage', 'Event app in Salesforce', ['Classes, series, sessions, speakers', 'Capacity, waitlists, refunds', 'QR check-in and reporting', 'Registrants matched to Health Cloud']],
-  ['Engage', 'Marketing Cloud journeys', ['Confirmations and reminders', 'Calendar invites and virtual links', 'Patient engagement initiatives (PEIs)']],
+  ['Register', 'Your existing website', ['Sitecore listings and today’s Experience Cloud site', 'Session picks and “My Agenda”', 'Chase checkout and refunds']],
+  ['Manage', 'Event solution in Salesforce', ['Conferences, sessions, speakers, rooms', 'Seat limits and waitlists', 'QR check-in and reporting', 'Registrants matched to Health Cloud']],
+  ['Engage', 'Email and online sessions', ['Confirmations and reminders', 'Calendar invites and Zoom or Teams links', 'PEIs on Marketing Cloud, later']],
 ];
 cols.forEach(([h, sub, items], i) => {
   const x = L + i * 4.2;
@@ -234,7 +234,7 @@ addPaymentSequenceSlide(h, 'The solution');
 pres.addSection({ title: 'Delivery plan' });
 s = pres.addSlide({ masterName: 'IG Section Gold', sectionTitle: 'Delivery plan' });
 s.addText('02  DELIVERY PLAN', { placeholder: 'title' });
-s.addText('Twelve sprints: conferences live at week 20, classes improved by week 25', { placeholder: 'body' });
+s.addText('Four sprints: conferences live in eight weeks', { placeholder: 'body' });
 
 // 11. Timeline (template timeline style)
 s = pres.addSlide({ masterName: 'IG Spectrum', sectionTitle: 'Delivery plan' });
@@ -244,10 +244,10 @@ const lineY = 3.95;
 s.addShape(pres.shapes.LINE, { x: 0.68, y: lineY, w: W - 1.36, h: 0, line: { color: C.background1, width: 3 } });
 [0.55, W - 0.81].forEach(x => s.addShape(pres.shapes.OVAL, { x, y: lineY - 0.13, w: 0.26, h: 0.26, fill: { color: C.background1 }, line: { color: C.background1 } }));
 const blocks = [
-  { x: 1.15, up: false, w: 3.3, h: 'Weeks 1-2  ·  Assess and design', b: 'Review today’s Experience Cloud site, the app, Certain and a sample of its data; shared event model' },
-  { x: 3.85, up: true, w: 3.3, h: 'Weeks 3-20  ·  Phase 1 live', b: 'Conferences: sessions, speakers, My Agenda, badges. Certain data moved and Certain retired' },
-  { x: 6.95, up: false, w: 3.3, h: 'Weeks 21-25  ·  Phase 2 live', b: 'Classes on the shared model: instant confirmation, waitlists, check-in, reporting' },
-  { x: 9.7, up: true, w: 2.9, h: 'Week 26+  ·  Grow', b: 'Patient engagement initiatives, app adoption, AI agents in a controlled harness' },
+  { x: 1.15, up: false, w: 3.3, h: 'Weeks 1-2  ·  Assess and design', b: 'Walk through today’s Experience Cloud site and Certain; design the conference extension' },
+  { x: 3.85, up: true, w: 3.3, h: 'Weeks 3-6  ·  Build', b: 'Sessions, speakers, My Agenda, seat limits and waitlists, Chase checkout, Zoom or Teams links' },
+  { x: 6.95, up: false, w: 3.3, h: 'Weeks 7-8  ·  Test and go live', b: 'Load and user testing, go-live and hypercare. Certain retired' },
+  { x: 9.7, up: true, w: 2.9, h: 'Week 9+  ·  Grow', b: 'Patient engagement initiatives, app adoption, AI agents in a controlled harness' },
 ];
 blocks.forEach(({ x, up, w, h, b }) => {
   const y = up ? 2.45 : lineY + 0.25;
@@ -256,30 +256,22 @@ blocks.forEach(({ x, up, w, h, b }) => {
   txt(s, b, { x: x + 0.2, y: y + 0.4, w, h: 0.85, fontSize: 12, color: C.background1 });
   s.addShape(pres.shapes.OVAL, { x: x - 0.09, y: lineY - 0.09, w: 0.18, h: 0.18, fill: { color: C.accent2 }, line: { color: C.accent2 } });
 });
-// Certain transition: weeks 15-20 on the Phase 1 stretch of the line (week 3 at x 3.85, week 21 at x 6.95)
-const wk = n => 3.85 + (n - 3) * 3.1 / 18;
-s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: wk(15), y: lineY - 0.09, w: wk(21) - wk(15) - 0.12, h: 0.18, rectRadius: 0.09, fill: { color: C.accent3 }, line: { color: C.background1, width: 1 }, objectName: 'certain-transition' });
-txt(s, 'Certain transition', { x: 4.95, y: lineY + 0.25, w: 1.85, h: 0.32, fontSize: 13, bold: true, color: C.background1 });
-txt(s, 'Weeks 15-20: export, map, two trial loads, cutover between conferences', { x: 4.95, y: lineY + 0.65, w: 1.75, h: 0.9, fontSize: 11, color: C.background1 });
-s.addNotes('Phase 1 replaces Certain around week 20, with a six-week Certain to Salesforce data transition in weeks 15 to 20; cutover is planned between conferences and before the Certain renewal. Phase 2 brings classes onto the same platform and improves them by week 25, without rebuilding the registration site. Engagement work can start once classes are on the shared model.');
+s.addNotes('Conferences go live in eight weeks and Certain is retired; time go-live before the Certain renewal and between conferences. No data migration is needed. Engagement work can start from week 9.');
 
-// What each phase delivers (restored by Surya in draft 2)
+// What the eight weeks deliver
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Delivery plan' });
-s.addText('What each phase delivers', { placeholder: 'title' });
-ruledTable(s, L, 1.7, [2.2, 5.0, 5.03], [
-  ['', 'Phase 1  ·  Conferences (replaces Certain)', 'Phase 2  ·  Classes on the shared platform'],
-  ['Scope', 'Multi-day agenda, tracks, rooms and session capacity', 'Today’s classes moved onto the shared event model'],
-  ['Registration', 'Providers and guests, ticket types, My Agenda on Experience Cloud', 'Existing Experience Cloud site and app, now with instant confirmation'],
-  ['Payments', 'Chase checkout, reusing today’s class integration', 'Chase checkout with safe payment retries and refunds'],
-  ['Engagement', 'Speaker and attendee communications, badges, CME [to confirm]', 'Reminder journeys, waitlists, QR check-in'],
-  ['Data', 'Certain data moved in a six-week transition (weeks 15-20)', 'Class data stays in place: the shared model extends today’s objects'],
-  ['Built in', 'Load test before each conference opens', 'Live seats, waitlists, encryption, monitoring'],
-  ['Retires', 'Certain', 'Nothing retired; today’s registration is improved'],
+s.addText('What the eight weeks deliver', { placeholder: 'title' });
+ruledTable(s, L, 1.7, [2.4, 9.83], [
+  ['', 'Conferences on Salesforce, replacing Certain'],
+  ['Scope', 'Multi-day agenda, tracks, rooms, speakers and session capacity inside today’s event solution'],
+  ['Registration', 'Providers and guests, ticket types, My Agenda on today’s Experience Cloud site'],
+  ['Payments', 'Chase checkout; cancellations and refunds through today’s workflows'],
+  ['Online sessions', 'Personal Zoom or Teams join links that work from anywhere'],
+  ['Engagement', 'Confirmations, reminders, waitlists, badges and check-in, CME [to confirm]'],
+  ['Data', 'No migration: conferences start fresh in Salesforce'],
+  ['Retires', 'Certain and its IP-restricted video link'],
 ], { rowH: 0.6, bodySize: 13 });
-s.addNotes('Same team and same platform across both phases, so Phase 2 builds on Phase 1 rather than starting over.');
-
-// Certain to Salesforce transition (data migration)
-addCertainTransitionSlide(h, 'Delivery plan');
+s.addNotes('Everything here lands in eight weeks with the same four-person pod. Classes and events stay as they are; conferences are added alongside them.');
 
 // Sprint plan and delivery pod
 addSprintPlanSlide(h, 'Delivery plan');
@@ -370,10 +362,10 @@ pres.addSection({ title: 'Roadmap and next steps' });
 s = pres.addSlide({ masterName: 'IG Light', sectionTitle: 'Roadmap and next steps' });
 s.addText('Roadmap: from registration to relationship', { placeholder: 'title' });
 const road = [
-  ['Conferences', 'Weeks 3-20', ['Sessions and speakers', 'My Agenda and badges', 'Certain retired']],
-  ['Classes improved', 'Weeks 21-25', ['Shared event model', 'Instant confirmation, waitlists', 'Check-in and reporting']],
-  ['Engagement', 'From Phase 2 go-live', ['PEI journeys by service line', 'App adoption campaigns', 'Find-a-doctor nurture']],
-  ['AI agents', 'Week 26+', ['Agents in a controlled harness', 'Demand and campaign agents', 'Concierge on web, app and SMS']],
+  ['Conferences', 'Weeks 1-8', ['Sessions and speakers', 'My Agenda, Zoom or Teams', 'Certain retired']],
+  ['Engagement', 'From week 9', ['PEI journeys by service line', 'App adoption campaigns', 'Find-a-doctor nurture']],
+  ['Class uplift', 'Optional', ['Instant confirmation', 'Live seats and waitlists', 'Check-in and reporting']],
+  ['AI agents', 'Later', ['Agents in a controlled harness', 'Demand and campaign agents', 'Concierge on web and SMS']],
 ];
 road.forEach(([h, t, items], i) => {
   const x = L + i * 3.1;
@@ -382,7 +374,7 @@ road.forEach(([h, t, items], i) => {
   txt(s, t, { x, y: 2.95, w: 2.85, h: 0.32, fontSize: 13, bold: true, color: [C.accent6, C.accent3, C.accent5, C.accent4][i] });
   bullets(s, items, { x, y: 3.45, w: 2.8, h: 2.4, fontSize: 14, color: MUTED_LIGHT });
 });
-txt(s, 'Phases 1 and 2 solve today’s problem. Phases 3 and 4 grow engagement and the network on the same platform.', { x: L, y: 5.75, w: CW, h: 0.4, fontSize: 14, bold: true, color: C.text1 });
+txt(s, 'Step 1 solves today’s problem in eight weeks. Steps 2 to 4 grow engagement and the network on the same platform.', { x: L, y: 5.75, w: CW, h: 0.4, fontSize: 14, bold: true, color: C.text1 });
 s.addNotes('Future plan. AI agents use Agentforce and are licensed separately; we would scope them after the core platform is live.');
 
 // AI agent harness
@@ -395,12 +387,12 @@ addInvestmentSlide(h, 'Roadmap and next steps');
 s = pres.addSlide({ masterName: 'IG Dark', sectionTitle: 'Roadmap and next steps' });
 s.addText('Next steps', { placeholder: 'title' });
 const steps = [
-  'Walk through today’s Experience Cloud site, the app and Certain',
-  'Confirm what is not working today and why Certain is being replaced',
-  'Confirm yearly volumes: classes, conferences, registrants',
+  'Walk through today’s Experience Cloud site, event objects and Certain',
+  'Confirm conference volumes: sessions, attendees, online audience',
   'Confirm conference must-haves: sessions, badges, sponsors, CME',
   'Confirm Chase for conference payments with finance',
-  'Share the Certain renewal date and conference calendar to set the cutover',
+  'Confirm Zoom or Teams, and MH’s rules for external attendees',
+  'Share the Certain renewal date and next conference date to set go-live',
   'Pick 2 to 3 service lines for the first engagement journeys',
 ];
 steps.forEach((t, i) => {
@@ -408,7 +400,7 @@ steps.forEach((t, i) => {
   numCircle(s, i + 1, 0.6, y, C.background1);
   txt(s, t, { x: 1.3, y, w: 11, h: 0.46, fontFace: LIGHT_FONT, fontSize: 20, color: C.background1, valign: 'middle' });
 });
-txt(s, 'Then we return with a scoped plan, team and estimate.', { x: 1.3, y: 6.35, w: 11, h: 0.35, fontSize: 14, bold: true, color: C.accent1 });
+txt(s, 'Then we confirm scope and start Sprint 1.', { x: 1.3, y: 6.35, w: 11, h: 0.35, fontSize: 14, bold: true, color: C.accent1 });
 s.addNotes('Ask Kevin to set up the walkthrough with Lucky Rai’s team. Items 2 to 7 let us firm up the timeline and estimate.');
 
 // 21. Closing

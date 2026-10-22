@@ -98,17 +98,16 @@ home-built tool and Certain. Present AppExchange as the faster alternative.
 4. Conference agenda: tracks, session capacity, CME badges, My Agenda
 5. Marketing Cloud journey with patient engagement initiatives
 
-## Deck structure (31 slides, 2026-10-20)
+## Deck structure (30 slides, 2026-10-22, conferences only)
 
-1 Title, 2 Agenda, 3 Business opportunity, 4 Build on what already works, 5 Section 01, 6 One event
-platform inside your org, 7 Overall solution design, 8 Registrant view (Sitecore listing, then
-sessions, Chase payment, add to calendar), 9 Staff view (conference and session setup), 10 Fully
-booked: interest list and organizer demand view, 11 Every seat filled, 12 Seat flow detail,
-13 Payments and data security, 14 Payment sequence, 15 Section 02, 16 Timeline (with Certain
-transition weeks 15-20), 17 What each phase delivers, 18 Certain to Salesforce transition, 19 Sprint
-plan, 20 Delivery pod, 21 Section 03, 22 Value statement, 23 PEI journey, 24 Campaigns, 25 Website
-registrants into the app, 26 KPIs, 27 Roadmap, 28 AI agents in a controlled harness, 29 Investment,
-30 Next steps, 31 Thank you.
+1 Title, 2 Agenda, 3 Business opportunity, 4 Build on what already works (keep / add / replace / later),
+5 Section 01, 6 Conferences inside your Salesforce org, 7 Overall solution design, 8 Registrant view
+(web only: Sitecore listing, sessions, Chase payment, confirmation with calendar and Zoom or Teams link),
+9 Staff view, 10 Fully booked: waitlist and interest list, 11 Every seat filled, 12 Seat flow detail,
+13 Payments and data security, 14 Payment sequence, 15 Section 02, 16 Timeline (8 weeks), 17 What the
+eight weeks deliver, 18 Sprint plan (4 sprints), 19 Delivery pod (4 people), 20 Section 03, 21 Value
+statement, 22 PEI journey, 23 Campaigns, 24 Website registrants into the app, 25 KPIs, 26 Roadmap,
+27 AI agents in a controlled harness, 28 Investment, 29 Next steps, 30 Thank you.
 
 Surya's draft 2 edits carried forward: "Business opportunity" heading and agenda item, restored
 "What each phase delivers" slide, value statement moved lower, "Salesforce licenses" wording,
@@ -119,14 +118,13 @@ speaker notes removed on agenda, slide 3, slide 6 and the AI harness slide. Sour
 
 - Pod of 4 (Surya, 2026-10-20): 1 Project Manager (runs the sprints), 1 QA engineer, 2 developers
   covering Salesforce and Marketing Cloud. Memorial Hermann provides a product owner and an Epic/app contact.
-- 25 weeks (Surya, 2026-10-20): 12 two-week sprints plus a go-live week. Sprint 1 assess (with a
-  Certain data sample); sprints 2-10 Phase 1 conferences (live week 20, Certain retired), with the
-  Certain transition in weeks 15-20; sprints 11-12 Phase 2 classes, go-live and handover week 25.
-  Grow from week 26. Demo and milestone sign-off at every sprint end.
+- 8 weeks (Surya, 2026-10-22), conferences only; Phase 2 (classes) out of scope. Sprint 1 assess and
+  design; sprint 2 conference, session, speaker and ticket setup; sprint 3 My Agenda, seat limits and
+  waitlists, Chase checkout, Zoom or Teams links; sprint 4 badges, check-in, testing, go-live (Certain
+  retired). Grow from week 9. No data migration; refunds reuse today's Chase workflows.
 - Pricing is for an **offshore delivery model** (labelled on the Investment slide).
-- Standard program value $580,000 (struck through, placeholder) unchanged: 4 people x 25 weeks is the
-  same 100 person-weeks as the earlier 5 x 20. Strategic partner investment $290,000 after a 50%
-  partnership credit applied upfront. Phase 1 (weeks 1-20) $464,000 to $232,000; Phase 2 (weeks 21-25)
-  $116,000 to $58,000. Indicative, billed at sprint milestones, final in the SOW.
-- Not included: Salesforce licenses (Shield, Agentforce, Data Cloud), gateway fees, waiting room
-  subscription.
+- Investment (Surya, 2026-10-22): $60,000 partner price, shown as $120,000 standard struck through with
+  a 50% partnership credit. Assess and design (weeks 1-2) $30,000 to $15,000; build, test and go live
+  (weeks 3-8) $90,000 to $45,000. Indicative, billed at sprint milestones, final in the SOW.
+- Not included: Salesforce licenses (Shield, Agentforce, Data Cloud), Zoom or Teams licenses, gateway
+  fees, waiting room subscription.

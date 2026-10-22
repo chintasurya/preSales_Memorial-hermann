@@ -26,7 +26,7 @@ docs/
   07-brand-template.md              Insight Global template rules
   08-detailed-design.md             Detailed design (approved 2026-10-15)
 deck/
-  Memorial-Hermann-Event-Platform.pptx  Client deck (31 slides, IG template)
+  Memorial-Hermann-Event-Platform.pptx  Client deck (30 slides, IG template)
   mockups/                          Concept screens (HTML source + PNG renders)
   assets/bg/                        Backgrounds taken from the IG template
   build/                            Scripts that render mockups and build the deck

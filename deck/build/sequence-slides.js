@@ -87,12 +87,12 @@ function addOverallDesignSlide(h, sectionTitle) {
   const { pres, txt, L, R, MUTED_LIGHT } = h;
   const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
   s.addText('Overall solution design', { placeholder: 'title' });
-  txt(s, 'One flow for conferences and classes on your existing Experience Cloud site and app; replaces Certain', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
+  txt(s, 'Conferences added to your existing Experience Cloud site; replaces Certain', { x: L, y: 1.42, w: 12, h: 0.32, fontSize: 14, color: MUTED_LIGHT });
   sequence(s, h, {
     x: 1.55, y: 1.92, w: R - 1.55, bottom: 6.62, phaseX: L,
     parts: [
       { id: 'p', label: 'Registrant' },
-      { id: 'ch', label: 'Website or app', color: ACCENT.cyan },
+      { id: 'ch', label: 'Website', color: ACCENT.cyan },
       { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
       { id: 'pay', label: 'Payment gateway (Chase)' },
       { id: 'sf', label: 'Salesforce event app', color: ACCENT.cyan },
@@ -107,7 +107,7 @@ function addOverallDesignSlide(h, sectionTitle) {
       { from: 'pay', to: 'reg', dashed: true, label: 'Signed webhook (payment confirmation)' },
       { from: 'reg', to: 'sf', label: 'Create registration (queued, duplicate-safe)' },
       { phase: 'Confirm', from: 'sf', to: 'mc', label: 'Registration event' },
-      { from: 'mc', to: 'p', dashed: true, label: 'Confirmation, QR code, calendar invite, reminders' },
+      { from: 'mc', to: 'p', dashed: true, label: 'Confirmation, QR code, calendar invite, Zoom or Teams link' },
       { phase: 'Attend', from: 'st', to: 'sf', label: 'QR check-in at the door' },
       { phase: 'Engage', from: 'sf', to: 'mc', label: 'Attendance and interests' },
       { from: 'mc', to: 'p', dashed: true, label: 'PEIs: thank you, next class, app, find a doctor' },
@@ -116,7 +116,7 @@ function addOverallDesignSlide(h, sectionTitle) {
     ],
   });
   txt(s, 'Classes and conferences share this flow; conferences add sessions, speakers and My Agenda.', { x: L, y: 6.68, w: 9, h: 0.26, fontSize: 10.5, italic: true, color: MUTED_LIGHT });
-  s.addNotes('This is the whole solution on one page, in the order a registrant experiences it. Register: website or the existing My Memorial Hermann app, with a seat held while they pay. Pay: the gateway hosts the card page; we receive only a token. Confirm: Salesforce records the registration and sends the confirmation, QR code, calendar invite and reminders from Salesforce email, so confirmation is instant. Attend: QR check-in. Engage: patient engagement initiatives. Grow: staff see demand and add sessions. It replaces Certain and builds on today’s Experience Cloud site and app.');
+  s.addNotes('This is the whole solution on one page, in the order a registrant experiences it. Register: on the website, with a seat held while they pay. Pay: the gateway hosts the card page; we receive only a token. Confirm: Salesforce records the registration and sends the confirmation, QR code, calendar invite and reminders from Salesforce email, so confirmation is instant. Attend: QR check-in. Engage: patient engagement initiatives. Grow: staff see demand and add sessions. It replaces Certain and builds on today’s Experience Cloud site and app.');
   return s;
 }
 
@@ -167,7 +167,7 @@ function addPaymentSequenceSlide(h, sectionTitle) {
   sequence(s, h, {
     x: 0.55, y: 1.65, w: 8.2, bottom: 6.6,
     parts: [
-      { id: 'p', label: 'Registrant (web or app)' },
+      { id: 'p', label: 'Registrant (web)' },
       { id: 'reg', label: 'Registration service', color: ACCENT.yellow },
       { id: 'gw', label: 'Chase hosted page', color: ACCENT.magenta },
       { id: 'sf', label: 'Salesforce', color: ACCENT.cyan },
@@ -195,7 +195,7 @@ function addPaymentSequenceSlide(h, sectionTitle) {
   });
   txt(s, 'After payment', { x: px, y: 4.95, w: pw, h: 0.35, fontSize: 16, bold: true, color: C.text1 });
   s.addText([
-    { text: 'Full and partial refunds by token from Salesforce', options: { bullet: true, breakLine: true } },
+    { text: 'Cancellations and refunds through today’s Chase workflows', options: { bullet: true, breakLine: true } },
     { text: 'Automatic receipts', options: { bullet: true, breakLine: true } },
     { text: 'Daily settlement reconciliation', options: { bullet: true } },
   ], { isTextBox: true, x: px, y: 5.35, w: pw, h: 1.2, fontSize: 12, color: MUTED_LIGHT, margin: 0, valign: 'top', paraSpaceAfter: 4 });

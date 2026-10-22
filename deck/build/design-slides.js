@@ -82,7 +82,7 @@ async function addSecuritySlide(h, sectionTitle) {
   // Left: payment flow
   txt(s, 'Card data never enters our systems', { x: L, y: 1.6, w: 5.8, h: 0.4, fontSize: 17, bold: true, color: C.text1 });
   const flow = [
-    ['FaUser', 'Registrant', 'Website, Experience Cloud or app'],
+    ['FaUser', 'Registrant', 'Website or Experience Cloud site'],
     ['FaCreditCard', 'Chase hosted page', 'Card typed here (Chase, as for classes today)'],
     ['FaKey', 'Signed webhook', 'Token, last 4 digits, approval code'],
     ['FaDatabase', 'Salesforce payment record', 'Token reference, last 4, amount, status'],
@@ -152,7 +152,7 @@ async function addHarnessSlide(h, sectionTitle) {
     ['FaCalendarCheck', 'Event Ops', 'Sessions, capacity, reminders', -90, HEX.yellow],
     ['FaChartLine', 'Demand', 'Spots surges, drafts new dates', -18, HEX.magenta],
     ['FaBullhorn', 'Campaign', 'Builds PEI journeys', 54, HEX.yellow],
-    ['FaComments', 'Concierge', 'Registers and answers on web, app, SMS', 126, HEX.magenta],
+    ['FaComments', 'Concierge', 'Registers and answers on web and SMS', 126, HEX.magenta],
     ['FaLightbulb', 'Insights', 'Summarizes feedback and results', 198, HEX.yellow],
   ];
   const d = 0.9;

@@ -1,10 +1,10 @@
-// Concept screen slides (registrant booking, staff setup, interest list) and the Certain transition slide.
+// Concept screen slides: registrant booking, staff setup, interest list.
 // White (IG Light) layout; screens come from deck/mockups/png.
 const path = require('path');
 
 const IMG = f => path.join(__dirname, '..', 'mockups', 'png', f);
 const INK = '000000', MUTED = '4D4D4D', CARD = 'F2F2F2', CARD_LINE = 'D0D0D6';
-const PURPLE = '45289F', MAGENTA = 'C8005A';
+const MAGENTA = 'C8005A';
 
 function frame(s, file, x, y, w, h) {
   s.addImage({ path: IMG(file), x, y, w, h, objectName: file, shadow: { type: 'outer', blur: 8, offset: 2, angle: 90, color: '000000', opacity: 0.25 } });
@@ -65,63 +65,4 @@ function addInterestSlide(h, sectionTitle) {
   return s;
 }
 
-function addCertainTransitionSlide(h, sectionTitle) {
-  const { pres, txt, L, CW } = h;
-  const s = pres.addSlide({ masterName: 'IG Light', sectionTitle });
-  s.addText('Certain to Salesforce transition', { placeholder: 'title' });
-  txt(s, 'Six weeks (weeks 15 to 20) at the end of Phase 1, with cutover planned between conferences. Certain stays live until sign-off.', { x: L, y: 1.42, w: CW, h: 0.32, fontSize: 14, color: MUTED });
-
-  const steps = [
-    ['WEEKS 15-16', 'Inventory and export', 'Data sample reviewed in Sprint 1 to shape the model; full export; history window agreed'],
-    ['WEEKS 15-16', 'Map and cleanse', 'Certain IDs kept for traceability; duplicates removed; attendees matched'],
-    ['WEEKS 17-18', 'Trial loads', 'Two rehearsal loads with emails and journeys switched off; counts and totals reconciled'],
-    ['WEEKS 19-20', 'Cutover', 'Between conferences, so only history moves; final delta load; go live on Salesforce'],
-    ['WEEK 20+', 'Retire Certain', 'Read-only until the contract ends; Authorize.net open only for past refunds'],
-  ];
-  const gap = 0.15, cw = (CW - 4 * gap) / 5, y0 = 1.9, ch = 1.55;
-  steps.forEach(([wk, t, d], i) => {
-    const x = L + i * (cw + gap), col = i === 3 ? MAGENTA : PURPLE, dark = i === 3;
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: y0, w: cw, h: ch, rectRadius: 0.1, fill: { color: dark ? INK : CARD }, line: { color: col, width: 1.75 }, objectName: `transition-${i + 1}` });
-    txt(s, `${i + 1}  ·  ${wk}`, { x: x + 0.15, y: y0 + 0.13, w: cw - 0.3, h: 0.24, fontSize: 10, bold: true, color: dark ? 'FF0068' : col, charSpacing: 2 });
-    txt(s, t, { x: x + 0.15, y: y0 + 0.4, w: cw - 0.3, h: 0.3, fontSize: 14, bold: true, color: dark ? 'FFFFFF' : INK });
-    txt(s, d, { x: x + 0.15, y: y0 + 0.74, w: cw - 0.3, h: 0.8, fontSize: 10.5, color: dark ? 'D9D9D9' : MUTED });
-  });
-
-  // What moves (template ruled-table style)
-  const tx = L, ty = 3.62, cols = [3.15, 4.25], rh = 0.45;
-  txt(s, 'Data', { x: tx + 0.08, y: ty, w: cols[0], h: 0.3, fontSize: 13, bold: true, color: INK, valign: 'bottom' });
-  txt(s, 'How it moves', { x: tx + cols[0] + 0.08, y: ty, w: cols[1], h: 0.3, fontSize: 13, bold: true, color: INK, valign: 'bottom' });
-  s.addShape(pres.shapes.LINE, { x: tx, y: ty + 0.36, w: cols[0] + cols[1], h: 0, line: { color: INK, width: 1.5 } });
-  const rows = [
-    ['Past events, sessions, speakers, attendees', 'Loaded for the agreed history window'],
-    ['Attendance and CME records', 'Loaded and kept for retention needs [to confirm]'],
-    ['Payment history', 'Summary marked as Authorize.net; card data never moves'],
-    ['Open registrations at cutover', 'Ideally none. If any: moved with sessions, new QR codes, welcome email'],
-    ['Older history', 'Archive export, outside Salesforce storage'],
-    ['Today\u2019s classes (Phase 2)', 'Shared model extends today\u2019s class objects, so no second migration [to confirm]'],
-  ];
-  let cy = ty + 0.36;
-  rows.forEach(([a, b]) => {
-    txt(s, a, { x: tx + 0.08, y: cy + 0.03, w: cols[0] - 0.16, h: rh - 0.06, fontSize: 10.5, bold: true, color: INK, valign: 'middle' });
-    txt(s, b, { x: tx + cols[0] + 0.08, y: cy + 0.03, w: cols[1] - 0.16, h: rh - 0.06, fontSize: 10.5, color: MUTED, valign: 'middle' });
-    cy += rh;
-    s.addShape(pres.shapes.LINE, { x: tx, y: cy, w: cols[0] + cols[1], h: 0, line: { color: '8C8C8C', width: 0.75, dashType: 'sysDot' } });
-  });
-
-  // Safeguards
-  const bx = L + cols[0] + cols[1] + 0.35, bw = L + CW - bx;
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: ty, w: bw, h: 0.36 + rows.length * rh, rectRadius: 0.1, fill: { color: CARD }, line: { color: CARD_LINE, width: 1 } });
-  txt(s, 'Safeguards', { x: bx + 0.2, y: ty + 0.15, w: bw - 0.4, h: 0.3, fontSize: 14, bold: true, color: INK });
-  s.addText([
-    'Reconciliation report signed off before cutover',
-    'Rollback ready: Certain stays live until sign-off',
-    'No emails or journeys fire for migrated records',
-    'Certain contract covers the read-only period [to confirm]',
-    'Delivered by the same four-person pod',
-  ].map((t, i, a) => ({ text: t, options: { bullet: true, breakLine: i < a.length - 1 } })), { isTextBox: true, x: bx + 0.2, y: ty + 0.55, w: bw - 0.4, h: 2.2, fontSize: 11.5, color: MUTED, margin: 0, valign: 'top', paraSpaceAfter: 5 });
-
-  s.addNotes('Data migration from Certain is planned as its own six-week workstream at the end of Phase 1 (weeks 15 to 20), so conferences go live on Salesforce with their data. A sample Certain export is reviewed in Sprint 1 so the event model fits Certain’s data; every record keeps its Certain ID. Two trial loads run with emails and journeys switched off and are reconciled before the final load. Cutover is planned between conferences so only history moves; if a conference is open, its registrations move with new QR codes and a welcome email. How many years of history to bring across is Memorial Hermann’s decision, agreed in discovery; older history can stay in an archive export. Card data is never migrated: payment history moves as a summary marked Authorize.net, and Authorize.net stays open only until refunds on past payments are done. For Phase 2 the shared model extends today’s class objects where possible, so classes need no second migration.');
-  return s;
-}
-
-module.exports = { addBookingFlowSlide, addStaffSetupSlide, addInterestSlide, addCertainTransitionSlide };
+module.exports = { addBookingFlowSlide, addStaffSetupSlide, addInterestSlide };
