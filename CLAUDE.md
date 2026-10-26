@@ -32,7 +32,8 @@ read the relevant files here first and build on them instead of starting over.
 - Class registration already exists (Sitecore listings open a home-built Experience Cloud site; a mobile app also registers). Build on it; never propose rebuilding it or a new mobile app.
 - The primary ask is replacing Certain (conferences with session management). Lead with it.
 - Scope after the 2026-10-20 call: add conference setup into the existing event and class solution; no data migration; reuse existing Chase cancellation and refund workflows; keep waitlist; mobile app out of scope (web screens only); virtual sessions via Zoom or Teams [platform to confirm].
-- Payments: Chase for every event (reuse the class integration); Authorize.net retires with Certain.
+- Payments: Chase for every event (reuse the class integration); Authorize.net retires with Certain. Chase confirmed by the client (2026-10-26).
+- Client answers (2026-10-26): class solution is custom built; attendance tracking (QR check-in) is out of scope; registrant emails come from Salesforce; June 2027 is the Certain deadline [renewal or next conference, to clarify].
 - Plan (2026-10-22): conferences only, Phase 2 (classes) out. 8 weeks, 4 two-week sprints, 3-person offshore team (1 PM, 1 Salesforce Developer, 1 QA). Grow from week 9. Commercials: $60,000 only, no strikethrough or partner credit, no rate cards; team table shows roles and headcount only.
 - Certain migration: not needed (Kevin, 2026-10-20). Earlier 6-week transition plan is superseded.
 - Client logo goes at `deck/assets/client/memorial-hermann-logo.png`; the build adds it to the title slide when present.

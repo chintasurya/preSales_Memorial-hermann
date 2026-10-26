@@ -63,3 +63,16 @@ Parked for now at the user's request: consent, HIPAA and budget questions.
 - **Virtual sessions:** Certain provides a conference video link today; access is IP restricted, so
   not everyone can join. Proposal (Surya): integrate Zoom or Microsoft Teams so the join link works
   for attendees anywhere. Which platform MH licenses is [to confirm].
+
+## Follow-up answers (reported by Surya, 2026-10-26)
+
+| # | Question | Customer response |
+|---|---|---|
+| 1 | AppExchange product or custom build? Who built it? | Custom built, not AppExchange. |
+| 2 | How is attendance tracked today? | No tracking today, and attendance tracking is out of scope. |
+| 3 | How are registrants contacted, and from which tool? | Salesforce emails. |
+| 4 | Volumes: sessions per conference, attendees, online audience | Not answered yet. |
+| 5 | Conference must-haves: badges, sponsors, CME credits | Not answered yet. |
+| 6 | Zoom or Teams, and IT rules for external attendees | Need to get clarity. |
+| 7 | Certain contract renewal and next conference | June next year (2027) [to clarify: renewal date, next conference, or both]. |
+| 8 | Finance sign-off on Chase | Confirmed: they want Chase as the payment tool. |
