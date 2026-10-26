@@ -26,6 +26,7 @@
 | 2026-10-22 | Surya: Phase 2 out, timeline 2 months, show Zoom or Teams, $60K. Deck rebuilt to 30 slides: Certain transition slide removed; keep / add / replace / later; web-only booking screen with Zoom or Teams link; 8-week timeline; "What the eight weeks deliver"; 4-sprint plan; pod 4 people, 4 sprints, 8 weeks; investment $120,000 struck to $60,000; roadmap and next steps updated. |
 | 2026-10-22 | Surya: slide 28 renamed "Commercials"; only $60,000 shown (no strikethrough or 50% credit); team table with 1 PM, 1 Developer, 1 QA and no rates; offshore tag kept. Team slide updated to three people to match. |
 | 2026-10-26 | Follow-up answers: class solution is custom built; attendance tracking out of scope (none today); registrants contacted by Salesforce email; Chase confirmed; June 2027 is the Certain date (renewal and/or next conference, to clarify). Still open: volumes, badges / sponsors / CME, Zoom or Teams and IT rules. Deck still shows QR check-in and badges; pending Surya's go-ahead to remove. |
+| 2026-10-26 | Consolidated discovery summary written (02). New: global access with no IP restrictions (open to alternatives if complex); priority is conferences following the same process as classes and events; Certain costs a six-figure amount a year and they want the lowest-cost replacement. |
 
 ## Manager direction (Sandeep)
 

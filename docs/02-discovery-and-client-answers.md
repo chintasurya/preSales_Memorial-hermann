@@ -64,15 +64,49 @@ Parked for now at the user's request: consent, HIPAA and budget questions.
   not everyone can join. Proposal (Surya): integrate Zoom or Microsoft Teams so the join link works
   for attendees anywhere. Which platform MH licenses is [to confirm].
 
-## Follow-up answers (reported by Surya, 2026-10-26)
+## Discovery summary: questions and customer responses (as of 2026-10-26)
 
-| # | Question | Customer response |
-|---|---|---|
-| 1 | AppExchange product or custom build? Who built it? | Custom built, not AppExchange. |
-| 2 | How is attendance tracked today? | No tracking today, and attendance tracking is out of scope. |
-| 3 | How are registrants contacted, and from which tool? | Salesforce emails. |
-| 4 | Volumes: sessions per conference, attendees, online audience | Not answered yet. |
-| 5 | Conference must-haves: badges, sponsors, CME credits | Not answered yet. |
-| 6 | Zoom or Teams, and IT rules for external attendees | Need to get clarity. |
-| 7 | Certain contract renewal and next conference | June next year (2027) [to clarify: renewal date, next conference, or both]. |
-| 8 | Finance sign-off on Chase | Confirmed: they want Chase as the payment tool. |
+**1. What problem are you trying to solve with patient registration and event management?**
+They want to replace Certain for conferences by adding conferences to the existing Classes and Events
+solution that already runs in Salesforce.
+
+**2. Who registers for classes, events and conferences?**
+Patients, plus caregivers and providers.
+
+**3. Which Salesforce products do you use?**
+Marketing Cloud and Health Cloud.
+
+**4. Is the current solution an AppExchange product or a custom build? Who built it?**
+Custom built, not AppExchange.
+
+**5. How is attendance tracked today?**
+There is no tracking today, and they do not want it in scope.
+
+**6. How are registrants contacted, and from which tool?**
+Salesforce emails.
+
+**7. Zoom or Teams, and IT rules for external attendees?**
+Still to be clarified.
+
+**8. When does the Certain contract renew, and when is the next conference?**
+June 2027.
+
+**9. Are payments made through Chase or Authorize.net?**
+Classes and events use Chase today. They want conferences to follow the same Chase process.
+
+**10. How are cancellations and refunds handled?**
+Classes and events already have a cancellation and refund workflow. Conferences should use the same one.
+
+**11. Is data migration from Certain needed?**
+No. They do not want any data migration.
+
+**Additional points from the customer**
+- Conference sessions must be open to attendees outside the US, with no IP restrictions. If that is
+  too complex to implement, they are open to other options.
+- Their priority is to bring conferences into the existing solution and follow the same process that
+  classes and events follow today.
+- Conferences happen once or twice a year. They spend a six-figure amount each year on Certain and want
+  to replace it at the lowest cost.
+
+Still open: conference volumes (sessions, attendees, online audience); must-haves such as badges,
+sponsors and CME credits; Zoom or Teams and IT rules.
