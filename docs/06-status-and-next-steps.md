@@ -27,6 +27,7 @@
 | 2026-10-22 | Surya: slide 28 renamed "Commercials"; only $60,000 shown (no strikethrough or 50% credit); team table with 1 PM, 1 Developer, 1 QA and no rates; offshore tag kept. Team slide updated to three people to match. |
 | 2026-10-26 | Follow-up answers: class solution is custom built; attendance tracking out of scope (none today); registrants contacted by Salesforce email; Chase confirmed; June 2027 is the Certain date (renewal and/or next conference, to clarify). Still open: volumes, badges / sponsors / CME, Zoom or Teams and IT rules. Deck still shows QR check-in and badges; pending Surya's go-ahead to remove. |
 | 2026-10-26 | Consolidated discovery summary written (02). New: global access with no IP restrictions (open to alternatives if complex); priority is conferences following the same process as classes and events; Certain costs a six-figure amount a year and they want the lowest-cost replacement. |
+| 2026-10-28 | Architect Q&A answered (9 questions). New: reuse the virtual meeting integration classes and events already use instead of building Zoom or Teams (only need outside-US access; do not over-engineer); waitlist optional; no login, secure email link for changes and cancellations. Deck still names Zoom or Teams; update pending. |
 
 ## Manager direction (Sandeep)
 

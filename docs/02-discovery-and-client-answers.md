@@ -110,3 +110,16 @@ No. They do not want any data migration.
 
 Still open: conference volumes (sessions, attendees, online audience); must-haves such as badges,
 sponsors and CME credits; Zoom or Teams and IT rules.
+
+## Clarifications from the architect Q&A (2026-10-28, as reported by Surya)
+
+- **Virtual sessions:** Kevin did not ask for Zoom or Teams specifically. Classes and events already run
+  online and in person with an existing virtual meeting integration (which one is not known). Reuse it
+  for conferences; the only requirement is that people outside the US can join. Kevin's stance: do not
+  over-engineer this, conferences happen about twice a year.
+- **Waitlist:** not asked for right now; offered as an optional extra.
+- **Registrant changes and cancellations:** public site, no login; secure link in the confirmation email
+  opens the registration on the Experience Cloud site with change and cancel options.
+- **Attendance:** QR check-in and no-show follow-up emails were suggested and declined for now.
+- **Email:** Marketing Cloud notifications were suggested; Kevin said volumes are low, so Salesforce
+  email stays (under the 5,000 a day limit).
