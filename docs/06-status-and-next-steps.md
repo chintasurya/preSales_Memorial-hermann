@@ -57,3 +57,12 @@
 
 - `deck/Memorial-Hermann-Event-Platform.pptx` (current, IG template)
 - Earlier draft deck (non-template): https://claude.ai/artifact/UhZEJHafG5M55BCCFpuEUp
+
+## Ideas parked for later
+
+- **AppExchange event management product (2026-10-29).** Started as a joke with the architect, kept as
+  a real idea: turn the conference and session capability we design for Memorial Hermann into a
+  reusable Salesforce AppExchange product (conferences, sessions, speakers, seat limits, waitlists,
+  payment gateway hookup, virtual links, emails). Repository reserved: `chintasurya/EventManagment`
+  (empty, cloned 2026-10-29). Next step when Surya is ready: create a starting skeleton there.
+  Keep it separate from the Memorial Hermann delivery; MH work stays reuse-first and low cost.
